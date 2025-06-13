@@ -1,0 +1,17 @@
+---
+import PortfolioNavigation from './PortfolioNavigation.astro';
+import InfoNavigation from './InfoNavigation.astro';
+import Logo from './Logo.astro';
+
+export interface Props {
+  currentPath?: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<nav>
+  <Logo />
+  <PortfolioNavigation currentPath={currentPath} />
+  <InfoNavigation currentPath={currentPath} />
+</nav>

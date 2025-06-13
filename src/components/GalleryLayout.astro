@@ -1,0 +1,44 @@
+---
+import HeaderNavigation from './HeaderNavigation.astro';
+import BasicMeta from './BasicMeta.astro';
+import MetaTags from './MetaTags.astro';
+import SocialMeta from './SocialMeta.astro';
+import Analytics from './Analytics.astro';
+import FontLoader from './FontLoader.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  currentPath: string;
+  pageTitle: string;
+  pageDescription: string;
+  canonicalUrl?: string;
+  image?: string;
+}
+
+const { title, description, currentPath, pageTitle, pageDescription, canonicalUrl, image } = Astro.props;
+---
+
+<html lang="de">
+<head>
+  <BasicMeta />
+  <MetaTags title={title} description={description} canonicalUrl={canonicalUrl} />
+  <SocialMeta title={title} description={description} image={image} url={canonicalUrl} />
+  <Analytics trackingId="G-WJK34XRR7F" />
+  <FontLoader />
+  <link rel="stylesheet" href="/styles/layout.css" />
+</head>
+<body>
+  <HeaderNavigation currentPath={currentPath} />
+
+  <main class="stack" style="--space: var(--s3); padding: var(--s2);">
+    <h1>{pageTitle}</h1>
+    
+    <div class="stack" style="--space: var(--s1);">
+      <p>{pageDescription}</p>
+    </div>
+    
+    <slot />
+  </main>
+</body>
+</html>

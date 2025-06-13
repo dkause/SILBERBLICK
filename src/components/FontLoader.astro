@@ -1,0 +1,19 @@
+---
+// Centralized font loading component
+// Eliminiert 7x Duplikate across all pages
+---
+
+<style>
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    src: local('IBM Plex Sans'), url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap');
+    font-weight: 400 600;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IBM Plex Serif';
+    src: local('IBM Plex Serif'), url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500&display=swap');
+    font-weight: 400 500;
+    font-display: swap;
+  }
+</style>

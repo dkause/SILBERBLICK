@@ -1,0 +1,35 @@
+---
+import HeaderNavigation from '../components/HeaderNavigation.astro';
+import BasicMeta from '../components/BasicMeta.astro';
+import MetaTags from '../components/MetaTags.astro';
+import SocialMeta from '../components/SocialMeta.astro';
+import Analytics from '../components/Analytics.astro';
+import FontLoader from '../components/FontLoader.astro';
+
+// Homepage
+const title = "SILBERBLICK - einfach gute Fotos in Berlin";
+const description = "Daniel Kause, Fotograf seit 1995. Businessfotografie, Portraitfotografie und Architekturfotografie in Berlin.";
+---
+
+<html lang="de">
+<head>
+  <BasicMeta />
+  <MetaTags title={title} description={description} canonicalUrl="https://silberblick.berlin/" />
+  <SocialMeta title={title} description={description} url="https://silberblick.berlin/" />
+  <Analytics trackingId="G-WJK34XRR7F" />
+  <FontLoader />
+  <link rel="stylesheet" href="/styles/layout.css" />
+</head>
+<body>
+  <HeaderNavigation currentPath="/" />
+
+  <main class="stack" style="--space: var(--s4); padding: var(--s2);">
+    <h1>Einfach gute Fotos</h1>
+    <h2>Daniel Kause, Fotograf seit 1995</h2>
+    
+    <div class="stack" style="--space: var(--s2);">
+      <p>Professionelle Fotografie für Menschen und Unternehmen in Berlin.</p>
+    </div>
+  </main>
+</body>
+</html>

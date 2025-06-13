@@ -1,0 +1,15 @@
+---
+// SEO meta tags - title, description, canonical URL
+export interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+}
+
+const { title, description, canonicalUrl } = Astro.props;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+<meta name="generator" content={Astro.generator} />

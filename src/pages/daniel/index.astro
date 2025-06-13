@@ -1,0 +1,43 @@
+---
+import HeaderNavigation from '../../components/HeaderNavigation.astro';
+import BasicMeta from '../../components/BasicMeta.astro';
+import MetaTags from '../../components/MetaTags.astro';
+import SocialMeta from '../../components/SocialMeta.astro';
+import Analytics from '../../components/Analytics.astro';
+import FontLoader from '../../components/FontLoader.astro';
+
+const title = "Daniel Kause - Fotograf seit 1995 | SILBERBLICK";
+const description = "Daniel Kause, Fotograf und Meister seit 2003. Professionelle Fotografie in Berlin seit 1995.";
+---
+
+<html lang="de">
+<head>
+  <BasicMeta />
+  <MetaTags title={title} description={description} canonicalUrl="https://silberblick.berlin/daniel/" />
+  <SocialMeta title={title} description={description} url="https://silberblick.berlin/daniel/" />
+  <Analytics trackingId="G-WJK34XRR7F" />
+  <FontLoader />
+  <link rel="stylesheet" href="/styles/layout.css" />
+</head>
+<body>
+  <HeaderNavigation currentPath="/daniel/" />
+
+  <main class="stack" style="--space: var(--s3); padding: var(--s2);">
+    <h1>Daniel Kause</h1>
+    
+    <div class="stack" style="--space: var(--s2);">
+      <div class="grid" style="grid-template-columns: 2fr 1fr; gap: var(--s3); align-items: start;">
+        <div class="stack" style="--space: var(--s2);">
+          <h2>Fotograf seit 1995</h2>
+          <p>Authentizität statt Pose. Qualität durch Erfahrung.</p>
+          <p>Meister des Fotografenhandwerks seit 2003. Ehemalige Studios in Berlin, langjährige Zusammenarbeit mit Unternehmen wie JLL, Argusdata und vielen kleinen Unternehmern.</p>
+          <p>Inspiriert von Irving Penn: Weniger ist mehr. Zeitlose Qualität statt Trends.</p>
+        </div>
+        <div class="frame" style="--ratio: 4/5;">
+          <img src="https://picsum.photos/400/500?random=30" alt="Daniel Kause, Fotograf" />
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

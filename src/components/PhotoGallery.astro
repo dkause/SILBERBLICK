@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+
+export interface Props {
+  photos: any[];
+  category: string;
+  images: Record<string, any>;
+}
+
+const { photos, category, images } = Astro.props;
+---
+
+<div class="grid">
+  {photos.map((photo) => {
+    const imageKey = `../../assets/images/${category}/${photo.id.replace('.md', '')}.jpg`;
+    const imageModule = images[imageKey];
+    const photoUrl = `/${category}/${photo.data.slug || photo.slug}/`;
+    
+    return imageModule && (
+      <a href={photoUrl} class="frame">
+        <Image 
+          src={imageModule.default} 
+          alt={photo.data.image.alt}
+          width={400}
+          height={300}
+          format="webp"
+          quality={80}
+          style="width: 100%; height: auto; object-fit: contain;"
+        />
+        <div class="frame-caption">
+          <h3>{photo.data.name}</h3>
+          <p>{photo.data.genre}</p>
+        </div>
+      </a>
+    );
+  })}
+</div>
+
+<style>
+  .frame {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+  }
+  
+  .frame:hover {
+    transform: scale(1.02);
+  }
+  
+  .frame-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .frame:hover .frame-caption {
+    opacity: 1;
+  }
+  
+  .frame-caption h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  .frame-caption p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.9;
+  }
+</style>

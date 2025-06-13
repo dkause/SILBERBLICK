@@ -1,0 +1,13 @@
+---
+export interface Props {
+  currentPath?: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<ul class="portfolio-group">
+  <li><a href="/businessfotografie/" aria-current={currentPath === '/businessfotografie/' ? 'page' : undefined}>Business</a></li>
+  <li><a href="/architekturfotografie/" aria-current={currentPath === '/architekturfotografie/' ? 'page' : undefined}>Architektur</a></li>
+  <li><a href="/portraitfotografie/" aria-current={currentPath === '/portraitfotografie/' ? 'page' : undefined}>Portraits</a></li>
+</ul>

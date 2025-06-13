@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import GalleryLayout from '../../components/GalleryLayout.astro';
+import PhotoGallery from '../../components/PhotoGallery.astro';
+
+const title = "Werbefotografie Berlin - SILBERBLICK";
+const description = "Professionelle Werbefotografie in Berlin. Commercial Photography und Marketing-Bilder von Daniel Kause.";
+
+// Get all werbefotografie photos
+const werbefotos = await getCollection('photos', ({ data }) => {
+  return data.category === 'werbefotografie';
+});
+
+// Import all werbefotografie images
+const images = import.meta.glob('../../assets/images/werbefotografie/*.jpg', { eager: true });
+---
+
+<GalleryLayout 
+  title={title}
+  description={description}
+  currentPath="/werbefotografie/"
+  pageTitle="Werbefotografie"
+  pageDescription="Commercial Photography und Marketing-Bilder für Unternehmen."
+>
+  <PhotoGallery 
+    photos={werbefotos} 
+    category="werbefotografie" 
+    images={images} 
+  />
+</GalleryLayout>

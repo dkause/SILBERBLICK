@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="26px" viewBox="0 0 80 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(0, 4.0245)" fill="#000000">
+            <text id="SILBERBLICK" font-family="Huninn-Regular, Huninn" font-size="12" font-weight="normal" letter-spacing="0.32">
+                <tspan x="0.506" y="19.9755283">SILBERBLICK</tspan>
+            </text>
+            <text id="*" transform="translate(61.1464, 8.2) rotate(-18) translate(-61.1464, -8.2)" font-family="Futura-Medium, Futura" font-size="11" font-weight="400" line-spacing="22" letter-spacing="1.257619">
+                <tspan x="57.1230213" y="8.20004837">*</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

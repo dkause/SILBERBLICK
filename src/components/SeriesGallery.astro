@@ -1,0 +1,233 @@
+---
+import { Image } from 'astro:assets';
+
+export interface Props {
+  photos: any[];
+  category: string;
+  images: Record<string, any>;
+}
+
+const { photos, category, images } = Astro.props;
+
+// Group photos by series
+function groupPhotosBySeries(photos: any[]) {
+  const series: Record<string, any> = {};
+  
+  photos.forEach(photo => {
+    let seriesKey = '';
+    let seriesTitle = '';
+    let seriesDescription = '';
+    
+    if (photo.id.includes('jll-portrait')) {
+      seriesKey = 'jll-corporate';
+      seriesTitle = 'JLL Corporate Identity';
+      seriesDescription = 'Professionelle Mitarbeiterfotos für das JLL-Team in Berlin Mitte. Ich fotografiere Ihre Mitarbeiter direkt bei Ihnen vor Ort und baue mein Studio bei Ihnen auf. Langwierige Abstimmungsrunden entfallen, denn ich fotografiere direkt ins Notebook - wir können sofort sehen, ob Ihnen die Fotos gefallen.';
+    } else if (photo.id.includes('samakiez-portrait')) {
+      seriesKey = 'samakiez-restaurant';
+      seriesTitle = 'Samakiez Restaurant Team';
+      seriesDescription = 'Authentische Team-Fotografie für das Samakiez Restaurant. Individualität in Serie - ich fotografiere Ihre Mitarbeiter in hoher Qualität und schnell. Das Studio wird vor Ort aufgebaut, das schont die Arbeitszeit und Nerven Ihrer Mitarbeiter.';
+    } else if (photo.id.includes('businessportrait')) {
+      seriesKey = 'business-portraits';
+      seriesTitle = 'Mitarbeiterfotos - Individualität in Serie';
+      seriesDescription = 'Sie wollen Fotos von Ihren Mitarbeitern in hoher Qualität und schnell? Dann sind Sie bei mir richtig. Ich fotografiere direkt vor Ort, wir steuern den kreativen Prozess gemeinsam und fokussieren das Wesentliche. Die Retuschen und Formatwandlungen werden nach dem Shooting von mir gemacht - das schont Ihre Ressourcen.';
+    } else {
+      // Fallback für Einzelbilder
+      seriesKey = photo.data.slug;
+      seriesTitle = photo.data.name;
+      seriesDescription = photo.data.genre;
+    }
+    
+    if (!series[seriesKey]) {
+      series[seriesKey] = {
+        key: seriesKey,
+        title: seriesTitle,
+        description: seriesDescription,
+        photos: [],
+        featuredPhoto: photo // Erstes Foto wird Featured
+      };
+    }
+    
+    series[seriesKey].photos.push(photo);
+  });
+  
+  return Object.values(series);
+}
+
+const photoSeries = groupPhotosBySeries(photos);
+---
+
+<div class="magazine-layout">
+  {photoSeries.map((series: any, index: number) => {
+    const featuredPhoto = series.featuredPhoto;
+    const imageKey = `../../assets/images/${category}/${featuredPhoto.id.replace('.md', '')}.jpg`;
+    const imageModule = images[imageKey];
+    const seriesUrl = `/${category}/${featuredPhoto.data.slug || featuredPhoto.slug}/`;
+    
+    // Unterschiedliche Layout-Varianten für Editorial Feel
+    const layoutClass = `series-${index % 3 + 1}`;
+    
+    return imageModule && (
+      <article class={`magazine-item ${layoutClass}`}>
+        <div class="magazine-image">
+          <a href={seriesUrl}>
+            <Image 
+              src={imageModule.default} 
+              alt={featuredPhoto.data.image.alt}
+              width={400}
+              height={300}
+              format="webp"
+              quality={85}
+            />
+          </a>
+        </div>
+        
+        <div class="magazine-text">
+          <h2>
+            <a href={seriesUrl}>{series.title}</a>
+          </h2>
+          <p class="magazine-meta">
+            {featuredPhoto.data.genre} • {series.photos.length} {series.photos.length === 1 ? 'Bild' : 'Bilder'}
+          </p>
+          <p class="magazine-description">{series.description}</p>
+          <a href={seriesUrl} class="magazine-link">Serie ansehen →</a>
+        </div>
+      </article>
+    );
+  })}
+</div>
+
+<style>
+  .magazine-layout {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .magazine-item {
+    display: contents;
+  }
+
+  .magazine-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .magazine-image a:hover img {
+    transform: scale(1.05);
+  }
+
+  .magazine-text h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  .magazine-text h2 a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease;
+  }
+
+  .magazine-text h2 a:hover {
+    opacity: 0.7;
+  }
+
+  .magazine-meta {
+    margin: 0 0 1rem 0;
+    color: #666;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .magazine-description {
+    margin: 0 0 1.5rem 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  .magazine-link {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: opacity 0.2s ease;
+  }
+
+  .magazine-link:hover {
+    opacity: 0.7;
+  }
+
+  /* Layout Varianten für Editorial Feel */
+  
+  /* Serie 1: Großes Bild links, Text rechts */
+  .series-1 .magazine-image {
+    grid-column: 1 / 7;
+    grid-row: span 2;
+  }
+
+  .series-1 .magazine-text {
+    grid-column: 8 / 12;
+    grid-row: span 1;
+    align-self: center;
+  }
+
+  /* Serie 2: Text links, kleineres Bild rechts */
+  .series-2 .magazine-text {
+    grid-column: 1 / 6;
+    grid-row: span 1;
+    align-self: end;
+  }
+
+  .series-2 .magazine-image {
+    grid-column: 7 / 11;
+    grid-row: span 1;
+  }
+
+  /* Serie 3: Zentriertes Layout */
+  .series-3 .magazine-image {
+    grid-column: 3 / 8;
+    grid-row: span 1;
+  }
+
+  .series-3 .magazine-text {
+    grid-column: 9 / 13;
+    grid-row: span 1;
+    align-self: start;
+  }
+
+  /* Mobile: Vereinfachtes Layout */
+  @media (max-width: 768px) {
+    .magazine-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding: 2rem 1rem;
+    }
+
+    .series-1 .magazine-image,
+    .series-2 .magazine-image,
+    .series-3 .magazine-image {
+      grid-column: 1;
+    }
+
+    .series-1 .magazine-text,
+    .series-2 .magazine-text,
+    .series-3 .magazine-text {
+      grid-column: 1;
+    }
+
+    .magazine-text h2 {
+      font-size: 1.3rem;
+    }
+
+    .magazine-description {
+      font-size: 0.95rem;
+    }
+  }
+</style>
