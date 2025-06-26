@@ -6,7 +6,7 @@
 /* 6. Media Queries */
 
 /* 1. Imports & Custom Properties */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@400;500&display=swap");
 
 /* 2. Reset & Base Styles */
 * {
@@ -30,7 +30,7 @@
 /* 3. Typography */
 body,
 address {
-  font-family: 'IBM Plex Serif', 'Times New Roman', serif;
+  font-family: "IBM Plex Serif", "Times New Roman", serif;
   font-style: normal;
   font-size: var(--s0);
   line-height: var(--ratio);
@@ -44,7 +44,7 @@ address {
 h1,
 h2,
 h3 {
-  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   font-weight: 400;
   line-height: 1.1;
   text-align: left;
@@ -67,10 +67,10 @@ p {
   max-width: 75ch;
 }
 
-p > a {
+.text-link {
   font-style: italic;
-  color: slategray;
-  font-weight: 600;
+  color: rgb(67, 67, 67);
+  font-weight: 500;
 }
 
 /* 4. Layout Components */
@@ -95,10 +95,11 @@ nav {
   align-items: end;
 }
 
-nav a {
+.nav-link,
+.nav-list > li > a {
   text-decoration: none;
   color: inherit;
-  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   transition: opacity 0.2s ease;
   font-weight: 600;
   cursor: pointer;
@@ -144,7 +145,22 @@ nav a:hover {
 .three-column-item {
   grid-column: span 4; /* 12 ÷ 3 = 4 Spalten je Element */
 }
+/* Vier-Spalten Layout */
+.four-column-item {
+  grid-column: span 3; /* 12 ÷ 3 = 4 Spalten je Element */
+}
 
+/* Content mit Aside */
+.content-with-aside {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.content-with-aside aside {
+  flex-shrink: 0;
+  max-width: 300px;
+}
 /*  Form Elements  */
 fieldset {
   border: solid 1px #000000;
@@ -190,17 +206,15 @@ figcaption {
 
 /* Responsive: Auf kleinen Screens einzelne Spalte */
 @media (max-width: 768px) {
+  .all-column-item,
   .two-column-item,
   .three-column-item {
     grid-column: span 12;
   }
-}
-
-figure {
-  margin: 0;
-}
-figcaption {
-  font-size: 0.875rem;
-  text-align: left;
-  margin-top: 0.5rem;
+  .content-with-aside aside {
+    float: none;
+    margin-left: 0;
+    margin-top: 1rem;
+    max-width: 100%;
+  }
 }
