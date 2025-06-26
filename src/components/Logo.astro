@@ -1,32 +1,20 @@
 ---
 // SILBERBLICK Logo component - replaces text brand
 export interface Props {
-  width?: number;
-  height?: number;
+  width?: number
+  height?: number
 }
 
-const { width = 240, height = 80 } = Astro.props;
+const width = '160' // 1/12 of viewport width as an approximation
+const height = 'auto'
 ---
 
 <a href="/" class="logo">
-  <img 
-    src="/logo-silberblick.svg" 
-    alt="SILBERBLICK - Fotograf Berlin" 
-    width={width} 
+  <img
+    src="/logo-silberblick.svg"
+    alt="SILBERBLICK - Fotograf Berlin"
+    width={width}
     height={height}
     style="height: auto; max-width: 100%;"
   />
 </a>
-
-<style>
-  .logo {
-    text-decoration: none;
-    display: inline-block;
-  }
-  
-  .logo img {
-    display: block;
-    height: auto;
-    max-width: 100%;
-  }
-</style>

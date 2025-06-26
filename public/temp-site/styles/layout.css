@@ -1,0 +1,206 @@
+/* 1. Imports & Custom Properties */
+/* 2. Reset & Base Styles */
+/* 3. Typography */
+/* 4. Layout Components */
+/* 5. Utilities */
+/* 6. Media Queries */
+
+/* 1. Imports & Custom Properties */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@400;500&display=swap');
+
+/* 2. Reset & Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --ratio: 1.5;
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+
+  /* Utopia Grid  */
+  --grid-max-width: 77.5rem;
+  --grid-gutter: clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem);
+  --grid-columns: 12;
+}
+
+/* 3. Typography */
+body,
+address {
+  font-family: 'IBM Plex Serif', 'Times New Roman', serif;
+  font-style: normal;
+  font-size: var(--s0);
+  line-height: var(--ratio);
+  color: #000;
+  background: #fff;
+  text-align: left;
+  margin: 0;
+  padding: 0 1rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: left;
+  font-style: italic;
+}
+
+h1 {
+  font-size: clamp(1.5rem, 3vw, 3rem);
+}
+h2 {
+  font-size: clamp(1rem, 2vw, 2rem);
+}
+h3 {
+  font-size: clamp(1rem, 2vw, 2rem);
+}
+/*Fließtext*/
+
+p {
+  font-size: clamp(1rem, 0.1rem + 1vw, 1.5rem);
+  max-width: 75ch;
+}
+
+p > a {
+  font-style: italic;
+  color: slategray;
+  font-weight: 600;
+}
+
+/* 4. Layout Components */
+
+/*---- Header ---- */
+
+/* ---- Logo ---*/
+.logo {
+  text-decoration: none;
+  display: inline-block;
+  padding-top: var(--s1, 0.5rem);
+}
+
+.logo img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  min-width: 160px; /* Minimum width for logo */
+}
+/* ---- Navigation ---- */
+nav {
+  align-items: end;
+}
+
+nav a {
+  text-decoration: none;
+  color: inherit;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  transition: opacity 0.2s ease;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+nav a:hover {
+  opacity: 0.7;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: end;
+  gap: var(--s1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Utopia Grid CSS */
+
+.u-container {
+  max-width: var(--grid-max-width);
+  padding-inline: var(--grid-gutter);
+  margin-inline: auto;
+}
+
+.u-grid {
+  display: grid;
+  gap: var(--grid-gutter);
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+}
+/* Alle-Spalten Layout */
+.all-column-item {
+  grid-column: span 12; /* 12 ÷ 1 = 1 Spalte je Element */
+}
+
+/* Zwei-Spalten Layout */
+.two-column-item {
+  grid-column: span 6; /* 12 ÷ 2 = 6 Spalten je Element */
+}
+
+/* Drei-Spalten Layout */
+.three-column-item {
+  grid-column: span 4; /* 12 ÷ 3 = 4 Spalten je Element */
+}
+
+/*  Form Elements  */
+fieldset {
+  border: solid 1px #000000;
+  padding: 3vw;
+}
+label {
+  display: block;
+  font-weight: 600;
+  width: 100%;
+}
+.form-submit-button {
+  color: red;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  line-height: 2.5;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+textarea {
+  line-height: 1.5;
+}
+figure {
+  margin: 0;
+}
+figcaption {
+  font-size: 0.875rem;
+  text-align: left;
+  margin-top: 0.5rem;
+}
+
+/* 5. Utilities */
+
+/* Stack - Vertical Spacing */
+.stack > * + * {
+  margin-top: var(--space, var(--s1));
+}
+/* 6. Media Queries */
+
+/* Responsive: Auf kleinen Screens einzelne Spalte */
+@media (max-width: 768px) {
+  .two-column-item,
+  .three-column-item {
+    grid-column: span 12;
+  }
+}
+
+figure {
+  margin: 0;
+}
+figcaption {
+  font-size: 0.875rem;
+  text-align: left;
+  margin-top: 0.5rem;
+}

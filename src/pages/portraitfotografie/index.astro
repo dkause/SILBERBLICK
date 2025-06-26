@@ -1,10 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import GalleryLayout from '../../components/GalleryLayout.astro';
-import PhotoGallery from '../../components/PhotoGallery.astro';
 
 const title = "Portraitfotografie Berlin - SILBERBLICK";
 const description = "Authentische Portraitfotografie in Berlin. Natürliche Menschen-Portraits und Charakterstudien von Daniel Kause.";
+const keywords = "Portraitfotografie Berlin, Portraitfotograf Berlin, Charakterportraits, Menschen Fotografie, authentische Portraits, Daniel Kause";
 
 // Get all portraitfotografie photos
 const portraitfotos = await getCollection('photos', ({ data }) => {
@@ -21,10 +21,7 @@ const images = import.meta.glob('../../assets/images/portraitfotografie/*.jpg', 
   currentPath="/portraitfotografie/"
   pageTitle="Portraitfotografie"
   pageDescription="Authentische Menschen-Portraits und natürliche Charakterstudien."
+  keywords={keywords}
+  canonicalUrl="https://silberblick.berlin/portraitfotografie/"
 >
-  <PhotoGallery 
-    photos={portraitfotos} 
-    category="portraitfotografie" 
-    images={images} 
-  />
 </GalleryLayout>

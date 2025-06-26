@@ -1,67 +1,88 @@
 ---
-import HeaderNavigation from '../../components/HeaderNavigation.astro';
-import BasicMeta from '../../components/BasicMeta.astro';
-import MetaTags from '../../components/MetaTags.astro';
-import SocialMeta from '../../components/SocialMeta.astro';
-import Analytics from '../../components/Analytics.astro';
-import FontLoader from '../../components/FontLoader.astro';
+import HeaderNavigation from '../../components/HeaderNavigation.astro'
+import BasicMeta from '../../components/BasicMeta.astro'
+import MetaTags from '../../components/MetaTags.astro'
+import SocialMeta from '../../components/SocialMeta.astro'
+import Analytics from '../../components/Analytics.astro'
+import '../../styles/layout.css'
 
-const title = "Kontakt - Daniel Kause Fotografie | SILBERBLICK";
-const description = "Kontaktieren Sie Daniel Kause für professionelle Fotografie in Berlin. Business-, Portrait- und Architekturfotografie.";
+const title = 'Kontakt - Daniel Kause Fotografie | SILBERBLICK'
+const description =
+  'Kontaktieren Sie Daniel Kause für professionelle Fotografie in Berlin. Business-, Portrait- und Architekturfotografie.'
 ---
 
 <html lang="de">
-<head>
-  <BasicMeta />
-  <MetaTags title={title} description={description} canonicalUrl="https://silberblick.berlin/kontakt/" />
-  <SocialMeta title={title} description={description} url="https://silberblick.berlin/kontakt/" />
-  <Analytics trackingId="G-WJK34XRR7F" />
-  <FontLoader />
-  <link rel="stylesheet" href="/styles/layout.css" />
-</head>
-<body>
-  <HeaderNavigation currentPath="/kontakt/" />
+  <head>
+    <BasicMeta />
+    <MetaTags
+      title={title}
+      description={description}
+      canonicalUrl="https://silberblick.berlin/kontakt/"
+    />
+    <SocialMeta
+      title={title}
+      description={description}
+      url="https://silberblick.berlin/kontakt/"
+    />
+    <Analytics trackingId="G-WJK34XRR7F" />
+  </head>
+  <body class="u-container">
+    <HeaderNavigation currentPath="/kontakt/" />
 
-  <main class="stack" style="--space: var(--s3); padding: var(--s2);">
-    <h1>Kontakt</h1>
-    
-    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--s4); align-items: start;">
-      <div class="stack" style="--space: var(--s2);">
-        <h2>Daniel Kause</h2>
-        <div class="stack" style="--space: var(--s1);">
-          <p><strong>Fotograf seit 1995</strong><br>
-          Meister des Fotografenhandwerks</p>
-          
-          <p><strong>E-Mail:</strong><br>
-          <a href="mailto:info@silberblick.berlin">info@silberblick.berlin</a></p>
-          
-          <p><strong>Telefon:</strong><br>
-          <a href="tel:+49301234567">+49 30 123 456 7</a></p>
-          
-          <p><strong>Berlin</strong><br>
-          Auf Anfrage in ganz Deutschland</p>
+    <main>
+      <h1>Kontakt</h1>
+
+      <div class="u-grid">
+        <div class="two-column-item">
+          <h2>Daniel Kause</h2>
+          <div class="stack" style="--space: var(--s1);">
+            <p>
+              <strong>Fotograf seit 1995</strong><br />
+              Meister des Fotografenhandwerks
+            </p>
+
+            <p>
+              <strong>E-Mail:</strong><br />
+              <a href="mailto:info@silberblick.berlin"
+                >info@silberblick.berlin</a
+              >
+            </p>
+
+            <p>
+              <strong>Telefon:</strong><br />
+              <a href="tel:+49301234567">+49 30 123 456 7</a>
+            </p>
+
+            <p>
+              <strong>Berlin</strong><br />
+              Auf Anfrage in ganz Deutschland
+            </p>
+          </div>
+        </div>
+
+        <div class="two-column-item">
+          <fieldset>
+            <legend><h3>Anfrage</h3></legend>
+
+            <form>
+              <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div>
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div>
+                <label for="message">Nachricht</label>
+                <textarea id="message" name="message" rows="6" required
+                ></textarea>
+              </div>
+              <button type="submit">Nachricht senden</button>
+            </form>
+          </fieldset>
         </div>
       </div>
-      
-      <div class="stack" style="--space: var(--s2);">
-        <h3>Anfrage</h3>
-        <form class="stack" style="--space: var(--s1);">
-          <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required />
-          </div>
-          <div>
-            <label for="email">E-Mail</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div>
-            <label for="message">Nachricht</label>
-            <textarea id="message" name="message" rows="6" required></textarea>
-          </div>
-          <button type="submit">Nachricht senden</button>
-        </form>
-      </div>
-    </div>
-  </main>
-</body>
+    </main>
+  </body>
 </html>
