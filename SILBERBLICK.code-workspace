@@ -1,13 +1,7 @@
 {
     "folders": [
         {
-            "path": "node_modules/astro"
-        },
-        {
             "path": "."
         }
-    ],
-    "settings": {
-        "liveServer.settings.multiRootWorkspaceName": "SILBERBLICK"
-    }
+    ]
 }
