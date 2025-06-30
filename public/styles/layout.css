@@ -211,6 +211,9 @@ figcaption {
   .three-column-item {
     grid-column: span 12;
   }
+  .content-with-aside {
+    flex-direction: column;
+  }
   .content-with-aside aside {
     float: none;
     margin-left: 0;
