@@ -139,18 +139,8 @@ nav a:hover {
   padding: 0;
 }
 
-.font-sans {
-  font-family: var(--font-sans);
-}
-.u-step-01 {
-  font-size: var(--step--1);
-}
-.u-step-02 {
-  font-size: var(--step--2);
-}
-.no-wrap {
-  white-space: nowrap;
-}
+/* Mobile Navigation
+
 /* Utopia Grid CSS */
 
 .u-container {
@@ -192,7 +182,7 @@ fieldset {
   border: solid 1px #000000;
   padding: 3vw;
 }
-label {
+.form-label {
   display: block;
   font-weight: 600;
   width: 100%;
@@ -200,6 +190,14 @@ label {
 .form-submit-button {
   color: red;
 }
+.cta-button {
+  padding: 0.75em 1.5em;
+  background: #222;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
 input,
 textarea,
 select {
@@ -241,22 +239,94 @@ figcaption {
 .padding-bottom {
   padding-bottom: 2rem;
 }
+.font-sans {
+  font-family: var(--font-sans);
+}
+.u-step-01 {
+  font-size: var(--step--1);
+}
+.u-step-02 {
+  font-size: var(--step--2);
+}
+.no-wrap {
+  white-space: nowrap;
+}
+.nav-toggle {
+  display: none;
+}
 /* 6. Media Queries */
+
+/* Desktop: Hamburger verstecken */
+@media (min-width: 769px) {
+  .nav-hamburger {
+    display: none;
+  }
+
+  .nav-container {
+    position: relative;
+  }
+}
 
 /* Responsive: Auf kleinen Screens einzelne Spalte */
 @media (max-width: 768px) {
   .all-column-item,
   .two-column-item,
-  .three-column-item {
+  .three-column-item,
+  .four-column-item {
     grid-column: span 12;
   }
-  .content-with-aside {
-    flex-direction: column;
+  .four-column-item {
+    margin: 0 auto;
   }
-  .content-with-aside aside {
-    float: none;
-    margin-left: 0;
-    margin-top: 1rem;
-    max-width: 100%;
+  /* Navigation */
+  .logo.two-column-item,
+  .nav-container.two-column-item {
+    grid-column: span 6;
+  }
+
+  .nav-container {
+    position: relative;
+  }
+  /* Checkbox verstecken */
+  .nav-toggle {
+    display: none;
+  }
+  .nav-hamburger {
+    display: block;
+    font-size: var(--step--2);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 12px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 4px;
+    float: right;
+  }
+  .nav-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border: 1px solid #000;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    flex-direction: column;
+    gap: 0;
+  }
+  .nav-list li {
+    border-bottom: 1px solid #eee;
+  }
+  .nav-list a {
+    padding: 1rem;
+    display: block;
+  }
+  .nav-toggle:checked ~ .nav-list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 }
