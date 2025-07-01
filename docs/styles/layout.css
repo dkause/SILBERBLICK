@@ -238,21 +238,20 @@ figcaption {
 .image-showcase {
   display: flex;
   gap: var(--grid-gutter);
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
   flex-wrap: wrap;
   overflow-x: auto;
 }
 
 .image-showcase figure {
-  flex: 1 1 auto;
+  flex: 1 1 0;
   flex-shrink: 1;
 }
 
 .image-showcase img {
-  height: 60vh;
   width: auto;
-  max-width: none;
+  max-width: 100%;
   object-fit: contain;
 }
 
