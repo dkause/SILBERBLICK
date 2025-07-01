@@ -234,15 +234,26 @@ figcaption {
 .stack > * + * {
   margin-top: var(--space, var(--s1));
 }
-.full-height {
-  height: 100%;
+
+.image-showcase {
+  display: flex;
+  gap: var(--grid-gutter);
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-x: auto;
 }
-.object-fit-cover {
-  max-width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+
+.image-showcase figure {
+  flex-shrink: 0;
 }
+
+.image-showcase img {
+  height: 60vh;
+  width: auto;
+  max-width: none;
+}
+
 .padding-bottom {
   padding-bottom: 2rem;
 }
