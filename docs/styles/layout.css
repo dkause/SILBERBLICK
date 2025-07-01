@@ -246,6 +246,7 @@ figcaption {
 
 .image-showcase figure {
   flex: 1 1 auto;
+  flex-shrink: 1;
 }
 
 .image-showcase img {
