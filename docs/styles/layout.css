@@ -190,19 +190,24 @@ fieldset {
 .form-submit-button {
   color: red;
 }
-.cta-button {
+.button-base {
   padding: 0.75em 1.5em;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block; /* Ensure padding and width work as expected for <a> tags */
+  text-align: center; /* Center text within the button */
+  white-space: nowrap; /* Prevent text from wrapping */
+  cursor: pointer; /* Indicate it's clickable */
+}
+
+.cta-button {
   background: #222;
   color: #fff;
-  border-radius: 4px;
-  text-decoration: none;
 }
+
 .cta-button-2 {
-  padding: 0.75em 1.5em;
   background: #eee;
   color: #222;
-  border-radius: 4px;
-  text-decoration: none;
   border: 1px solid #ccc;
 }
 input,
@@ -291,11 +296,27 @@ figcaption {
   .all-column-item,
   .two-column-item,
   .three-column-item,
-  .four-column-item {
+  .four-column-item,
+  .eight-column-item {
     grid-column: span 12;
   }
   .four-column-item {
     margin: 0 auto;
+  }
+  .image-showcase {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: var(--step-2);
+  }
+  h2,
+  h3 {
+    font-size: var(--step-1);
+  }
+  p {
+    font-size: var(--step--1);
   }
   /* Navigation */
   .logo.two-column-item,
@@ -347,5 +368,12 @@ figcaption {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+  }
+
+  .button-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s1);
   }
 }
