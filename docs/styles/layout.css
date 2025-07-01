@@ -252,6 +252,7 @@ figcaption {
   height: 60vh;
   width: auto;
   max-width: none;
+  object-fit: contain;
 }
 
 .padding-bottom {
