@@ -278,6 +278,29 @@ figcaption {
 .nav-toggle {
   display: none;
 }
+.media-object {
+  display: flex;
+  gap: var(--space, 1rem);
+  align-items: flex-start;
+}
+.media-object figure {
+  width: calc(4 * var(--step-5));
+  flex-shrink: 0;
+}
+.media-object figure img {
+  width: 100%;
+  max-width: 100%;
+}
+
+.media-object p {
+  flex: 1;
+}
+.vw33 {
+  flex: 1;
+}
+.flex-end {
+  align-items: flex-end;
+}
 /* 6. Media Queries */
 
 /* Desktop: Hamburger verstecken */
@@ -303,6 +326,7 @@ figcaption {
   .four-column-item {
     margin: 0 auto;
   }
+  .media-object,
   .image-showcase {
     display: flex;
     flex-direction: column;
