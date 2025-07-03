@@ -287,11 +287,13 @@ figcaption {
   width: calc(4 * var(--step-5));
   flex-shrink: 0;
 }
-.media-object figure img {
+.max-width {
   width: 100%;
   max-width: 100%;
 }
-
+.contain {
+  object-fit: contain;
+}
 .media-object p {
   flex: 1;
 }
