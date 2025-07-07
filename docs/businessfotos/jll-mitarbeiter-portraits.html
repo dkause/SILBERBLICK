@@ -9,60 +9,9 @@
 <link rel="stylesheet" href="../styles/layout.css" />
 <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
 
-<!-- Zusätzliches CSS für die Einzelfoto-Seite -->
-<style>
-    .grid-col-span-5 {
-        grid-column: span 5;
-    }
-
-    .grid-col-span-2 {
-        grid-column: span 2;
-    }
-
-    .thumbnail-stage {
-        display: flex;
-        align-items: flex-end;
-        overflow-x: auto;
-        gap: var(--grid-gutter);
-        padding-bottom: 1rem;
-        container-type: inline-size;
-    }
 
 
-    .thumbnail-stage a {
-        /* Standard-Breite für breitere Container */
-        flex: 0 0 30%;
-        display: block;
-    }
 
-    .thumbnail-stage img {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    @media (min-width: 768px) {
-        .thumbnail-stage {
-            /* Apply flex-direction to the container */
-            flex-direction: column;
-        }
-
-        .thumbnail-stage a {
-            /* Keep these properties as they affect the flex items (the a tags) */
-            width: 100%;
-            flex-basis: auto;
-            /* You can keep display: flex here if you want to control the layout of the img inside the a tag */
-            /* flex-direction: column; /* This would affect the img inside, not the row layout */
-        }
-    }
-
-    @media (max-width: 768px) {
-
-        .grid-col-span-5,
-        .grid-col-span-2 {
-            grid-column: span 12;
-        }
-    }
 </style>
 </head>
 
@@ -114,7 +63,7 @@
             </div>
             <!-- Spalte 3: Weitere Bilder (Desktop: 20%) -->
             <div class="grid-col-span-2">
-                <h3 class="--">Weitere Bilder der Serie</h3>
+                <h3>Weitere Bilder</h3>
                 <div class="thumbnail-stage">
                     <a href="#"><img src="aroma-thai-massage-blume.jpg" alt="Vorschaubild 1"></a>
                     <a href="#"><img src="aroma-thai-massage-oele-model.jpg" alt="Vorschaubild 2"></a>
