@@ -357,34 +357,35 @@ figcaption {
 /* Isotope Gallery Styles */
 .isotope-grid {
   container-type: inline-size;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--grid-gutter);
+  position: relative;
 }
-
+.isotope-grid-sizer,
 .isotope-grid-item {
-  width: calc(50% - (var(--grid-gutter) / 2)); /* Default for mobile (2 columns) */
-  margin-bottom: var(--grid-gutter); /* Spacing between items */
+  width: 50%; /* Default for mobile (2 columns) */
+  margin-bottom: 10px; /* Spacing between items */
 }
 
 @container (min-width: 500px) {
+  .isotope-grid-sizer,
   .isotope-grid-item {
-    width: calc(33.333% - (2 * var(--grid-gutter) / 3)); /* 3 columns */
+    width: 33.333%; /* 3 columns */
   }
 }
 
 @container (min-width: 768px) {
+  .isotope-grid-sizer,
   .isotope-grid-item {
-    width: calc(25% - (3 * var(--grid-gutter) / 4)); /* 4 columns */
+    width: 25%; /* 4 columns */
   }
 }
 
 @container (min-width: 1100px) {
+  .isotope-grid-sizer,
   .isotope-grid-item {
-    width: calc(20% - (4 * var(--grid-gutter) / 5)); /* 5 columns */
+    width:calc(20% - 8px); /* 5 columns */
   }
 }
-
+ 
 .isotope-grid-item img {
   display: block;
   width: 100%;

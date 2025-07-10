@@ -19,8 +19,8 @@ const allTags = new Set(fotos.flatMap(tag => tag.data.tags))
     ))
   }
 </div>
-<div class="isotope-grid gap">
-
+<div class="isotope-grid ">
+<div class="isotope-grid-sizer"></div>
     {fotos.map(foto =>(
         
         <div class="isotope-grid-item" data-tags={foto.data.tags.join(' ')}>
@@ -34,60 +34,20 @@ const allTags = new Set(fotos.flatMap(tag => tag.data.tags))
     </div>
     ))}
     </div>
-
-    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-    <script is:inline>
-              document.addEventListener('DOMContentLoaded', function () {
-                // Isotope initialisieren
-                var iso = new Isotope('.isotope-grid', {
-                  itemSelector: '.isotope-grid-item',
-                  layoutMode: 'masonry'
-                });
-
-                // Define a variable to hold the current filter value
-                var currentFilterValue = '*'; // Initialize to show all
-
-                // Custom filter function
-                function customFilterFn(itemElement) {
-                  console.log('Inside customFilterFn. itemElement:', itemElement);
-                  console.log('Type of itemElement:', typeof itemElement);
-
-                  if (currentFilterValue === '*') {
-                    return true; // Show all items
-                  }
-
-                  // Use itemElement instead of 'this'
-                  if (itemElement && typeof itemElement.getAttribute === 'function') {
-                    var itemTags = itemElement.getAttribute('data-tags');
-                    var tags = itemTags ? itemTags.split(' ') : [];
-                    var targetTag = currentFilterValue.substring(1); // Remove the leading '.'
-                    var matches = tags.includes(targetTag);
-                    console.log(`Item: ${itemTags}, Target: ${targetTag}, Matches: ${matches}`);
-                    return matches;
-                  } else {
-                    console.error('itemElement is not a valid DOM element in filter function:', itemElement);
-                    return false; // Do not show this item if context is invalid
-                  }
-                };
-        
-                // Filter-Logik an die Buttons binden
-                var filterButtonGroup = document.querySelector('.filter-button-group');
-                filterButtonGroup.addEventListener('click', function (event) {
-                  if (!event.target.matches('button')) {
-                    return;
-                  }
-                  var filterValue = event.target.getAttribute('data-filter');
-                  console.log('Filter button clicked. filterValue:', filterValue);
-
-                  // Update the global filter value
-                  currentFilterValue = filterValue;
-
-                  // Arrange Isotope items using the custom filter function
-                  iso.arrange({ filter: customFilterFn });
-
-                  // Update active button state
-                  filterButtonGroup.querySelector('.is-checked').classList.remove('is-checked');
-                  event.target.classList.add('is-checked');
-                });
-              });
-            </script>
+<!-- Am Ende deiner Datei -->
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const elem = document.querySelector('.isotope-grid');
+    if (window.Isotope && elem) {
+      new Isotope(elem, {
+        itemSelector: '.isotope-grid-item',
+        percentPosition:true,
+        masonry: {
+            columnWidth: '.isotope-grid-sizer',
+            gutter:8
+      }
+    }
+  )}
+})
+</script>
