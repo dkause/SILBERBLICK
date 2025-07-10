@@ -1,0 +1,93 @@
+---
+import '../styles/global.css'
+
+import { getCollection } from "astro:content";
+
+import { Image } from "astro:assets";
+
+
+const fotos = (await getCollection('fotos'));
+const allTags = new Set(fotos.flatMap(tag => tag.data.tags))
+---
+<h1>Collection-Masonry-Test</h1>
+
+<div class="filter-button-group">
+  <button class="is-checked" data-filter="*">show all</button>
+  {
+    Array.from(allTags).map((tag) => (
+      <button data-filter={`.${tag}`}>{tag}</button>
+    ))
+  }
+</div>
+<div class="isotope-grid gap">
+
+    {fotos.map(foto =>(
+        
+        <div class="isotope-grid-item" data-tags={foto.data.tags.join(' ')}>
+        <Image
+        src={foto.data.image.src}
+    alt={foto.data.image.alt}
+    sizes="(max-width: 768px) 100vw, 33vw" 
+        />
+        
+        <span></span>
+    </div>
+    ))}
+    </div>
+
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script is:inline>
+              document.addEventListener('DOMContentLoaded', function () {
+                // Isotope initialisieren
+                var iso = new Isotope('.isotope-grid', {
+                  itemSelector: '.isotope-grid-item',
+                  layoutMode: 'masonry'
+                });
+
+                // Define a variable to hold the current filter value
+                var currentFilterValue = '*'; // Initialize to show all
+
+                // Custom filter function
+                function customFilterFn(itemElement) {
+                  console.log('Inside customFilterFn. itemElement:', itemElement);
+                  console.log('Type of itemElement:', typeof itemElement);
+
+                  if (currentFilterValue === '*') {
+                    return true; // Show all items
+                  }
+
+                  // Use itemElement instead of 'this'
+                  if (itemElement && typeof itemElement.getAttribute === 'function') {
+                    var itemTags = itemElement.getAttribute('data-tags');
+                    var tags = itemTags ? itemTags.split(' ') : [];
+                    var targetTag = currentFilterValue.substring(1); // Remove the leading '.'
+                    var matches = tags.includes(targetTag);
+                    console.log(`Item: ${itemTags}, Target: ${targetTag}, Matches: ${matches}`);
+                    return matches;
+                  } else {
+                    console.error('itemElement is not a valid DOM element in filter function:', itemElement);
+                    return false; // Do not show this item if context is invalid
+                  }
+                };
+        
+                // Filter-Logik an die Buttons binden
+                var filterButtonGroup = document.querySelector('.filter-button-group');
+                filterButtonGroup.addEventListener('click', function (event) {
+                  if (!event.target.matches('button')) {
+                    return;
+                  }
+                  var filterValue = event.target.getAttribute('data-filter');
+                  console.log('Filter button clicked. filterValue:', filterValue);
+
+                  // Update the global filter value
+                  currentFilterValue = filterValue;
+
+                  // Arrange Isotope items using the custom filter function
+                  iso.arrange({ filter: customFilterFn });
+
+                  // Update active button state
+                  filterButtonGroup.querySelector('.is-checked').classList.remove('is-checked');
+                  event.target.classList.add('is-checked');
+                });
+              });
+            </script>

@@ -1,0 +1,546 @@
+/* 1. Imports & Custom Properties */
+/* 2. Reset & Base Styles */
+/* 3. Typography */
+/* 4. Layout Components */
+/* 5. Utilities */
+/* 6. Media Queries */
+
+/* 1. Imports & Custom Properties */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@400;500&display=swap");
+
+/* 2. Reset & Base Styles */
+* {
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+:root {
+  --ratio: 1.5;
+  --s00: calc(var(--s0) / var(--ratio));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+
+  /* Utopia Grid  */
+  --grid-max-width: 77.5rem;
+  --grid-gutter: clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem);
+  --grid-columns: 12;
+
+  /* Utopia Clamp*/
+  /* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  --step--2: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
+  --step--1: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
+  --step-0: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+  --step-1: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+  --step-2: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
+  --step-3: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
+  --step-4: clamp(2.3328rem, 2.0827rem + 1.2504vw, 3.0518rem);
+  --step-5: clamp(2.7994rem, 2.4462rem + 1.7658vw, 3.8147rem);
+
+  /* Fonts */
+  --font-serif: "IBM Plex Serif", "Times New Roman", serif;
+  --font-sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 3. Typography */
+body,
+address {
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-size: var(--step-0);
+  line-height: var(--ratio);
+  color: #000;
+  background: #fff;
+  text-align: left;
+  margin: 0;
+  padding: 0 1rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: left;
+}
+
+h1 {
+  font-size: var(--step-5);
+}
+h2 {
+  font-size: var(--step-4);
+}
+h3 {
+  font-size: var(--step-3);
+}
+/*Fließtext*/
+
+p {
+  font-size: var(--step-0);
+  max-width: 75ch;
+}
+
+.text-link {
+  font-style: italic;
+  font-size: var(--step-0);
+
+  color: rgb(67, 67, 67);
+  font-weight: 500;
+  text-decoration: none;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* 4. Layout Components */
+
+/*---- Header ---- */
+
+/* ---- Logo ---*/
+.logo {
+  text-decoration: none;
+  display: inline-block;
+  padding-top: var(--s1, 0.5rem);
+}
+
+.logo img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  min-width: 160px; /* Minimum width for logo */
+}
+/* ---- Navigation ---- */
+nav {
+  align-items: end;
+}
+
+.nav-link,
+.nav-list > li > a {
+  font-size: var(--step--1);
+  text-decoration: none;
+  color: inherit;
+  font-family: var(--font-sans);
+  transition: opacity 0.2s ease;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+nav a:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: end;
+  gap: var(--s1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.thumbnail-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  overflow-x: auto;
+  gap: var(--grid-gutter);
+  padding-bottom: 1rem;
+  container-type: inline-size;
+}
+
+.thumbnail-stage a {
+  /* Standard-Breite für breitere Container */
+  flex: 0 0 30%;
+  display: block;
+}
+
+.thumbnail-stage img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* Mobile Navigation
+
+/* Utopia Grid CSS */
+
+.u-container {
+  max-width: var(--grid-max-width);
+  padding-inline: var(--grid-gutter);
+  margin-inline: auto;
+}
+
+.u-grid {
+  display: grid;
+  gap: var(--grid-gutter);
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+}
+/* Alle-Spalten Layout */
+.all-column-item {
+  grid-column: span 12; /* 12 ÷ 1 = 1 Spalte je Element */
+}
+
+/* Zwei-Spalten Layout */
+.two-column-item {
+  grid-column: span 6; /* 12 ÷ 2 = 6 Spalten je Element */
+}
+
+/* Drei-Spalten Layout */
+.three-column-item {
+  grid-column: span 4; /* 12 ÷ 3 = 4 Spalten je Element */
+}
+/* Vier-Spalten Layout */
+.four-column-item {
+  grid-column: span 3; /* 12 ÷ 3 = 4 Spalten je Element */
+}
+/* Acht-Spalten Layout */
+.eight-column-item {
+  grid-column: span 8; /* 12 ÷ 3 = 4 Spalten je Element */
+}
+.grid-col-span-5 {
+  grid-column: span 5;
+}
+.grid-col-span-5 h1 {
+  font-size: var(--step-1);
+}
+
+.grid-col-span-2 {
+  grid-column: span 2;
+}
+.grid-col-span-2 h3 {
+  font-size: var(--step--1);
+}
+
+/*  Form Elements  */
+fieldset {
+  border: solid 1px #000000;
+  padding: 3vw;
+}
+.form-label {
+  display: block;
+  font-weight: 600;
+  width: 100%;
+}
+.form-submit-button {
+  color: red;
+}
+.button-base {
+  padding: 0.75em 1.5em;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block; /* Ensure padding and width work as expected for <a> tags */
+  text-align: center; /* Center text within the button */
+  white-space: nowrap; /* Prevent text from wrapping */
+  cursor: pointer; /* Indicate it's clickable */
+}
+
+.cta-button {
+  background: #222;
+  color: #fff;
+}
+
+.cta-button-2 {
+  background: #eee;
+  color: #222;
+  border: 1px solid #ccc;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  line-height: 2.5;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+textarea {
+  line-height: 1.5;
+}
+figure {
+  margin: 0;
+}
+figcaption {
+  font-family: var(--font-sans);
+  font-size: var(--step--2);
+  text-align: left;
+  margin-top: 0.5rem;
+}
+
+/* 5. Utilities */
+
+/* Stack - Vertical Spacing */
+.stack > * + * {
+  margin-top: var(--space, var(--s1));
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-auto-width {
+  width: auto;
+  max-width: 100%;
+}
+.image-showcase {
+  display: flex;
+  gap: var(--grid-gutter);
+  align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-x: auto;
+}
+.gap {
+  gap: var(--grid-gutter);
+
+}
+.image-showcase figure {
+  flex: 0 1 0;
+  flex-shrink: 1;
+}
+
+.image-showcase img {
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.padding-bottom {
+  padding-bottom: 2rem;
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+.u-step-01 {
+  font-size: var(--step--1);
+}
+.u-step-02 {
+  font-size: var(--step--2);
+}
+.no-wrap {
+  white-space: nowrap;
+}
+.nav-toggle {
+  display: none;
+}
+.media-object {
+  display: flex;
+  gap: var(--space, 1rem);
+  align-items: flex-start;
+}
+.media-object figure {
+  width: calc(4 * var(--step-5));
+  flex-shrink: 0;
+}
+.max-width {
+  width: 100%;
+  max-width: 100%;
+}
+.contain {
+  object-fit: contain;
+}
+.media-object p {
+  flex: 1;
+}
+.vw33 {
+  flex: 1;
+}
+.flex-end {
+  align-items: flex-end;
+}
+
+/* Isotope Gallery Styles */
+.isotope-grid {
+  container-type: inline-size;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--grid-gutter);
+}
+
+.isotope-grid-item {
+  width: calc(50% - (var(--grid-gutter) / 2)); /* Default for mobile (2 columns) */
+  margin-bottom: var(--grid-gutter); /* Spacing between items */
+}
+
+@container (min-width: 500px) {
+  .isotope-grid-item {
+    width: calc(33.333% - (2 * var(--grid-gutter) / 3)); /* 3 columns */
+  }
+}
+
+@container (min-width: 768px) {
+  .isotope-grid-item {
+    width: calc(25% - (3 * var(--grid-gutter) / 4)); /* 4 columns */
+  }
+}
+
+@container (min-width: 1100px) {
+  .isotope-grid-item {
+    width: calc(20% - (4 * var(--grid-gutter) / 5)); /* 5 columns */
+  }
+}
+
+.isotope-grid-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.grid-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.filter-button-group {
+  margin-bottom: var(--grid-gutter);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-button-group button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  border-radius: 4px;
+}
+
+.filter-button-group button.is-checked {
+  background-color: #000;
+  color: #fff;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 0.2em 0.5em;
+  margin-right: 0.5em;
+  margin-top: 0.5em;
+  border-radius: 3px;
+  font-size: var(--step--2);
+  font-family: var(--font-sans);
+}
+
+/* 6. Media Queries */
+
+/* Desktop: Hamburger verstecken */
+@media (min-width: 769px) {
+  .nav-hamburger {
+    display: none;
+  }
+
+  .nav-container {
+    position: relative;
+  }
+}
+
+/* Responsive: Auf kleinen Screens einzelne Spalte */
+@media (max-width: 768px) {
+  .all-column-item,
+  .two-column-item,
+  .three-column-item,
+  .four-column-item,
+  .eight-column-item,
+  .grid-col-span-5,
+  .grid-col-span-2 {
+    grid-column: span 12;
+  }
+  .four-column-item {
+    margin: 0 auto;
+  }
+  .media-object,
+  .image-showcase {
+    display: flex;
+    flex-direction: column;
+  }
+  .thumbnail-stage {
+    /* Apply flex-direction to the container */
+    display: flex;
+    flex-direction: row;
+  }
+
+  .thumbnail-stage a {
+    flex: 1 1 160px;
+    min-width: 160px;
+    width: auto;
+  }
+
+  h1 {
+    font-size: var(--step-2);
+  }
+  h2,
+  h3 {
+    font-size: var(--step-1);
+  }
+  p {
+    font-size: var(--step--1);
+  }
+  /* Navigation */
+  .logo.two-column-item,
+  .nav-container.two-column-item {
+    grid-column: span 6;
+  }
+
+  .nav-container {
+    position: relative;
+  }
+  /* Checkbox verstecken */
+  .nav-toggle {
+    display: none;
+  }
+  .nav-hamburger {
+    display: block;
+    font-size: var(--step--2);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 12px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 4px;
+    float: right;
+  }
+  .nav-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border: 1px solid #000;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    flex-direction: column;
+    gap: 0;
+  }
+  .nav-list li {
+    border-bottom: 1px solid #eee;
+  }
+  .nav-list a {
+    padding: 1rem;
+    display: block;
+  }
+  .nav-toggle:checked ~ .nav-list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .button-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s1);
+  }
+}
