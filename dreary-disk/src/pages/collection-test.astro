@@ -30,12 +30,60 @@ breakpointCols={{
 
   {fotos.map(foto =>(
     
-    <div  data-tags={foto.data.tags.join(' ')}>
+    <div class="masonry-item">
         <Image
         src={foto.data.image.src}
         alt={foto.data.image.alt}
+        data-tags={foto.data.tags.join(' ')}
         />
         
     </div>
     ))}
     </Masonry>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtonGroup = document.querySelector('.filter-button-group');
+    // Selektiere jetzt die Spalten der Masonry-Galerie
+    const masonryColumns = document.querySelectorAll('.astro-masonry-grid_column');
+
+    if (!filterButtonGroup || masonryColumns.length === 0) {
+      console.warn('Filter elements or masonry columns not found. Filtering will not work.');
+      return;
+    }
+
+    filterButtonGroup.addEventListener('click', (event) => {
+      const targetButton = event.target.closest('button');
+
+      if (targetButton) {
+        // Remove 'is-checked' from previously active button
+        const currentActive = filterButtonGroup.querySelector('.is-checked');
+        if (currentActive) {
+          currentActive.classList.remove('is-checked');
+        }
+
+        // Add 'is-checked' to the clicked button
+        targetButton.classList.add('is-checked');
+
+        const filterValue = targetButton.dataset.filter; // e.g., ".produkt" or "*"
+
+        masonryColumns.forEach(column => {
+          // Hole das Image-Element innerhalb der Spalte
+          const imageElement = column.querySelector('img');
+          if (!imageElement) {
+            console.warn('No image found in masonry column:', column);
+            return;
+          }
+          // Hole die Tags vom Image-Element
+          const itemTags = imageElement.dataset.tags; // e.g., "produkt wellness"
+
+          if (filterValue === '*' || (itemTags && itemTags.includes(filterValue.substring(1)))) {
+            column.classList.remove('hidden');
+          } else {
+            column.classList.add('hidden');
+          }
+        });
+      }
+    });
+  });
+</script>
