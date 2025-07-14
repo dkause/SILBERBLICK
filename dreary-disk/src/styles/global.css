@@ -325,7 +325,7 @@ figcaption {
 .no-wrap {
   white-space: nowrap;
 }
-.nav-toggle {
+.hidden {
   display: none;
 }
 .media-object {
