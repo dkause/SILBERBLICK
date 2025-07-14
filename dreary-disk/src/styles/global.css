@@ -354,49 +354,8 @@ figcaption {
   align-items: flex-end;
 }
 
-/* Isotope Gallery Styles */
-.isotope-grid {
-  container-type: inline-size;
-  position: relative;
-}
-.isotope-grid-sizer,
-.isotope-grid-item {
-  width: 50%; /* Default for mobile (2 columns) */
-  margin-bottom: 10px; /* Spacing between items */
-}
+/* Filter Button Styles */
 
-@container (min-width: 500px) {
-  .isotope-grid-sizer,
-  .isotope-grid-item {
-    width: 33.333%; /* 3 columns */
-  }
-}
-
-@container (min-width: 768px) {
-  .isotope-grid-sizer,
-  .isotope-grid-item {
-    width: 25%; /* 4 columns */
-  }
-}
-
-@container (min-width: 1100px) {
-  .isotope-grid-sizer,
-  .isotope-grid-item {
-    width:calc(20% - 8px); /* 5 columns */
-  }
-}
- 
-.isotope-grid-item img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.grid-item img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
 
 .filter-button-group {
   margin-bottom: var(--grid-gutter);

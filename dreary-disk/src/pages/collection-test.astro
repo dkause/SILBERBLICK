@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css'
-
+import { Masonry } from 'astro-masonry';
 import { getCollection } from "astro:content";
 
 import { Image } from "astro:assets";
@@ -19,35 +19,23 @@ const allTags = new Set(fotos.flatMap(tag => tag.data.tags))
     ))
   }
 </div>
-<div class="isotope-grid ">
-<div class="isotope-grid-sizer"></div>
-    {fotos.map(foto =>(
-        
-        <div class="isotope-grid-item" data-tags={foto.data.tags.join(' ')}>
+<Masonry
+breakpointCols={{
+  default: 5,
+  1160: 4,
+  768: 3,
+  500: 2,
+
+}}>
+
+  {fotos.map(foto =>(
+    
+    <div  data-tags={foto.data.tags.join(' ')}>
         <Image
         src={foto.data.image.src}
-    alt={foto.data.image.alt}
-    sizes="(max-width: 768px) 100vw, 33vw" 
+        alt={foto.data.image.alt}
         />
         
-        <span></span>
     </div>
     ))}
-    </div>
-<!-- Am Ende deiner Datei -->
-<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const elem = document.querySelector('.isotope-grid');
-    if (window.Isotope && elem) {
-      new Isotope(elem, {
-        itemSelector: '.isotope-grid-item',
-        percentPosition:true,
-        masonry: {
-            columnWidth: '.isotope-grid-sizer',
-            gutter:8
-      }
-    }
-  )}
-})
-</script>
+    </Masonry>
