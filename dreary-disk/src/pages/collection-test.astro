@@ -44,46 +44,78 @@ breakpointCols={{
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     const filterButtonGroup = document.querySelector('.filter-button-group');
-    // Selektiere jetzt die Spalten der Masonry-Galerie
-    const masonryColumns = document.querySelectorAll('.astro-masonry-grid_column');
 
-    if (!filterButtonGroup || masonryColumns.length === 0) {
-      console.warn('Filter elements or masonry columns not found. Filtering will not work.');
+    if (!filterButtonGroup) {
+      console.warn('Filter button group not found. Filtering will not work.');
       return;
     }
 
-    filterButtonGroup.addEventListener('click', (event) => {
-      const targetButton = event.target.closest('button');
+    // Function to initialize filtering once masonry columns are available
+    const initializeFiltering = () => {
+      const masonryColumns = document.querySelectorAll('.astro-masonry-grid_column');
 
-      if (targetButton) {
-        // Remove 'is-checked' from previously active button
-        const currentActive = filterButtonGroup.querySelector('.is-checked');
-        if (currentActive) {
-          currentActive.classList.remove('is-checked');
+      if (masonryColumns.length === 0) {
+        // Columns not yet available, wait for next mutation
+        return false;
+      }
+
+      console.log('Masonry columns found. Initializing filtering.');
+
+      filterButtonGroup.addEventListener('click', (event) => {
+        const targetButton = event.target.closest('button');
+
+        if (targetButton) {
+          const currentActive = filterButtonGroup.querySelector('.is-checked');
+          if (currentActive) {
+            currentActive.classList.remove('is-checked');
+          }
+          targetButton.classList.add('is-checked');
+
+          const filterValue = targetButton.dataset.filter;
+
+          masonryColumns.forEach(column => {
+            const imageElement = column.querySelector('img');
+            if (!imageElement) {
+              console.warn('No image found in masonry column:', column);
+              return;
+            }
+            const itemTags = imageElement.dataset.tags;
+
+            if (filterValue === '*' || (itemTags && itemTags.includes(filterValue.substring(1)))) {
+              column.classList.remove('hidden');
+            } else {
+              column.classList.add('hidden');
+            }
+          });
+          });
         }
+      });
+      return true; // Filtering initialized
+    };
 
-        // Add 'is-checked' to the clicked button
-        targetButton.classList.add('is-checked');
+    // Try to initialize immediately in case columns are already there
+    if (initializeFiltering()) {
+      return;
+    }
 
-        const filterValue = targetButton.dataset.filter; // e.g., ".produkt" or "*"
-
-        masonryColumns.forEach(column => {
-          // Hole das Image-Element innerhalb der Spalte
-          const imageElement = column.querySelector('img');
-          if (!imageElement) {
-            console.warn('No image found in masonry column:', column);
-            return;
+    // If not, set up MutationObserver
+    const observer = new MutationObserver((mutationsList, observer) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+          // Check if any added node is a masonry column or contains one
+          for (const node of mutation.addedNodes) {
+            if (node.nodeType === 1 && (node.classList.contains('astro-masonry-grid_column') || node.querySelector('.astro-masonry-grid_column'))) {
+              if (initializeFiltering()) {
+                observer.disconnect(); // Disconnect once initialized
+                return;
+              }
+            }
           }
-          // Hole die Tags vom Image-Element
-          const itemTags = imageElement.dataset.tags; // e.g., "produkt wellness"
-
-          if (filterValue === '*' || (itemTags && itemTags.includes(filterValue.substring(1)))) {
-            column.classList.remove('hidden');
-          } else {
-            column.classList.add('hidden');
-          }
-        });
+        }
       }
     });
+
+    // Start observing the body for configured mutations
+    observer.observe(document.body, { childList: true, subtree: true });
   });
 </script>
