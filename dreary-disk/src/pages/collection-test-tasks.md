@@ -129,3 +129,96 @@ Es wird keine neue CSS-Klasse benötigt. Stattdessen wird die bereits existieren
 }
 ```
 Dieser Ansatz erfordert keine externen Bibliotheken und hält sich an die Vorgabe, nur minimales JavaScript zu verwenden.
+
+---
+
+## Phase 2: Design
+
+### 1. Responsive, vertikal und horizontal gleich große Lücke zwischen den Items
+
+**1.1 Analyse des vorhandenen CSS:**
+
+In `src/styles/global.css` ist bereits eine CSS-Variable `--grid-gutter` definiert, die für responsive Abstände verwendet wird:
+
+```css
+:root {
+  --grid-gutter: clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem);
+}
+```
+
+Diese Variable wird bereits in `.u-grid` und `.image-showcase` für `gap` verwendet. Die `astro-masonry` Komponente selbst erzeugt ein Grid-Layout, und es ist üblich, dass solche Komponenten eine Möglichkeit bieten, Abstände zwischen den Spalten und Reihen zu definieren.
+
+**1.2 Vorschläge:**
+
+Die `astro-masonry` Komponente rendert die Spalten als `.astro-masonry-grid_column`. Der einfachste und konsistenteste Weg, um Abstände zu schaffen, ist die Verwendung der `gap`-Eigenschaft auf dem Container, der diese Spalten enthält, oder durch Hinzufügen von `padding` zu den `masonry-item` Elementen.
+
+**Option A: `gap` auf dem Masonry-Container (bevorzugt)**
+
+Die `astro-masonry` Komponente rendert standardmäßig einen Container, der die Spalten enthält. Wenn dieser Container eine Klasse oder ID hat, können wir dort die `gap`-Eigenschaft anwenden. Die Dokumentation von `astro-masonry` (oder eine Inspektion des gerenderten HTML) würde zeigen, ob der Hauptcontainer eine spezifische Klasse hat, auf die wir abzielen können. Angenommen, der Hauptcontainer hat die Klasse `astro-masonry-grid`:
+
+```css
+/* In src/styles/global.css oder einer neuen CSS-Datei für die Galerie */
+.astro-masonry-grid {
+  display: grid; /* Oder flex, je nachdem wie astro-masonry es intern handhabt */
+  gap: var(--grid-gutter); /* Verwendet den bereits definierten responsiven Abstand */
+}
+```
+
+**Option B: `padding` auf den `masonry-item` Elementen**
+
+Wenn Option A nicht direkt anwendbar ist oder zu unerwünschten Nebeneffekten führt, können wir `padding` auf die `masonry-item` Elemente anwenden. Dies würde einen inneren Abstand um jedes Bild herum schaffen.
+
+```css
+/* In src/styles/global.css oder einer neuen CSS-Datei für die Galerie */
+.masonry-item {
+  padding: calc(var(--grid-gutter) / 2); /* Halber Gutter für gleichmäßigen Abstand */
+}
+```
+
+**Empfehlung:** Option A ist vorzuziehen, da sie die Abstände direkt auf Grid-Ebene verwaltet und sauberer ist. Ich müsste das gerenderte HTML der `Masonry`-Komponente überprüfen, um die genaue Klasse des Containers zu finden.
+
+### 2. Transition für Bilder/Divs (Ein- und Ausfaden)
+
+**2.1 Analyse von `astro-masonry`, Isotope und `playersclub88.netlify.app`:**
+
+*   **`astro-masonry`:** Die Dokumentation erwähnt keine direkten Optionen für Animationen oder Übergänge beim Filtern. Es ist eine statische Komponente, die das Layout berechnet. Animationen müssten clientseitig über CSS oder JavaScript hinzugefügt werden.
+*   **Isotope.metafizzy.co:** Isotope ist bekannt für seine flüssigen Layout-Übergänge und Filteranimationen. Es verwendet intern CSS-Transformationen (`transform`) und `transition`-Eigenschaften, um Elemente zu bewegen und ein- oder auszublenden. Die Kernidee ist, dass Elemente, die ausgeblendet werden sollen, eine `opacity: 0` und möglicherweise eine `transform: scale(0.001)` erhalten, während sichtbare Elemente `opacity: 1` und `transform: scale(1)` haben. Die `transition`-Eigenschaft sorgt für den sanften Übergang.
+*   **`playersclub88.netlify.app`:** Diese Seite zeigt eine Masonry-Galerie mit sanften Übergängen beim Laden und Filtern. Dies deutet darauf hin, dass CSS-Transitions oder eine JavaScript-Bibliothek für Animationen verwendet werden.
+
+**2.2 Vorschläge:**
+
+Der beste Ansatz ist die Verwendung von CSS-Transitions in Kombination mit der bereits vorhandenen `hidden`-Klasse. Wenn ein Element die Klasse `hidden` erhält, soll es sanft ausgeblendet werden, und wenn die Klasse entfernt wird, soll es sanft eingeblendet werden.
+
+**Vorschlag: CSS-Transitions für `opacity` und `transform`**
+
+Wir können die `transition`-Eigenschaft auf den `masonry-item` Elementen anwenden, um einen sanften Übergang zu ermöglichen, wenn die `hidden`-Klasse hinzugefügt oder entfernt wird.
+
+```css
+/* In src/styles/global.css oder einer neuen CSS-Datei für die Galerie */
+
+/* Grundzustand für Animationen */
+.astro-masonry-grid_column {
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Sanfter Übergang für Opazität und Skalierung */
+  transform: scale(1); /* Standard-Skalierung */
+  opacity: 1; /* Standard-Opazität */
+}
+
+/* Zustand, wenn das Element ausgeblendet ist */
+.astro-masonry-grid_column.hidden {
+  opacity: 0; /* Vollständig transparent */
+  transform: scale(0.95); /* Leicht verkleinert, um einen "Verschwinden"-Effekt zu erzeugen */
+  pointer-events: none; /* Verhindert Interaktionen, wenn ausgeblendet */
+}
+```
+
+**Erklärung:**
+
+*   `transition: opacity 0.3s ease-out, transform 0.3s ease-out;`: Definiert, dass Änderungen an `opacity` und `transform` über 0.3 Sekunden mit einer `ease-out`-Funktion animiert werden.
+*   `opacity: 0;`: Macht das Element unsichtbar.
+*   `transform: scale(0.95);`: Verkleinert das Element leicht, was einen subtilen "Verschwinden"-Effekt erzeugt. Du könntest auch `scale(0.001)` für einen stärkeren Effekt verwenden.
+*   `pointer-events: none;`: Stellt sicher, dass das ausgeblendete Element keine Mausereignisse (wie Klicks) empfängt.
+
+**Zusätzliche Überlegungen (für Phase 2):**
+
+*   **Staggered Animations:** Für einen fortgeschritteneren Effekt könnten wir JavaScript verwenden, um eine gestaffelte Animation zu erstellen, bei der die Elemente nacheinander ein- oder ausgeblendet werden, anstatt alle gleichzeitig. Dies würde jedoch mehr JavaScript erfordern.
+*   **Layout-Übergänge:** Isotope handhabt auch die Neuanordnung der Elemente mit Animationen. `astro-masonry` bietet dies nicht von Haus aus. Wenn dies gewünscht wird, müsste eine komplexere JavaScript-Lösung oder eine andere Masonry-Bibliothek in Betracht gezogen werden. Für den Moment konzentrieren wir uns auf das Ein- und Ausblenden der einzelnen Elemente.

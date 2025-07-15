@@ -1,120 +1,18 @@
 ---
-import '../styles/global.css'
-import { Masonry } from 'astro-masonry';
+import '../styles/global.css';
 import { getCollection } from "astro:content";
-
-import { Image } from "astro:assets";
-
+import IsotopeGallery from '../components/IsotopeGallery.astro';
 
 const fotos = (await getCollection('fotos'));
-const allTags = new Set(fotos.flatMap(tag => tag.data.tags))
+const allTags = new Set(fotos.flatMap(foto => foto.data.tags));
+
+const isotopeOptions = {
+  layoutMode: 'masonry',
+  // columnWidth and gutter will be handled by the component's internal responsive logic
+  // but can be overridden here if needed.
+};
 ---
+
 <h1>Collection-Masonry-Test</h1>
 
-<div class="filter-button-group">
-  <button class="is-checked" data-filter="*">show all</button>
-  {
-    Array.from(allTags).map((tag) => (
-      <button data-filter={`.${tag}`}>{tag}</button>
-    ))
-  }
-</div>
-<Masonry
-breakpointCols={{
-  default: 5,
-  1160: 4,
-  768: 3,
-  500: 2,
-
-}}>
-
-  {fotos.map(foto =>(
-    
-    <div class="masonry-item">
-        <Image
-        src={foto.data.image.src}
-        alt={foto.data.image.alt}
-        data-tags={foto.data.tags.join(' ')}
-        />
-        
-    </div>
-    ))}
-    </Masonry>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const filterButtonGroup = document.querySelector('.filter-button-group');
-
-    if (!filterButtonGroup) {
-      console.warn('Filter button group not found. Filtering will not work.');
-      return;
-    }
-
-    // Function to initialize filtering once masonry columns are available
-    const initializeFiltering = () => {
-      const masonryColumns = document.querySelectorAll('.astro-masonry-grid_column');
-
-      if (masonryColumns.length === 0) {
-        // Columns not yet available, wait for next mutation
-        return false;
-      }
-
-      console.log('Masonry columns found. Initializing filtering.');
-
-      filterButtonGroup.addEventListener('click', (event) => {
-        const targetButton = event.target.closest('button');
-
-        if (targetButton) {
-          const currentActive = filterButtonGroup.querySelector('.is-checked');
-          if (currentActive) {
-            currentActive.classList.remove('is-checked');
-          }
-          targetButton.classList.add('is-checked');
-
-          const filterValue = targetButton.dataset.filter;
-
-          masonryColumns.forEach(column => {
-            const imageElement = column.querySelector('img');
-            if (!imageElement) {
-              console.warn('No image found in masonry column:', column);
-              return;
-            }
-            const itemTags = imageElement.dataset.tags;
-
-            if (filterValue === '*' || (itemTags && itemTags.includes(filterValue.substring(1)))) {
-              column.classList.remove('hidden');
-            } else {
-              column.classList.add('hidden');
-            }
-          });
-        }
-      });
-      return true; // Filtering initialized
-    };
-
-    // Try to initialize immediately in case columns are already there
-    if (initializeFiltering()) {
-      return;
-    }
-
-    // If not, set up MutationObserver
-    const observer = new MutationObserver((mutationsList, observer) => {
-      for (const mutation of mutationsList) {
-        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-          // Check if any added node is a masonry column or contains one
-          for (const node of mutation.addedNodes) {
-            if (node.nodeType === 1 && (node.classList.contains('astro-masonry-grid_column') || node.querySelector('.astro-masonry-grid_column'))) {
-              if (initializeFiltering()) {
-                observer.disconnect(); // Disconnect once initialized
-                return;
-              }
-            }
-          }
-        }
-      }
-    });
-
-    // Start observing the body for configured mutations
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-</script>
+<IsotopeGallery fotos={fotos} allTags={allTags} isotopeOptions={isotopeOptions} />

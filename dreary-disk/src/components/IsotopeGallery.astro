@@ -1,0 +1,158 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  fotos: any[]; // Replace 'any' with a more specific type if available
+  allTags: Set<string>;
+  isotopeOptions?: {
+    layoutMode?: string;
+    columnWidth?: string | number;
+    gutter?: string | number;
+  };
+}
+
+const { fotos, allTags, isotopeOptions } = Astro.props;
+
+const defaultIsotopeOptions = {
+  layoutMode: 'masonry',
+  masonry: {
+    columnWidth: '.masonry-sizer', // Isotope will use the width of this element
+    gutter: 0, // Set gutter to 0 for testing
+  },
+  itemSelector: '.masonry-item',
+  percentPosition: true,
+  transitionDuration: '0.3s',
+};
+
+// Merge default options with props
+const finalIsotopeOptions = { ...defaultIsotopeOptions, ...isotopeOptions };
+
+const totalFotos = fotos.length;
+---
+
+<div class="filter-button-group" role="group" aria-label="Image filters">
+  <button class="is-checked" data-filter="*" aria-pressed="true" aria-controls="gallery-grid">show all</button>
+  {
+    Array.from(allTags).map((tag) => (
+      <button data-filter={`.${tag}`} aria-pressed="false" aria-controls="gallery-grid">{tag}</button>
+    ))
+  }
+</div>
+
+<div class="gallery-container">
+  <div
+    id="gallery-grid"
+    class="grid"
+    itemscope
+    itemtype="http://schema.org/ItemList"
+    itemprop="mainEntityOfPage"
+    data-isotope-options={JSON.stringify(finalIsotopeOptions)}
+  >
+    <meta itemprop="numberOfItems" content={totalFotos.toString()} />
+    <div class="masonry-sizer"></div> {/* Used by Isotope for column width */}
+    {fotos.map(foto => (
+      <div class={`masonry-item ${foto.data.tags.join(' ')}`} itemscope itemtype="http://schema.org/ImageObject">
+        <a href={foto.data.image.src} itemprop="contentUrl">
+          <Image
+            src={foto.data.image.src}
+            alt={foto.data.image.alt}
+            loading="lazy"
+            itemprop="image name description"
+          />
+        </a>
+      </div>
+    ))}
+  </div>
+  <div class="no-results-message hidden" role="status" aria-live="polite" aria-hidden="true">
+    <p>No images found for this filter.</p>
+  </div>
+</div>
+<script src="/src/scripts/isotope-init.js"></script>
+<style>
+  .gallery-container {
+    display: block; /* Ensure it's not flex or grid */
+  }
+
+  .grid {
+    /* Isotope will manage positioning, so we need position: relative */
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    display: block; /* Ensure it's not flex or grid */
+    /* Removed debugging border */
+  }
+
+  /* Masonry Sizer for responsive column width */
+  .masonry-sizer {
+    width: 20%; /* Default for desktop (5 columns) */
+    /* Removed debugging border and background */
+    height: 0; /* No visual height needed */
+    background-color: transparent; /* No background needed */
+  }
+
+  .masonry-item {
+    /* Isotope will set left/top for positioning */
+    /* Width should match masonry-sizer for single-column items */
+    width: calc(20% - 10px); /* Adjusted for 5px margin on each side */
+    margin: 5px; /* 5px margin on all sides */
+    box-sizing: border-box;
+  }
+
+  .masonry-item img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .masonry-item figcaption {
+    font-family: var(--font-sans);
+    font-size: var(--step--2);
+    text-align: left;
+    margin-top: 0.5rem;
+  }
+
+  .masonry-item .tags {
+    margin-top: 0.5rem;
+  }
+
+  .masonry-item .tag {
+    display: inline-block;
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 0.2em 0.5em;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    border-radius: 3px;
+    font-size: var(--step--2);
+    font-family: var(--font-sans);
+  }
+
+  .no-results-message {
+    text-align: center;
+    padding: 2rem;
+    font-size: var(--step-1);
+    color: #555;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  /* Responsive adjustments for masonry-item width and masonry-sizer */
+  @media (max-width: 1024px) { /* Tablet */
+    .masonry-sizer,
+    .masonry-item {
+      width: calc(33.333% - 10px); /* Adjusted for 5px margin on each side */
+      margin: 5px;
+    }
+  }
+
+  @media (max-width: 768px) { /* Mobile */
+    .masonry-sizer,
+    .masonry-item {
+      width: calc(50% - 10px); /* Adjusted for 5px margin on each side */
+      margin: 5px;
+    }
+  }
+</style>
