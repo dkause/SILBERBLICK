@@ -1,12 +1,12 @@
 ---
 name: "Aroma Thai Massage Kopfmassage"
 image:
-  src: "./aromat-thai-massage-kopfmassage.jpg"
+  src: "./aroma-thai-massage-kopfmassage.jpg"
   alt: "Professionelle Kopfmassage-Technik bei Aroma Thai Massage"
-tags: ["massage", "wellness", "portrait"]
+tags: ["massage", "wellness", "portrait", "businessfotos"]
 ---
 
 # Aroma Thai Massage Kopfmassage
-![Professionelle Kopfmassage-Technik bei Aroma Thai Massage](./aromat-thai-massage-kopfmassage.jpg)
+![Professionelle Kopfmassage-Technik bei Aroma Thai Massage](./aroma-thai-massage-kopfmassage.jpg)
 
 Professionelle Massage-Techniken in entspannter Wellness-Atmosphäre.
