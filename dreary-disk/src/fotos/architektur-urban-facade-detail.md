@@ -1,6 +1,7 @@
 ---
 name: "Urbane Fassadendetail - Architekturkomposition"
 tags: ["architektur", "urban", "facade", "detail"]
+category: "architektur"
 image:
   src: "./architektur-urban-facade-detail.jpg"
   alt: "Detailaufnahme einer urbanen Gebäudefassade mit geometrischen Elementen"

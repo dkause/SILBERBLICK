@@ -1,6 +1,6 @@
 ---
 name: "Creative Werbeportrait 91"
-category: "business"
+category: "businessfotos"
 tags: ["creative", "marketing"]
 image:
   src: "./business-creative-werbeportrait-91.jpg"

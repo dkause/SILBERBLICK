@@ -1,6 +1,6 @@
 ---
 name: "Samakiez Executive Portrait 74"
-category: "business"
+category: "businessfotos"
 tags: ["corporate", "executive"]
 image:
   src: "./business-samakiez-executive-portrait-74.jpg"

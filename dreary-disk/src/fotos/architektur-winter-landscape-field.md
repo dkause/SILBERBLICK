@@ -1,6 +1,7 @@
 ---
 name: "Winterlandschaft - Verschneites Feld"
 tags: ["architektur", "winter", "landscape", "field", "snow"]
+category: "architektur"
 image:
   src: "./architektur-winter-landscape-field.jpg"
   alt: "Winterlandschaft mit verschneitem Feld und minimalistischer Komposition"

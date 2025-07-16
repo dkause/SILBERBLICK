@@ -1,6 +1,6 @@
 ---
 name: "Creative Reisewerbung 79"
-category: "business"
+category: "businessfotos"
 tags: ["creative", "marketing"]
 image:
   src: "./business-creative-reisewerbung-79.jpg"

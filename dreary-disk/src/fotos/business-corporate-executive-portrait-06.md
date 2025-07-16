@@ -1,6 +1,6 @@
 ---
 name: "Corporate Executive Portrait 06"
-category: "business"
+category: "businessfotos"
 tags: ["corporate", "executive"]
 image:
   src: "./business-corporate-executive-portrait-06.jpg"

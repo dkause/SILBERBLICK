@@ -1,6 +1,7 @@
 ---
 name: "Natürliche Umgebung - Landschaftsarchitektur"
 tags: ["architektur", "natural", "environment", "landscape"]
+category: "architektur"
 image:
   src: "./architektur-natural-environment.jpg"
   alt: "Natürliche Umgebung mit landschaftsarchitektonischen Elementen"

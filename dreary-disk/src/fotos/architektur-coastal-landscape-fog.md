@@ -1,6 +1,7 @@
 ---
 name: "Küstenlandschaft - Herbststimmung im Nebel"
 tags: ["architektur", "landscape", "coastal", "fog", "autumn"]
+category: "architektur"
 image:
   src: "./architektur-coastal-landscape-fog.jpg"
   alt: "Atmosphärische Küstenlandschaft mit Nebel und Herbststimmung"

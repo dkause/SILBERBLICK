@@ -4,6 +4,7 @@ image:
   src: "./aroma-thai-massage-oele.jpg"
   alt: "Hochwertige Massage-Öle für Aroma Thai Massage in warmer Beleuchtung"
 tags: ["massage", "wellness", "produkt"]
+category: "businessfotos"
 ---
 
 # Aroma Thai Massage Öle

@@ -4,6 +4,7 @@ image:
   src: "./aroma-thai-massage-blume-oel.jpg"
   alt: "Harmonische Kombination aus Blumen und Massage-Ölen"
 tags: ["produkt", "wellness", "dekoration"]
+category: "businessfotos"
 ---
 
 # Aroma Thai Massage Blumen und Öle

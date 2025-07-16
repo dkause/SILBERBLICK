@@ -1,6 +1,7 @@
 ---
 name: "Urbane Landschaftsansicht - Stadtperspektive"
 tags: ["architektur", "urban", "landscape", "cityscape"]
+category: "architektur"
 image:
   src: "./architektur-urban-landscape-view.jpg"
   alt: "Urbane Landschaftsansicht mit Stadtperspektive und architektonischen Elementen"

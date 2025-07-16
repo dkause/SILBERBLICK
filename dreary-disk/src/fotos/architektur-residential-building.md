@@ -1,6 +1,7 @@
 ---
 name: "Wohngebäude - Moderne Wohnarchitektur"
 tags: ["architektur", "residential", "modern", "building"]
+category: "architektur"
 image:
   src: "./architektur-residential-building.jpg"
   alt: "Moderne Wohnarchitektur mit klaren Linien und funktionalem Design"

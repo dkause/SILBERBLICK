@@ -4,6 +4,7 @@ image:
   src: "./aroma-thai-massage-oele-model.jpg"
   alt: "Wellness-Szene mit Model und Massage-Ölen in entspannter Atmosphäre"
 tags: ["massage", "wellness", "model"]
+category: "businessfotos"
 ---
 
 # Aroma Thai Massage mit Model

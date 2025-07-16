@@ -1,6 +1,7 @@
 ---
 name: "Zeitgenössische Struktur - Architekturdetail"
 tags: ["architektur", "contemporary", "structure", "detail"]
+category: "architektur"
 image:
   src: "./architektur-contemporary-structure.jpg"
   alt: "Zeitgenössische Architekturstruktur mit betonten geometrischen Elementen"

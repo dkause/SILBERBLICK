@@ -1,6 +1,7 @@
 ---
 name: "Potsdamer Platz - Moderne Architektur Berlin"
 tags: ["architektur", "modern", "urban", "berlin"]
+category: "architektur"
 image:
   src: "./architektur-potsdamer-platz-modern.jpg"
   alt: "Moderne Architektur am Potsdamer Platz Berlin mit Glas- und Stahlfassaden"

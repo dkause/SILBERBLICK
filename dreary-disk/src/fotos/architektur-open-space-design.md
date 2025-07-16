@@ -1,6 +1,7 @@
 ---
 name: "Freiraumgestaltung - Offene Raumkonzepte"
 tags: ["architektur", "open", "space", "design", "landscape"]
+category: "architektur"
 image:
   src: "./architektur-open-space-design.jpg"
   alt: "Freiraumgestaltung mit offenen Raumkonzepten und landschaftsarchitektonischen Elementen"
