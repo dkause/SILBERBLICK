@@ -107,8 +107,12 @@ const totalFotos = fotos.length;
     width: calc(20% - 10px); /* Adjusted for 5px margin on each side */
     margin: 5px; /* 5px margin on all sides */
     box-sizing: border-box;
- /*    opacity: 0; /* Hide item */
-  /*  transition: opacity 0.4s ease-in-out; */
+    opacity: 0; /* Hide item */
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .grid.isotope-is-ready .masonry-item {
+    opacity: 1;
   }
 
   .masonry-item img {

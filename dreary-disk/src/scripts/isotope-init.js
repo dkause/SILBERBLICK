@@ -35,32 +35,37 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Masonry Sizer offsetWidth:', masonrySizer.offsetWidth);
   }
 
-  // 4. URL-Parameter für den initialen Filter lesen
+ 
+       // 4. URL-Parameter für den initialen Filter lesen
   const urlParams = new URLSearchParams(window.location.search);
   const initialFilter = urlParams.get('filter');
 
-  // Wenn ein initialer Filter in der URL gefunden wurde, diesen in die Isotope-Optionen übernehmen
-  if (initialFilter) {
-    finalIsotopeOptions.filter = `.${initialFilter}`;
-    console.log('Initial filter from URL:', initialFilter);
-  }
+  // Ensure transitions are used for filtering
+  finalIsotopeOptions.transitionDuration = '0.4s';
 
   let iso; // Variable für die Isotope-Instanz
 
   // 5. imagesLoaded Callback: Isotope initialisieren, sobald alle Bilder geladen sind
-  // Diese Logik wird IMMER ausgeführt, da 'grid' als essentiell definiert wurde.
   imagesLoaded(grid, () => {
     console.log('All images loaded. Initializing Isotope.');
-    // Isotope-Instanz erstellen mit den finalen Optionen (inkl. initialem Filter aus URL)
+    // Isotope-Instanz erstellen
     iso = new Isotope(grid, finalIsotopeOptions);
     console.log('Isotope instance:', iso);
 
-    // Nachricht für "keine Ergebnisse" aktualisieren (benötigt die 'iso'-Instanz)
+    // Grid sichtbar machen, indem eine Klasse hinzugefügt wird
+    grid.classList.add('isotope-is-ready');
+
+    // Apply initial filter from URL if it exists
+    if (initialFilter) {
+      const filterValue = `.${initialFilter}`;
+      iso.arrange({ filter: filterValue });
+      console.log('Applying initial filter from URL:', filterValue);
+    }
+
+    // Nachricht für "keine Ergebnisse" aktualisieren
     updateNoResultsMessage();
 
-    // Initiales Layout nach der Initialisierung von Isotope
-    iso.layout();
-    console.log('Initial Isotope layout triggered.');
+    console.log('Isotope initialized and grid is ready.');
 
     // 6. Logik für die Filter-Buttons (NUR, wenn die Buttons im DOM vorhanden sind)
     if (filterButtonGroup) { // <-- NEUE BEDINGUNG: Prüfen, ob filterButtonGroup existiert
