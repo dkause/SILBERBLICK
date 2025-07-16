@@ -40,30 +40,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const initialFilter = urlParams.get('filter');
 
-  // Ensure transitions are used for filtering
-  finalIsotopeOptions.transitionDuration = '0.4s';
+  // Ensure transitions are used for filtering - reduced for performance
+  finalIsotopeOptions.transitionDuration = '0.3s';
 
   let iso; // Variable für die Isotope-Instanz
 
   // 5. imagesLoaded Callback: Isotope initialisieren, sobald alle Bilder geladen sind
   imagesLoaded(grid, () => {
     console.log('All images loaded. Initializing Isotope.');
+    // DEBUG: Count actual images vs loaded images
+    const totalImages = grid.querySelectorAll('img').length;
+    const actuallyLoadedImages = Array.from(grid.querySelectorAll('img')).filter(img => img.complete && img.naturalWidth > 0).length;
+    console.log(`Total images: ${totalImages}, Actually loaded images: ${actuallyLoadedImages}`);
     // Isotope-Instanz erstellen
     iso = new Isotope(grid, finalIsotopeOptions);
     console.log('Isotope instance:', iso);
 
-    // Grid sichtbar machen, indem eine Klasse hinzugefügt wird
-    grid.classList.add('isotope-is-ready');
-
-    // Apply initial filter from URL if it exists
+    // Apply initial filter from URL if it exists BEFORE making grid visible
     if (initialFilter) {
       const filterValue = `.${initialFilter}`;
       iso.arrange({ filter: filterValue });
       console.log('Applying initial filter from URL:', filterValue);
+      // Wait for filter animation to complete before showing grid
+      setTimeout(() => {
+        grid.classList.add('isotope-is-ready');
+        console.log('Grid made visible after filter delay');
+        // Nachricht für "keine Ergebnisse" aktualisieren NACH dem Delay
+        updateNoResultsMessage();
+      }, 100);
+    } else {
+      // Grid sichtbar machen, indem eine Klasse hinzugefügt wird
+      grid.classList.add('isotope-is-ready');
+      console.log('Grid made visible immediately (no filter)');
+      // Nachricht für "keine Ergebnisse" aktualisieren
+      updateNoResultsMessage();
     }
-
-    // Nachricht für "keine Ergebnisse" aktualisieren
-    updateNoResultsMessage();
 
     console.log('Isotope initialized and grid is ready.');
 

@@ -18,7 +18,7 @@ const { fotos, allTags, isotopeOptions, showFilterButtons = true } = Astro.props
 const defaultIsotopeOptions = {
   layoutMode: 'masonry',
   masonry: {
-    // columnWidth: '.masonry-sizer', // REMOVED: Isotope will now use the columnWidth from the prop directly
+    columnWidth: '.masonry-sizer',
     gutter: 0, // Keeping as 0 as per user request for now
   },
   itemSelector: '.masonry-item',
@@ -29,21 +29,7 @@ const defaultIsotopeOptions = {
 // Merge default options with props
 const finalIsotopeOptions = { ...defaultIsotopeOptions, ...isotopeOptions };
 
-// Extract columnWidth and gutter for CSS variables
-// Provide fallbacks if not explicitly set in isotopeOptions
-const cssColumnWidth = typeof finalIsotopeOptions.columnWidth === 'string'
-  ? finalIsotopeOptions.columnWidth
-  : (typeof finalIsotopeOptions.columnWidth === 'number'
-    ? `${finalIsotopeOptions.columnWidth}px`
-    : '20%' // Default to 20% if not specified
-  );
 
-const cssGutter = typeof finalIsotopeOptions.masonry?.gutter === 'string'
-  ? finalIsotopeOptions.masonry.gutter
-  : (typeof finalIsotopeOptions.masonry?.gutter === 'number'
-    ? `${finalIsotopeOptions.masonry.gutter}px`
-    : '0px' // Default to 0px if not specified
-  );
 
 const totalFotos = fotos.length;
 ---
@@ -75,14 +61,15 @@ const totalFotos = fotos.length;
     data-isotope-options={JSON.stringify(finalIsotopeOptions)}
   >
     <meta itemprop="numberOfItems" content={totalFotos.toString()} />
-    <div class="masonry-sizer"></div> {/* Used by Isotope for column width */}
+    <div class="masonry-sizer"></div>
     {fotos.map(foto => (
-      <div class={`masonry-item ${foto.data.tags.join(' ')}`} itemscope itemtype="http://schema.org/ImageObject">
+      <div class={`masonry-item ${foto.data.category} ${foto.data.tags.join(' ')}`} itemscope itemtype="http://schema.org/ImageObject">
         <a href={foto.data.image.src} itemprop="contentUrl">
           <Image
             src={foto.data.image.src}
             alt={foto.data.image.alt}
             loading="lazy"
+            decoding="async"
             itemprop="image name description"
           />
         </a>
@@ -94,9 +81,10 @@ const totalFotos = fotos.length;
   </div>
 </div>
 <script src="/src/scripts/isotope-init.js"></script>
-<style define:vars={{ cssColumnWidth, cssGutter }}>
+<style>
   .gallery-container {
     display: block; /* Ensure it's not flex or grid */
+    --gallery-gutter: 10px; /* Define gallery-specific gutter */
   }
 
   .grid {
@@ -106,7 +94,14 @@ const totalFotos = fotos.length;
     padding: 0;
     list-style: none;
     display: block; /* Ensure it's not flex or grid */
-    /* Removed debugging border */
+    contain: layout style; /* CSS containment for performance */
+    /* Hide grid until Isotope is ready to prevent FOUC */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .grid.isotope-is-ready {
+    opacity: 1;
   }
 
   /* Masonry Sizer for responsive column width */
@@ -119,21 +114,31 @@ const totalFotos = fotos.length;
   .masonry-item {
     /* Isotope will set left/top for positioning */
     /* Width should match masonry-sizer for single-column items */
-    width: calc(var(--cssColumnWidth) - var(--cssGutter) * 2); /* Adjusted for gutter on each side */
-    margin: var(--cssGutter); /* Use CSS variable for dynamic margin */
+    width: var(--cssColumnWidth); /* Isotope sets this width */
+    padding: calc(var(--gallery-gutter) / 2); /* Apply half gutter as padding on all sides */
     box-sizing: border-box;
     opacity: 0; /* Hide item */
-    transition: opacity 0.4s ease-in-out;
+    transform: translateZ(0) scale(1); /* Enable hardware acceleration with consistent scale */
+    will-change: opacity, transform; /* Optimize for animations */
+    /* Only apply transitions after Isotope is ready */
+    transition: none;
+  }
+
+  .grid.isotope-is-ready .masonry-item {
+    /* transition: opacity 0.3s ease-out, transform 0.3s ease-out; */
   }
 
   .grid.isotope-is-ready .masonry-item {
     opacity: 1;
+    transform: translateZ(0) scale(1); /* Hardware-accelerated final state */
   }
 
   .masonry-item img {
     display: block;
     max-width: 100%;
     height: auto;
+    transform: translateZ(0); /* Hardware acceleration for images */
+    transition: transform 0.2s ease-out;
   }
 
   .masonry-item figcaption {
@@ -170,6 +175,30 @@ const totalFotos = fotos.length;
     display: none;
   }
 
-  /* REMOVED: Responsive adjustments for masonry-item width and masonry-sizer */
-  /* These will now be controlled by passing different columnWidth values from the parent component */
+  /* Responsive adjustments for masonry-item width and masonry-sizer */
+  /* Default for small screens (e.g., 2 columns) */
+  .grid {
+    --cssColumnWidth: 50%; /* 2 columns */
+  }
+
+  /* For medium screens (e.g., 3 columns) */
+  @media (min-width: 768px) {
+    .grid {
+      --cssColumnWidth: 33.333%; /* 3 columns */
+    }
+  }
+
+  /* For larger screens (e.g., 4 columns) */
+  @media (min-width: 1024px) {
+    .grid {
+      --cssColumnWidth: 25%; /* 4 columns */
+    }
+  }
+
+  /* For very large screens (e.g., 5 columns) */
+  @media (min-width: 1280px) {
+    .grid {
+      --cssColumnWidth: calc(100% / 5); /* 5 columns */
+    }
+  }
 </style>
