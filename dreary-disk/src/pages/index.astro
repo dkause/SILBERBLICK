@@ -6,10 +6,10 @@ import IsotopeGallery from '../components/IsotopeGallery.astro';
 import { getCollection } from "astro:content";
 const fotos = (await getCollection('fotos'));
 const allTags = new Set(fotos.flatMap(foto => foto.data.tags));
-
 const isotopeOptions = {
   layoutMode: 'masonry',
-  columnWidth: '14%'
+  columnWidth: '14%',
+  masonry: {gutter: 2}
   // columnWidth and gutter will be handled by the component's internal responsive logic
   // but can be overridden here if needed.
 };
@@ -27,7 +27,8 @@ import danielfoto from '../fotograf-daniel-kause.jpg'
         Professionelle Fotografie für Menschen und Unternehmen in Berlin
       </h2>
     </div>
-    <IsotopeGallery fotos={fotos} allTags={allTags} isotopeOptions={isotopeOptions} showFilterButtons={false} />
+    
+    <IsotopeGallery fotos={fotos} allTags={allTags} isotopeOptions={isotopeOptions} showFilterButtons={false} /> // - [ ] add:  filter auf startseite tag
 
 
   </section>

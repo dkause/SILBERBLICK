@@ -18,8 +18,8 @@ const { fotos, allTags, isotopeOptions, showFilterButtons = true } = Astro.props
 const defaultIsotopeOptions = {
   layoutMode: 'masonry',
   masonry: {
-    columnWidth: '.masonry-sizer', // Isotope will use the width of this element
-    gutter: 0, // Set gutter to 0 for testing
+    // columnWidth: '.masonry-sizer', // REMOVED: Isotope will now use the columnWidth from the prop directly
+    gutter: 0, // Keeping as 0 as per user request for now
   },
   itemSelector: '.masonry-item',
   percentPosition: true,
@@ -29,12 +29,28 @@ const defaultIsotopeOptions = {
 // Merge default options with props
 const finalIsotopeOptions = { ...defaultIsotopeOptions, ...isotopeOptions };
 
+// Extract columnWidth and gutter for CSS variables
+// Provide fallbacks if not explicitly set in isotopeOptions
+const cssColumnWidth = typeof finalIsotopeOptions.columnWidth === 'string'
+  ? finalIsotopeOptions.columnWidth
+  : (typeof finalIsotopeOptions.columnWidth === 'number'
+    ? `${finalIsotopeOptions.columnWidth}px`
+    : '20%' // Default to 20% if not specified
+  );
+
+const cssGutter = typeof finalIsotopeOptions.masonry?.gutter === 'string'
+  ? finalIsotopeOptions.masonry.gutter
+  : (typeof finalIsotopeOptions.masonry?.gutter === 'number'
+    ? `${finalIsotopeOptions.masonry.gutter}px`
+    : '0px' // Default to 0px if not specified
+  );
+
 const totalFotos = fotos.length;
 ---
 
-<!-- 
-  Conditional rendering for the filter buttons. 
-  The buttons will only be rendered if `showFilterButtons` is true. 
+<!--
+  Conditional rendering for the filter buttons.
+  The buttons will only be rendered if `showFilterButtons` is true.
   By default, `showFilterButtons` is true (see frontmatter).
   To hide the buttons, set `showFilterButtons={false}` when using <IsotopeGallery />.
 -->
@@ -78,7 +94,7 @@ const totalFotos = fotos.length;
   </div>
 </div>
 <script src="/src/scripts/isotope-init.js"></script>
-<style>
+<style define:vars={{ cssColumnWidth, cssGutter }}>
   .gallery-container {
     display: block; /* Ensure it's not flex or grid */
   }
@@ -95,8 +111,7 @@ const totalFotos = fotos.length;
 
   /* Masonry Sizer for responsive column width */
   .masonry-sizer {
-    width: 20%; /* Default for desktop (5 columns) */
-    /* Removed debugging border and background */
+    width: var(--cssColumnWidth); /* Use CSS variable for dynamic width */
     height: 0; /* No visual height needed */
     background-color: transparent; /* No background needed */
   }
@@ -104,8 +119,8 @@ const totalFotos = fotos.length;
   .masonry-item {
     /* Isotope will set left/top for positioning */
     /* Width should match masonry-sizer for single-column items */
-    width: calc(20% - 10px); /* Adjusted for 5px margin on each side */
-    margin: 5px; /* 5px margin on all sides */
+    width: calc(var(--cssColumnWidth) - var(--cssGutter) * 2); /* Adjusted for gutter on each side */
+    margin: var(--cssGutter); /* Use CSS variable for dynamic margin */
     box-sizing: border-box;
     opacity: 0; /* Hide item */
     transition: opacity 0.4s ease-in-out;
@@ -155,20 +170,6 @@ const totalFotos = fotos.length;
     display: none;
   }
 
-  /* Responsive adjustments for masonry-item width and masonry-sizer */
-  @media (max-width: 1024px) { /* Tablet */
-    .masonry-sizer,
-    .masonry-item {
-      width: calc(33.333% - 10px); /* Adjusted for 5px margin on each side */
-      margin: 5px;
-    }
-  }
-
-  @media (max-width: 768px) { /* Mobile */
-    .masonry-sizer,
-    .masonry-item {
-      width: calc(50% - 10px); /* Adjusted for 5px margin on each side */
-      margin: 5px;
-    }
-  }
+  /* REMOVED: Responsive adjustments for masonry-item width and masonry-sizer */
+  /* These will now be controlled by passing different columnWidth values from the parent component */
 </style>
