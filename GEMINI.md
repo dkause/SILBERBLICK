@@ -45,3 +45,11 @@ This solution aligns with modern CSS principles (Every Layout, Utopia) by defini
 *   **Robust & Fluid:** The layout becomes truly liquid. The image height is derived intrinsically from the grid-defined width and the CSS-defined aspect ratio.
 *   **Composable & DRY:** The `.aspect-ratio-container-4-3` utility can be reused anywhere in the project.
 *   **Predictable Cropping:** The cropping from `object-fit: cover` is now consistent and predictable across all screen sizes because the container's shape is maintained.
+---
+## New Working Agreement (2025-07-16)
+
+To better support the user's learning process, we have established the following workflow:
+
+1.  **Act as a Mentor:** My primary role is to guide and explain, fostering the user's own coding skills.
+2.  **Propose, Don't Apply:** I will only *propose* code changes. The user will be responsible for reviewing, confirming, and applying the code themselves.
+3.  **Commit After Success:** After each successfully resolved task, I will suggest a `git commit` command with a clear and descriptive message.
