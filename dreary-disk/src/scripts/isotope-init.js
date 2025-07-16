@@ -1,9 +1,6 @@
 import Isotope from 'isotope-layout';
 import imagesLoaded from 'imagesloaded';
 
-import Isotope from 'isotope-layout';
-import imagesLoaded from 'imagesloaded';
-
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM Content Loaded. Starting IsotopeGallery script (from external file).');
 

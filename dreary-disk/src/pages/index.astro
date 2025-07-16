@@ -14,45 +14,21 @@ const isotopeOptions = {
   // but can be overridden here if needed.
 };
 
-import businessfotos from '../businessfotos/jll-portrait-001.jpg'
-import architektur from '../architekturfotos/potsdamer-platz-001.jpg'
-import portraitfotos from '../portraitfotos/portrait-martina-001.jpg'
 import danielfoto from '../fotograf-daniel-kause.jpg'
 ---
 
 <Layout title="SILBERBLICK - Fotograf Berlin | Daniel Kause">
   <section aria-label="Portfolio" >
 
-    <h1>Collection-Masonry-Test</h1>
 
-<IsotopeGallery fotos={fotos} allTags={allTags} isotopeOptions={isotopeOptions} showFilterButtons={false} />
     <div class="all-column-item">
       <h1>Einfach gute Fotos</h1>
       <h2>
         Professionelle Fotografie für Menschen und Unternehmen in Berlin
       </h2>
     </div>
-	<main class="stack">
-		<Masonry class="gap"
-	  breakpointCols={{
-		default: 5,
-		1100: 4,
-		768: 3,
-		500: 2
-	  }}
-	>
-	  <div>  <a href="businessfotos.html">
-		<Image src={businessfotos} layout="constrained"  alt="Businessportrait in schwarz-weiss"></Image>
-	</a></div>
-	  <div>  <a href="architektur.html">
-		<Image src={architektur}   alt="Architekturfotografie in Berlin"  />
-	  </a></div>
-	  <div>     <a href="portraits.html">
-		<Image src={portraitfotos} alt="Portraitfotografie in Berlin"  />
-	  </a></div>
-	  <div>Item 4</div>
-	  <div>Item 5</div>
-	</Masonry>
+    <IsotopeGallery fotos={fotos} allTags={allTags} isotopeOptions={isotopeOptions} showFilterButtons={false} />
+
 
   </section>
   <section aria-label="Über den Fotografen" class="u-grid">
