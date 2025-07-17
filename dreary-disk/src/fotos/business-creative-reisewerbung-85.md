@@ -5,6 +5,7 @@ tags: ["creative", "marketing"]
 image:
   src: "./business-creative-reisewerbung-85.jpg"
   alt: "Kreative Reisewerbung Fotografie für emotionales Tourismus Marketing"
+seriesName: "reisewerbung"
 ---
 
 Kreative Reisewerbung mit eindrucksvoller Bildsprache für emotionales Tourismus-Marketing. Die fesselnde Darstellung inspiriert zu neuen Reiseerlebnissen.

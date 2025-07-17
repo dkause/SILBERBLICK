@@ -5,6 +5,7 @@ image:
   alt: "Dekorative Blumenarrangements für Aroma Thai Massage Studio"
 tags: ["dekoration", "wellness", "produkt"]
 category: "businessfotos"
+seriesName: "aroma"
 ---
 
 # Aroma Thai Massage Blumendekoration

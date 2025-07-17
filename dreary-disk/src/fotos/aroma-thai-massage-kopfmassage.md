@@ -5,6 +5,8 @@ image:
   alt: "Professionelle Kopfmassage-Technik bei Aroma Thai Massage"
 tags: ["massage", "wellness", "portrait", "businessfotos"]
 category: "businessfotos"
+seriesName: "aroma"
+isHero: true
 ---
 
 # Aroma Thai Massage Kopfmassage

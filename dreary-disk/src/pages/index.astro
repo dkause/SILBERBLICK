@@ -4,14 +4,27 @@ import { Image } from 'astro:assets';
 import { Masonry } from 'astro-masonry';
 import IsotopeGallery from '../components/IsotopeGallery.astro';
 import { getCollection } from "astro:content";
-const fotos = (await getCollection('fotos'));
-const allTags = new Set(fotos.flatMap(foto => foto.data.tags));
+const allFotos = (await getCollection('fotos'));
+
+// Filtere die Fotos: Nur HeroImages und Einzelbilder anzeigen
+const fotosToShow = allFotos.filter(foto => {
+  // Ein Bild ist ein HeroImage, wenn isHero: true gesetzt ist
+  const isHeroImage = foto.data.isHero === true;
+  // Ein Bild ist ein Einzelbild, wenn es keinen seriesName hat
+  const isSingleImage = !foto.data.seriesName;
+
+  // Zeige das Bild an, wenn es ein HeroImage ist ODER ein Einzelbild
+  return isHeroImage || isSingleImage;
+});
+
+const allTags = new Set(fotosToShow.flatMap(foto => foto.data.tags));
+
 const isotopeOptions = {
   layoutMode: 'masonry',
-  columnWidth: '14%',
-  masonry: {gutter: 2}
-  // columnWidth and gutter will be handled by the component's internal responsive logic
-  // but can be overridden here if needed.
+  // columnWidth wird jetzt über CSS-Variablen in IsotopeGallery.astro gesteuert
+  masonry: {
+    gutter: 0 // Isotope will not add gutter; we control it via CSS
+  }
 };
 
 import danielfoto from '../fotograf-daniel-kause.jpg'
@@ -27,8 +40,8 @@ import danielfoto from '../fotograf-daniel-kause.jpg'
         Professionelle Fotografie für Menschen und Unternehmen in Berlin
       </h2>
     </div>
-    
-    <IsotopeGallery fotos={fotos} allTags={allTags} isotopeOptions={isotopeOptions} showFilterButtons={false} /> // - [ ] add:  filter auf startseite tag
+    <!-- - [ ] FIX: Sieben Spaltenfunktionieren nicht! -->
+    <IsotopeGallery fotos={fotosToShow} allTags={allTags} isotopeOptions={isotopeOptions} showFilterButtons={false} />
 
 
   </section>

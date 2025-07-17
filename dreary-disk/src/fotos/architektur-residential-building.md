@@ -5,6 +5,7 @@ category: "architektur"
 image:
   src: "./architektur-residential-building.jpg"
   alt: "Moderne Wohnarchitektur mit klaren Linien und funktionalem Design"
+seriesName: "kastanienallee"
 ---
 
 # Moderne Wohnarchitektur

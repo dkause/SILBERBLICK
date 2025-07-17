@@ -1,13 +1,14 @@
 ---
-name: "Urbane Landschaftsansicht - Stadtperspektive"
+name: "Landschaftsansicht - Agrikultur"
 tags: ["architektur", "urban", "landscape", "cityscape"]
 category: "architektur"
 image:
-  src: "./architektur-urban-landscape-view.jpg"
-  alt: "Urbane Landschaftsansicht mit Stadtperspektive und architektonischen Elementen"
+  src: "./architektur-agricultural-landscape-view.jpg"
+  alt: "Gelbes Feld in der Uckermark"
+seriesName: "conow"
 ---
 
 # Urbane Landschaftsansicht
-![Urbane Landschaftsansicht](./architektur-urban-landscape-view.jpg)
+![Urbane Landschaftsansicht](./architektur-agricultural-landscape-view.jpg)
 
 Städtische Landschaftsfotografie mit architektonischem Blick. Komposition verbindet Naturraum und urbane Strukturen zu einer Einheit.

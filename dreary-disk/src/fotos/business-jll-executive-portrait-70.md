@@ -1,6 +1,7 @@
 ---
 name: "JLL Executive Portrait 70"
 category: "businessfotos"
+seriesName: "jll"
 tags: ["corporate", "executive"]
 image:
   src: "./business-jll-executive-portrait-70.jpg"
