@@ -1,6 +1,20 @@
-# SILBERBLICK - dreary-disk
+# SILBERBLICK
 
-This is the Astro-based portfolio website for the photographer Daniel Kause (SILBERBLICK).
+Astro-basierte Portfolio-Website für Fotograf Daniel Kause, Berlin.
+
+## Quick Start
+
+```bash
+npm install
+npm run dev
+```
+
+## Deployment
+
+- **Platform**: Cloudflare Pages
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Domain**: silberblick.berlin
 
 ## Content Structure
 
@@ -45,3 +59,11 @@ const fotos = defineCollection({
 
 export const collections = { fotos };
 ```
+
+## Dokumentation
+
+- Detaillierte Entwicklungsdokumentation → `CLAUDE.md`
+
+## Website
+
+🌍 [silberblick.berlin](https://silberblick.berlin)

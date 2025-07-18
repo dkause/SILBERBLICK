@@ -1,121 +1,8 @@
-# CLAUDE.md
+# SILBERBLICK - Entwicklungsdokumentation
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+**Astro-basierte Portfolio-Website für Fotograf Daniel Kause**
 
-## Project Overview
-
-SILBERBLICK is a static HTML photography portfolio website for photographer Daniel Kause in Berlin. The site features:
-
-- Portfolio page with filterable masonry grid layout using Isotope.js
-- Image categories: portraits, stillleben (still life), landschaften (landscapes)
-- Responsive design using Pico CSS framework
-- German language content
-
-## Architecture
-
-- **Frontend**: Vanilla HTML/CSS/JS with Pico CSS framework
-- **Layout**: Masonry grid using Isotope.js for portfolio filtering
-- **Images**: Organized in `/res/img/` with subdirectories by category
-- **Styling**: Custom CSS in `/res/css/styles.css` with IBM Plex fonts
-- **No build process**: Direct static HTML files
-
-## Image Management System
-
-The project uses a structured metadata system for organizing photography assets. All images have corresponding markdown files with frontmatter metadata.
-
-### Frontmatter Schema für Bilddateien
-
-Für jede Bilddatei (.jpg, .jpeg, .png) soll eine entsprechende .md-Datei erstellt werden mit folgendem Schema:
-
-```yaml
----
-name: "Beschreibender Name des Bildes"
-image:
-  src: "/images/kategorie/dateiname.webp"
-  alt: "Beschreibender Alt-Text für Barrierefreiheit"
----
-Professionelle Beschreibung des Bildes in 1-2 Sätzen...
-```
-
-### Kategorien
-
-- **stillleben** - für Wellness/Spa-Fotos, Produktfotografie, Arrangements
-- **portraits** - für Personen-Portraits, Business-Fotos, Charakterstudien
-- **landschaften** - für Architektur, Stadtansichten, Naturaufnahmen
-
-### Genre-Beispiele
-
-- Werbefotografie
-- Portraitfotografie
-- Business Fotografie
-- Marketing Fotografie
-- Architekturfotografie
-- Landschaftsfotografie
-
-### Slug-Erstellung
-
-- Kurz und prägnant (max. 4-5 Wörter)
-- SEO-optimiert mit relevanten Keywords
-- Bindestriche statt Leerzeichen
-- Kleinschreibung
-- Beschreibt Inhalt und Zweck des Bildes
-
-### Alt-Text
-
-- Beschreibt das Bild für Barrierefreiheit
-- Konkret und aussagekräftig
-- Erwähnt wichtige visuelle Elemente
-- Kontextbezogen
-
-### Bildpfade
-
-- Webp-Format in den Pfaden verwenden
-- Struktur: `/images/kategorie/dateiname.webp`
-- Kategorien: stillleben, portraits, landschaften
-
-### Beschreibungstext
-
-- 1-2 professionelle Sätze
-- Fokus auf Zweck und Atmosphäre
-- Erwähnung des Kunden/Kontexts wenn relevant
-- Professioneller, kreativer Stil
-
-## MVP Projekt Status (November 2024)
-
-### Ziel
-
-- MVP in 2 Tagen für silberblick.berlin
-- Astro-basierte Neuentwicklung im Branch `mvp-astro`
-- Business-Fokus (80% der Kunden sind Unternehmen)
-- SEO-optimiert für "Businessfotografie Berlin"
-
-### Daniel's Profil
-
-- Fotograf seit 1995, Meister seit 2003
-- Ehemalige Studios in Berlin, Kunden: JLL, Argusdata, kleine Unternehmer
-- Stil: Irving Penn-inspiriert, "Weniger ist mehr", Anti-Marketing
-- Authentizität statt Pose, Qualität durch Erfahrung
-
-### Geplante Struktur
-
-```
-SILBERBLICK
-"Weniger ist mehr. Seit 1995."
-━ Menschen
-━ Produkte
-━ Räume
-━ Daniel
-━ Kontakt
-```
-
-### Design-Philosophie
-
-- Viel Weißraum, große Bilder, minimaler Text
-- Keine Marketing-Sprache, ehrlich und direkt
-- Bauhaus-inspiriert, funktional
-- Zeitlose Qualität statt Trends
-
-## Aktueller Entwicklungsstand (Juni 2025)
+## Aktueller Stand
 
 ### ✅ Abgeschlosssen
 
@@ -226,6 +113,24 @@ SILBERBLICK
 - **Sketch Integration**: Sketch Cloud nicht kompatibel mit WebFetch → Screenshot-Workflow optimal
 - **Magazine-Layout**: Editorial Design mit asymmetrischen Grids statt Shop-Cards für bessere UX/SEO
 - **Flexbox Masonry**: Löst Thumbnail-Beschneidung bei Hoch- und Querformaten
+
+### CSS Layout Solutions
+
+**Problem: Inconsistent Image Heights and Mobile Cropping**
+
+Bei Homepage-Portfolio-Bildern mit unterschiedlichen Seitenverhältnissen führte `object-fit: cover` auf mobilen Geräten zu unerwünschtem Beschnitt.
+
+**Lösung: Composition mit `aspect-ratio`**
+```css
+.aspect-ratio-container-4-3 {
+  aspect-ratio: 4 / 3;
+}
+```
+
+**Vorteile:**
+- Robust & Fluid: Layout wird truly liquid
+- Composable & DRY: Utility-Class wiederverwendbar  
+- Predictable Cropping: Konsistenter Beschnitt auf allen Bildschirmgrößen
 
 ### 🎯 TODO für 13.6.2025
 

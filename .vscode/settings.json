@@ -29,5 +29,8 @@
   // 4. Emmet-Vorschläge in der Liste nach unten verschieben:
   // Sorgt dafür, dass IntelliSense-Vorschläge (z.B. CSS-Klassen) Priorität haben.
   "emmet.showSuggestionsAsSnippets": true,
-  "editor.snippetSuggestions": "bottom"
+  "editor.snippetSuggestions": "bottom",
+
+  // Astro-spezifische Einstellungen
+  "astro.enable-extension": true
 }
