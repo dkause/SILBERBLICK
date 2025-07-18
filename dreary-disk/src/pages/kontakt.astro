@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title='Mitten in Berlin aber nur mit Termin'>
+    <div class="u-container">
+        <div class="u-grid">
+            <div class="eight-column-item stack">
+                <h1 id="contact-heading">Kontakt</h1>
+                <form action="https://formspree.io/f/manjljar" method="POST" aria-labelledby="contact-heading">
+                    <fieldset class="padding-3vw">
+                        <legend class="hidden">Kontaktformular</legend>
+                        <div >
+                            <div>
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-hint">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="form-label">E-Mail</label>
+                                <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-hint">
+                            </div>
+                            
+                            <fieldset>
+                                <legend class="form-label">Ich bin</legend>
+                                <div style="display: flex; gap: 1rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                        <input type="radio" name="kundentyp" value="privat" required aria-required="true">
+                                        Privatkunde
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                        <input type="radio" name="kundentyp" value="firma" required aria-required="true">
+                                        Firmenkunde
+                                    </label>
+                                </div>
+                            </fieldset>
+                            
+                            <div>
+                                <label for="subject" class="form-label">Betreff</label>
+                                <input type="text" id="subject" name="subject" required aria-required="true" aria-describedby="subject-hint">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="form-label">Nachricht</label>
+                                <textarea id="message" name="message" rows="6" required aria-required="true" aria-describedby="message-hint"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="button-base cta-button" aria-describedby="submit-hint">Nachricht senden</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</Layout>

@@ -31,7 +31,7 @@ Für jede Bilddatei (.jpg, .jpeg, .png) soll eine entsprechende .md-Datei erstel
 ---
 name: "Beschreibender Name des Bildes"
 image:
-  src: "/images/kategorie/dateiname.webp"
+  src: "./dateiname.jpg"
   alt: "Beschreibender Alt-Text für Barrierefreiheit"
 ---
 Professionelle Beschreibung des Bildes in 1-2 Sätzen...
@@ -69,9 +69,10 @@ Professionelle Beschreibung des Bildes in 1-2 Sätzen...
 
 ### Bildpfade
 
-- Webp-Format in den Pfaden verwenden
-- Struktur: `/images/kategorie/dateiname.webp`
-- Kategorien: stillleben, portraits, landschaften
+- **Astro Content Collection**: Relative Pfade mit JPG-Format verwenden (Astro optimiert automatisch zu WebP)
+- Struktur: `./dateiname.jpg`
+- Kategorien: business, architektur, portraits
+- **Wichtig**: Bei Konflikten zwischen CLAUDE.md und task-spezifischen Anweisungen hat die aktuelle Task-Beschreibung Priorität - nachfragen welche Datei/Anweisung verwendet werden soll
 
 ### Beschreibungstext
 
