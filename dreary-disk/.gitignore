@@ -28,3 +28,6 @@ TASKS/
 
 # Scratch
 SCRATCH/
+
+# Cloudflare
+.wrangler/

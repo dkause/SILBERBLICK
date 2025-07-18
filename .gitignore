@@ -24,5 +24,11 @@ pnpm-debug.log*
 .idea/
 
 # Tasks
-Tasks.mdGEMINI.md
+TASKS/
+
+# Scratch
+SCRATCH/
+
+# Cloudflare
+.wrangler/
 
