@@ -238,18 +238,22 @@ nav a:hover {
 /*  Form Elements  */
 fieldset {
   border: solid 1px #000000;
-  padding: 3vw;
+    border-radius: 4px;
+
+
 }
 .form-label {
   display: block;
-  font-weight: 600;
-  width: 100%;
+  font-weight: 600
 }
 .form-submit-button {
   color: red;
 }
 .button-base {
-  padding: 0.75em 1.5em;
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  text-transform: uppercase;
+  padding: 1rem 1.5rem;
   border-radius: 4px;
   text-decoration: none;
   display: inline-block; /* Ensure padding and width work as expected for <a> tags */
@@ -378,7 +382,10 @@ text-transform: capitalize;
 .flex-end {
   align-items: flex-end;
 }
+.padding-3vw {
 
+  padding: 3vw;
+}
 /* Filter Button Styles */
 
 
