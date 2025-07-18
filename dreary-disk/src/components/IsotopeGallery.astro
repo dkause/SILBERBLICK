@@ -62,9 +62,11 @@ const totalFotos = fotos.length;
   >
     <meta itemprop="numberOfItems" content={totalFotos.toString()} />
     <div class="masonry-sizer"></div>
-    {fotos.map(foto => (
-      <div class={`masonry-item ${foto.data.category} ${foto.data.tags.join(' ')}`} itemscope itemtype="http://schema.org/ImageObject">
-        <a href={foto.data.image.src} itemprop="contentUrl">
+    {fotos.map(foto => {
+      const filename = foto.id.split('/').pop()?.replace('.md', '') || foto.id;
+      return (
+        <div class={`masonry-item ${foto.data.category} ${foto.data.tags.join(' ')}`} itemscope itemtype="http://schema.org/ImageObject">
+          <a href={`/${foto.data.category}/${filename}`} itemprop="contentUrl">
           <Image
             src={foto.data.image.src}
             alt={foto.data.image.alt}
@@ -73,8 +75,9 @@ const totalFotos = fotos.length;
             itemprop="image name description"
           />
         </a>
-      </div>
-    ))}
+        </div>
+      );
+    })}
   </div>
   <div class="no-results-message hidden" role="status" aria-live="polite" aria-hidden="true">
     <p>No images found for this filter.</p>

@@ -1,5 +1,5 @@
 ---
-name: "Corporate Executive Portrait 03"
+name: "Geschäftsführer Portrait für die MIC-Klinik"
 category: "businessfotos"
 tags: ["corporate", "executive"]
 image:
@@ -7,4 +7,4 @@ image:
   alt: "Authentisches Corporate Executive Portrait für professionelle Unternehmenskommunikation"
 ---
 
-Authentisches Corporate Portrait mit natürlicher Ausstrahlung. Die professionelle Bildsprache eignet sich ideal für Jahresberichte und Unternehmensdarstellungen.
+Authentisches Portrait mit natürlicher Ausstrahlung. Die professionelle Bildsprache eignet sich ideal für Unternehmensdarstellungen.

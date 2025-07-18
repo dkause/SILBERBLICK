@@ -13,7 +13,7 @@ const fotos = defineCollection({
       alt: z.string(),
     }),
     // NEUE FELDER HINZUFÜGEN
-    category: z.string().optional(),
+    category: z.string(),
     isHero: z.boolean().optional(),
     seriesName: z.string().optional(),
   }),

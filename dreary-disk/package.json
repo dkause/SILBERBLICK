@@ -12,6 +12,7 @@
     "@astrojs/cloudflare": "^12.6.0",
     "astro": "^5.11.0",
     "imagesloaded": "^5.0.0",
-    "isotope-layout": "^3.0.6"
+    "isotope-layout": "^3.0.6",
+    "photoswipe": "^5.4.4"
   }
 }

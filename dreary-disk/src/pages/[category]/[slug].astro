@@ -1,0 +1,264 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Image, getImage } from "astro:assets";
+// Build URLs at runtime
+export const getStaticPaths: GetStaticPaths = async () => {
+    const fotos = await getCollection('fotos');
+    
+    return fotos.map(entry => {
+        // Extrahiere nur den Dateinamen ohne Pfad und .md
+        const filename = entry.id.split('/').pop()?.replace('.md', '') || entry.id;
+        
+        return {
+            params: {
+                category: entry.data.category,
+                slug: filename,
+            },
+            props: { entry }
+        };
+    });
+}
+type Props = { 
+    entry: CollectionEntry<'fotos'>; 
+}
+
+const { entry } = Astro.props
+const  { Content } = await render(entry);
+
+// Nur den Text-Content extrahieren (ohne Markdown-Bilder)
+const textContent = entry.body?.replace(/!\[.*?\]\(.*?\)/g, '').replace(/^#.*$/gm, '').trim();
+
+// Layout-Erkennung: Einzelbild vs. Serie
+const isPhotoSeries = entry.data.seriesName !== undefined;
+const layoutType = isPhotoSeries ? 'series' : 'single';
+
+// Serien-Bilder laden (falls Serie)
+let seriesPhotos: any[] = [];
+let heroPhoto = entry;
+if (isPhotoSeries) {
+    const allPhotos = await getCollection('fotos');
+    seriesPhotos = allPhotos.filter(photo => 
+        photo.data.seriesName === entry.data.seriesName
+    );
+    
+    // Hero-Bild bestimmen: mit isHero: true oder das erste Bild
+    const heroCandidate = seriesPhotos.find(photo => photo.data.isHero === true);
+    if (heroCandidate) {
+        heroPhoto = heroCandidate;
+    }
+}
+
+// Photoswipe
+// BildBreite von getImage aus collection bekommen
+const imageOptimized = await getImage ({
+        src: heroPhoto.data.image.src,
+        width: 1920
+    });
+// Alle entry-Bilder optimieren
+let seriesImageOptimized: any [] = [];
+if (layoutType === 'series') {
+    seriesImageOptimized = await Promise.all(
+        seriesPhotos.map (async (photo) => {
+            const optimized = await getImage({
+                src: photo.data.image.src,
+                width: 1920
+            });
+            return { 
+                ...photo,
+                optimized
+            };
+        })
+    );
+}    
+
+
+---
+<Layout title={entry.data.name}>
+    <main class="container">
+        <h1 class="capitalize">{entry.data.category}</h1>
+        
+        {layoutType === 'single' && (
+            <div class="photo-layout">
+                <div class="left-column">
+                    <a
+                    href={imageOptimized.src}
+                    data-pswp-width={imageOptimized.attributes.width}
+                    data-pswp-height={imageOptimized.attributes.height}
+                    >
+                    <Image 
+                        src={entry.data.image.src} 
+                        alt={entry.data.image.alt}
+                        loading="eager"
+                        decoding="async"
+                    />
+                    </a>
+                </div>
+                <div class="right-column">
+                            <h2>{entry.data.name}</h2>
+
+                    <p>{textContent}</p>
+                </div>
+            </div>
+        )}
+        
+        {layoutType === 'series' && (
+            <div class="photo-layout">
+                <div class="left-column">
+                    <div class="hero-image">
+                          <a
+                    href={imageOptimized.src}
+                    data-pswp-width={imageOptimized.attributes.width}
+                    data-pswp-height={imageOptimized.attributes.height}
+                    >
+                        <Image 
+                            src={heroPhoto.data.image.src} 
+                            alt={heroPhoto.data.image.alt}
+                            loading="eager"
+                            decoding="async"
+                        />
+                        </a>
+                    </div>
+                    <div class="hero-text">
+                                                    <h2>{entry.data.name}</h2>
+
+                        <p>{textContent}</p>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <div class="series-thumbnails">
+  {                     seriesImageOptimized.filter(photo => photo.id !== heroPhoto.id).map(photo => (
+                        <a 
+                        href={photo.optimized.src}
+                        data-pswp-height={photo.optimized.attributes.height}
+                        data-pswp-width=""={photo.optimized.attributes.width}
+                        class="series-thumbnail"
+                        >
+                            <Image
+                            src={photo.data.image.src}
+                            alt={photo.data.image.alt}
+                            loading="lazy"
+                            decoding="async"
+
+                            
+                            />
+
+                        </a>
+                       ))}
+                    </div>
+                </div>
+            </div>
+        )}
+    </main>
+    
+    <!-- PhotoSwipe Container (wird nur bei Modal-Öffnung sichtbar) -->
+    <div style="margin: 0;" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Schließen (Esc)"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  // PhotoSwipe initialisieren
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '.photo-layout',
+    children: 'a',
+    pswpModule: () => import('photoswipe'),
+    
+    // Deine gewünschten Einstellungen
+    bgOpacity: 0.8,
+    showHideOpacity: true,
+    
+    // UI Elemente
+    zoom: true,
+    counter: true,
+    
+    // Navigation
+    arrowKeys: true,
+    escKey: true,
+  });
+
+  lightbox.init();
+</script>
+    </Layout>
+<style>
+    /* 2-Spalten Layout für alle Layouts */
+    .photo-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-top: 2rem;
+    }
+    
+    .left-column {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    /* Bilder */
+    .hero-image img,
+    .left-column img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    /* Serie-Thumbnails */
+    .series-thumbnails {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .series-thumbnail {
+        display: block;
+        border: 2px solid transparent;
+        transition: border-color 0.2s;
+    }
+    
+    .series-thumbnail:hover {
+        border-color: #333;
+    }
+    
+    .series-thumbnail img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .photo-layout {
+            grid-template-columns: 1fr;
+        }
+        
+        .left-column,
+        .right-column {
+            grid-column: 1;
+        }
+    }
+</style>
