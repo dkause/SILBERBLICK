@@ -126,6 +126,10 @@ const totalFotos = fotos.length;
     /* Only apply transitions after Isotope is ready */
     transition: none;
   }
+  .masonry-item-double-width {
+    /* Width should match masonry-sizer for single-column items */
+    width: calc( var(--cssColumnWidth) *2); /* Isotope sets this width */
+  }
 
   .grid.isotope-is-ready .masonry-item {
     /* transition: opacity 0.3s ease-out, transform 0.3s ease-out; */

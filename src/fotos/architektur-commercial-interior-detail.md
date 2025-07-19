@@ -1,6 +1,6 @@
 ---
 name: "Urbane Fassadendetail - Architekturkomposition"
-tags: ["architektur", "urban", "facade", "detail"]
+tags: ["architektur", "urban", "facade", "detail", "masonry-item-double-width"]
 category: "architektur"
 image:
   src: "./architektur-commercial-interior-detail.jpg"

@@ -1,7 +1,7 @@
 ---
 name: "Professional Kundenportrait Rehau"
 category: "portraits"
-tags: ["portrait", "professional", "business", "corporate", "client"]
+tags: ["portrait", "professional", "business", "corporate"]
 image:
   src: "./portrait-professional-kunde-rehau-56.jpg"
   alt: "Professionelles Kundenportrait für Rehau Unternehmen, Businessfotografie Berlin von Daniel Kause"

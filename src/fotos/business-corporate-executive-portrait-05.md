@@ -1,7 +1,7 @@
 ---
 name: "Corporate Executive Portrait 05"
 category: "businessfotos"
-tags: ["corporate", "executive"]
+tags: ["corporate", "executive", "masonry-item-double-width"]
 image:
   src: "./business-corporate-executive-portrait-05.jpg"
   alt: "Professionelles Corporate Portrait mit starker Präsenz für Führungskräfte"
