@@ -166,19 +166,31 @@ Bei Homepage-Portfolio-Bildern mit unterschiedlichen Seitenverhältnissen führt
    - Lighthouse-Score verbessern
    - Static Site Generation testen
 
-**Deployment Vorbereitung:** 6. **SEO Finalisierung**: Meta Tags und Schema.org vervollständigen
+**Deployment Vorbereitung:** 
+✅ **Deployment abgeschlossen**: Cloudflare Pages mit automatischer CI/CD
+✅ **Domain**: silberblick.berlin (live)
+✅ **SSL**: Automatisch via Cloudflare
+✅ **Build Pipeline**: GitHub → Cloudflare (45 Seiten, 81 optimierte Bilder)
 
-- Structured Data für Fotograf-Portfolio
-- Lokale SEO für Berlin optimieren
-- Sitemap und robots.txt
+### 🎯 Current TODOs (Post-Deployment)
 
-7. **Deployment Setup**: GitHub Pages oder Netlify konfigurieren
+**SEO & Performance (Priorität: Hoch):**
 
-   - CI/CD Pipeline einrichten
-   - Domain silberblick.berlin verknüpfen
-   - SSL-Zertifikat einrichten
+1. ✅ **PhotoSwipe Modal-Verzerrung** (erledigt)
+2. **Schema.org Structured Data**: LocalBusiness + Photographer Schema implementieren
+   - JSON-LD für Fotograf-Portfolio
+   - Lokale Berlin SEO optimieren
+   - Review-Schema für Kundenbewertungen
+3. **CSS Cleanup**: Ungenutzte Klassen und tote Styles entfernen
+   - Dead CSS Detection
+   - Bundle-Größe optimieren
+   - Performance-Impact messen
 
-8. **Kontaktformular**: Netlify Forms oder alternative Lösung implementieren
+**Content & Analytics (Priorität: Mittel):**
+
+4. **Analytics Setup**: Cloudflare/Google Analytics konfigurieren
+5. **Content Ausbau**: Fotografenseite detaillierter ausarbeiten
+6. **Legacy Domain**: silberblick.net → silberblick.berlin Redirect
 
 ### 🔮 V2 Features (Post-MVP)
 

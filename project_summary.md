@@ -61,9 +61,11 @@ SILBERBLICK/
 ## Next Steps (Documented)
 1. Analytics Setup (Cloudflare/Google Analytics)
 2. SEO Testing (PageSpeed, Lighthouse, Search Console)
-3. Bugfix: PhotoSwipe Modal-Verzerrung
-4. Content: Fotografenseite ausarbeiten
-5. Legacy Domain Redirect (silberblick.net → silberblick.berlin)
+3. ✅ Bugfix: PhotoSwipe Modal-Verzerrung (erledigt)
+4. **Schema.org Structured Data**: LocalBusiness + Photographer Schema implementieren
+5. **CSS Cleanup**: Ungenutzte Klassen und tote Styles entfernen
+6. Content: Fotografenseite ausarbeiten
+7. Legacy Domain Redirect (silberblick.net → silberblick.berlin)
 
 ## Workflow
 ```
