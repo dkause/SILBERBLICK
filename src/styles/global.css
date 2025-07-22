@@ -613,7 +613,7 @@ text-transform: capitalize;
 }
 
 .masonry-item-double-width {
-  /* width: calc(var(--cssColumnWidth) * 2); */
+  width: calc(var(--cssColumnWidth) * 2);
 }
 
 /* Responsive Masonry Grid */

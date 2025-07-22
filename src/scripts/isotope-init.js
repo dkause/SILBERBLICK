@@ -43,6 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Ensure transitions are used for filtering - reduced for performance
   finalIsotopeOptions.transitionDuration = '0.3s';
 
+  // MASONRY FIX: Force columnWidth to masonry-sizer, ignore first item width
+  if (!finalIsotopeOptions.masonry) {
+    finalIsotopeOptions.masonry = {};
+  }
+  finalIsotopeOptions.masonry.columnWidth = '.masonry-sizer';
+  console.log('Forced columnWidth to .masonry-sizer to fix double-width first item issue');
+  
+  if (masonrySizer) {
+    console.log('Masonry columnWidth will be:', masonrySizer.offsetWidth + 'px');
+  }
+
   let iso; // Variable für die Isotope-Instanz
 
   // 5. imagesLoaded Callback: Isotope initialisieren, sobald alle Bilder geladen sind
