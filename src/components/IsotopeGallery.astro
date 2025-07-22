@@ -84,128 +84,15 @@ const totalFotos = fotos.length;
   </div>
 </div>
 <script src="/src/scripts/isotope-init.js"></script>
+<!-- Masonry styles moved to global.css for proper bundling -->
 <style>
-  .gallery-container {
-    display: block; /* Ensure it's not flex or grid */
-    --gallery-gutter: 10px; /* Define gallery-specific gutter */
-  }
-
-  .grid {
-    /* Isotope will manage positioning, so we need position: relative */
-    position: relative;
-    margin: 0 auto;
-    padding: 0;
-    list-style: none;
-    display: block; /* Ensure it's not flex or grid */
-    contain: layout style; /* CSS containment for performance */
-    /* Hide grid until Isotope is ready to prevent FOUC */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .grid.isotope-is-ready {
-    opacity: 1;
-  }
-
-  /* Masonry Sizer for responsive column width */
-  .masonry-sizer {
-    width: var(--cssColumnWidth); /* Use CSS variable for dynamic width */
-    height: 0; /* No visual height needed */
-    background-color: transparent; /* No background needed */
-  }
-
-  .masonry-item {
-    /* Isotope will set left/top for positioning */
-    /* Width should match masonry-sizer for single-column items */
-    width: var(--cssColumnWidth); /* Isotope sets this width */
-    padding: calc(var(--gallery-gutter) / 2); /* Apply half gutter as padding on all sides */
-    box-sizing: border-box;
-    opacity: 0; /* Hide item */
-    transform: translateZ(0) scale(1); /* Enable hardware acceleration with consistent scale */
-    will-change: opacity, transform; /* Optimize for animations */
-    /* Only apply transitions after Isotope is ready */
-    transition: none;
-  }
-  .masonry-item-double-width {
-    /* Width should match masonry-sizer for single-column items */
-    width: calc( var(--cssColumnWidth) *2); /* Isotope sets this width */
-  }
-
-  .grid.isotope-is-ready .masonry-item {
-    /* transition: opacity 0.3s ease-out, transform 0.3s ease-out; */
-  }
-
-  .grid.isotope-is-ready .masonry-item {
-    opacity: 1;
-    transform: translateZ(0) scale(1); /* Hardware-accelerated final state */
-  }
-
-  .masonry-item img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    transform: translateZ(0); /* Hardware acceleration for images */
-    transition: transform 0.2s ease-out;
-  }
-
-  .masonry-item figcaption {
-    font-family: var(--font-sans);
-    font-size: var(--step--2);
-    text-align: left;
-    margin-top: 0.5rem;
-  }
-
-  .masonry-item .tags {
-    margin-top: 0.5rem;
-  }
-
-  .masonry-item .tag {
-    display: inline-block;
-    background-color: #e0e0e0;
-    color: #333;
-    padding: 0.2em 0.5em;
-    margin-right: 0.5em;
-    margin-top: 0.5em;
-    border-radius: 3px;
-    font-size: var(--step--2);
-    font-family: var(--font-sans);
-  }
-
   .no-results-message {
     text-align: center;
     padding: 2rem;
     font-size: var(--step-1);
     color: #555;
   }
-
-  .hidden {
-    display: none;
-  }
-
-  /* Responsive adjustments for masonry-item width and masonry-sizer */
-  /* Default for small screens (e.g., 2 columns) */
-  .grid {
-    --cssColumnWidth: 50%; /* 2 columns */
-  }
-
-  /* For medium screens (e.g., 3 columns) */
-  @media (min-width: 768px) {
-    .grid {
-      --cssColumnWidth: 33.333%; /* 3 columns */
-    }
-  }
-
-  /* For larger screens (e.g., 4 columns) */
-  @media (min-width: 1024px) {
-    .grid {
-      --cssColumnWidth: 25%; /* 4 columns */
-    }
-  }
-
-  /* For very large screens (e.g., 5 columns) */
-  @media (min-width: 1280px) {
-    .grid {
-      --cssColumnWidth: calc(100% / 5); /* 5 columns */
-    }
-  }
+  .masonry-item:first-child:not(.masonry-item-double-width) {
+  order: -1;
+}
 </style>

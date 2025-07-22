@@ -538,3 +538,103 @@ text-transform: capitalize;
     gap: var(--s1);
   }
 }
+
+/* Masonry Gallery Styles (moved from IsotopeGallery.astro) */
+.gallery-container {
+  display: block;
+  --gallery-gutter: 10px;
+}
+
+.grid {
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: block;
+  contain: layout style;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.grid.isotope-is-ready {
+  opacity: 1;
+}
+
+.masonry-sizer {
+  width: var(--cssColumnWidth);
+  height: 0;
+  background-color: transparent;
+}
+
+.masonry-item {
+  width: var(--cssColumnWidth);
+  padding: calc(var(--gallery-gutter) / 2);
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateZ(0) scale(1);
+  will-change: opacity, transform;
+  transition: none;
+}
+
+.grid.isotope-is-ready .masonry-item {
+  opacity: 1;
+  transform: translateZ(0) scale(1);
+}
+
+.masonry-item img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  transform: translateZ(0);
+  transition: transform 0.2s ease-out;
+}
+
+.masonry-item figcaption {
+  font-family: var(--font-sans);
+  font-size: var(--step--2);
+  text-align: left;
+  margin-top: 0.5rem;
+}
+
+.masonry-item .tags {
+  margin-top: 0.5rem;
+}
+
+.masonry-item .tag {
+  display: inline-block;
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 0.2em 0.5em;
+  margin-right: 0.5em;
+  margin-top: 0.5em;
+  border-radius: 3px;
+  font-size: var(--step--2);
+  font-family: var(--font-sans);
+}
+
+.masonry-item-double-width {
+  /* width: calc(var(--cssColumnWidth) * 2); */
+}
+
+/* Responsive Masonry Grid */
+.grid {
+  --cssColumnWidth: 50%; /* 2 columns default */
+}
+
+@media (min-width: 768px) {
+  .grid {
+    --cssColumnWidth: 33.333%; /* 3 columns */
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    --cssColumnWidth: 25%; /* 4 columns */
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid {
+    --cssColumnWidth: calc(100% / 5); /* 5 columns */
+  }
+}
