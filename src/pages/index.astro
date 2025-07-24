@@ -31,7 +31,7 @@ import danielfoto from '../fotograf-daniel-kause.jpg'
 ---
 
 <Layout title="SILBERBLICK - Fotograf Berlin | Daniel Kause" >
-  <section  aria-label="Portfolio" >
+  <section class="gap" aria-label="Portfolio" >
 
 
     <div class="all-column-item">
@@ -40,7 +40,9 @@ import danielfoto from '../fotograf-daniel-kause.jpg'
         Professionelle Fotografie für Menschen und Unternehmen in Berlin
       </h2>
     </div>
-    <IsotopeGallery fotos={fotosToShow} allTags={allTags} isotopeOptions={isotopeOptions} showFilterButtons={false} />
+    
+  
+    <IsotopeGallery fotos={fotosToShow} allTags={allTags} isotopeOptions={isotopeOptions} showFilterButtons={true} />
 
 
   </section>

@@ -3,6 +3,7 @@ import type { GetStaticPaths } from "astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { Image, getImage } from "astro:assets";
+import ImageObjectSchema from "../../components/ImageObjectSchema.astro";
 // Build URLs at runtime
 export const getStaticPaths: GetStaticPaths = async () => {
     const fotos = await getCollection('fotos');
@@ -53,29 +54,35 @@ if (isPhotoSeries) {
 // Photoswipe
 // BildBreite von getImage aus collection bekommen
 const imageOptimized = await getImage ({
-        src: heroPhoto.data.image.src,
-        width: 1920
-    });
+src: heroPhoto.data.image.src,
+width: 1920
+});
 // Alle entry-Bilder optimieren
 let seriesImageOptimized: any [] = [];
 if (layoutType === 'series') {
-    seriesImageOptimized = await Promise.all(
-        seriesPhotos.map (async (photo) => {
-            const optimized = await getImage({
-                src: photo.data.image.src,
-                width: 1920
-            });
-            return { 
-                ...photo,
-                optimized
-            };
-        })
-    );
-}    
+seriesImageOptimized = await Promise.all(
+seriesPhotos.map (async (photo) => {
+const optimized = await getImage({
+src: photo.data.image.src,
+width: 1920
+});
+return { 
+...photo,
+optimized
+};
+})
+);    
+}
+
+// Schema.org Integration: Aktuelle URL für ImageObject Schema
+const currentUrl = Astro.url.href;
 
 
 ---
 <Layout title={entry.data.name}>
+    <!-- ImageObject Schema für das Haupt-Foto (Hero bei Serie, Entry bei Single) -->
+    <ImageObjectSchema photo={heroPhoto} currentUrl={currentUrl} />
+    
     <main class="container">
         <h1 class="capitalize">{entry.data.category}</h1>
         

@@ -1,0 +1,60 @@
+---
+// ImageObjectSchema.astro - Schema.org Markup für einzelne Portfolio-Bilder
+// Generiert strukturierte Daten für Foto-Detail-Seiten
+
+interface Props {
+  photo: any; // Content Collection Entry von fotos
+  currentUrl: string; // Vollständige URL der aktuellen Seite
+}
+
+const { photo, currentUrl } = Astro.props;
+
+// 1. Description mit Fallback-Logic erstellen
+// Bevorzugt: Markdown Body Content (ausführliche Beschreibung)
+// Fallback: Alt-Text (mandatory field, immer vorhanden)
+const description = photo.body || photo.data.image.alt;
+
+// 2. Optimierte Bild-URL generieren 
+// Astro Image optimization erstellt WebP/AVIF aus ursprünglichem JPG
+const optimizedImage = photo.data.image.src;
+const contentUrl = `${Astro.site}${optimizedImage.src}`;
+
+// 3. ImageObject Schema zusammenstellen
+const imageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ImageObject",
+  
+  // Basis-Metadaten aus Frontmatter
+  "name": photo.data.name,           // Titel des Fotos
+  "description": description,        // Body-Content oder Alt-Text
+  
+  // URL-Daten  
+  "contentUrl": contentUrl,          // Direkter Link zum optimierten Bild
+  "url": currentUrl,                 // Link zur Foto-Detail-Seite
+  
+  // Urheberrechts-Daten (fest)
+  "author": {
+    "@type": "Person",
+    "name": "Daniel Kause"
+  },
+  "copyrightHolder": "Daniel Kause",
+  "license": "All Rights Reserved",
+  
+  // Verbindung zum Hauptfotograf (Person Schema)
+  "creator": {
+    "@type": "Person", 
+    "@id": "https://silberblick.berlin#daniel-kause"
+  }
+};
+---
+
+<!-- ImageObject Schema für Foto-Detail-Seite -->
+<!-- Wird nur auf /category/slug Seiten geladen, nicht auf Galerie-Übersichten -->
+<script type="application/ld+json" set:html={JSON.stringify(imageSchema, null, 2)} />
+
+<!-- Debug-Kommentar für Development (wird in Production entfernt) -->
+<!-- 
+  Foto: {photo.data.name}
+  Body vorhanden: {photo.body ? 'ja' : 'nein'} 
+  Fallback verwendet: {photo.body ? 'nein' : 'ja (alt-text)'}
+-->

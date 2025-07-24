@@ -144,6 +144,30 @@ nav a:hover {
   margin: 0;
   padding: 0;
 }
+
+/* Navigation utility classes */
+.nav-list--left {
+  justify-content: flex-start;
+}
+
+.nav-list--right {
+  justify-content: end;
+}
+
+/* Filter navigation styling */
+.filter-nav-container {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  margin-bottom: var(--s1);
+}
+
+.filter-label {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  font-weight: 600;
+  white-space: nowrap;
+}
 .thumbnail-stage {
   display: flex;
   flex-direction: column;

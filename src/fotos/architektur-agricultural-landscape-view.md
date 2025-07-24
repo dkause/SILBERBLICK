@@ -11,4 +11,4 @@ seriesName: "conow"
 # Urbane Landschaftsansicht
 ![Urbane Landschaftsansicht](./architektur-agricultural-landscape-view.jpg)
 
-Städtische Landschaftsfotografie mit architektonischem Blick. Komposition verbindet Naturraum und urbane Strukturen zu einer Einheit.
+Landschaftsfotografie einer Agrarlandschaft. Komposition verbindet Naturraum und humane urbane Strukturen zu einer Einheit.

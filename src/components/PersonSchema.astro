@@ -1,0 +1,185 @@
+---
+// PersonSchema.astro - Schema.org Markup für Daniel Kause / SILBERBLICK
+// Photographer Person Schema mit Service Area und Business Info
+
+interface Props {
+  page?: 'homepage' | 'businessfotografie' | 'architekturfotografie' | 'portraitfotografie' | 'kontakt' | 'daniel';
+}
+
+const { page = 'homepage' } = Astro.props;
+
+// Base Person Schema - immer gleich
+const basePersonSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Daniel Kause",
+  "givenName": "Daniel", 
+  "familyName": "Kause",
+  "additionalName": "SILBERBLICK",
+  "jobTitle": "Fotograf",
+  "description": "Professioneller Fotograf für Business, Architektur und Portraits in der Metropolitanregion Berlin-Brandenburg seit 1995.",
+  
+  // Arbeitgeber - Smart Genossenschaft
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Smart Genossenschaft",
+    "url": "https://smartde.coop/",
+    "description": "Genossenschaft für selbständige Kreative und Berater"
+  },
+  
+  // Berufliche Details
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Fotograf",
+    "occupationalCategory": "Fotografische Dienstleistungen",
+    "experienceRequirements": "30+ Jahre Berufserfahrung seit 1995"
+  },
+  
+  // Service Area - Metropolitanregion Berlin-Brandenburg + International
+  "serviceArea": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hauptstadtregion Berlin-Brandenburg",
+      "description": "6 Millionen Einwohner, 30.370 km² Fläche"
+    },
+    {
+      "@type": "Place",
+      "name": "Berlin",
+      "addressLocality": "Berlin",
+      "addressCountry": "DE"
+    },
+    {
+      "@type": "Place", 
+      "name": "Brandenburg",
+      "addressRegion": "Brandenburg",
+      "addressCountry": "DE"
+    },
+    {
+      "@type": "Country",
+      "name": "Deutschland"
+    }
+  ],
+  
+  // Kontaktdaten
+  "url": "https://silberblick.berlin",
+  "email": "daniel@silberblick.berlin",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "business",
+    "email": "daniel@silberblick.berlin",
+    "url": "https://silberblick.berlin/kontakt",
+    "availableLanguage": ["de", "en"]
+  },
+  
+  // Brand Identity
+  "brand": {
+    "@type": "Brand",
+    "name": "SILBERBLICK",
+    "description": "Fotografische Marke seit 2003",
+    "foundingDate": "1995"
+  },
+  
+  // Core Services
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "name": "Businessfotografie",
+      "description": "Corporate Portraits, Unternehmensfotos, Executive Photography",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Businessfotografie",
+        "serviceType": "Corporate Photography",
+        "provider": {
+          "@type": "Person",
+          "@id": "https://silberblick.berlin#daniel-kause"
+        }
+      },
+      "areaServed": {
+        "@type": "AdministrativeArea", 
+        "name": "Hauptstadtregion Berlin-Brandenburg"
+      }
+    },
+    {
+      "@type": "Offer",
+      "name": "Architekturfotografie", 
+      "description": "Architekturfotos, Raumfotografie, Immobilienfotografie",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Architekturfotografie",
+        "serviceType": "Architectural Photography",
+        "provider": {
+          "@type": "Person",
+          "@id": "https://silberblick.berlin#daniel-kause"
+        }
+      },
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Hauptstadtregion Berlin-Brandenburg"
+      }
+    },
+    {
+      "@type": "Offer",
+      "name": "Portraitfotografie",
+      "description": "Authentische Portraits, Personenfotografie, Bewerbungsfotos",
+      "itemOffered": {
+        "@type": "Service", 
+        "name": "Portraitfotografie",
+        "serviceType": "Portrait Photography",
+        "provider": {
+          "@type": "Person",
+          "@id": "https://silberblick.berlin#daniel-kause"
+        }
+      },
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Hauptstadtregion Berlin-Brandenburg"  
+      }
+    }
+  ],
+  
+  // Professional Identity
+  "@id": "https://silberblick.berlin#daniel-kause",
+  "sameAs": [
+    "https://silberblick.berlin",
+    "https://silberblick.berlin/der-fotograf"
+  ]
+};
+
+// Page-spezifische Schema-Ergänzungen
+let pageSpecificSchema = {};
+
+if (page === 'businessfotografie') {
+  pageSpecificSchema = {
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://silberblick.berlin/businessfotografie",
+      "name": "Businessfotografie Berlin",
+      "description": "Corporate Portraits und Unternehmensfotos in Berlin"
+    }
+  };
+} else if (page === 'architekturfotografie') {
+  pageSpecificSchema = {
+    "mainEntityOfPage": {
+      "@type": "WebPage", 
+      "@id": "https://silberblick.berlin/architekturfotografie",
+      "name": "Architekturfotografie Berlin",
+      "description": "Professionelle Architektur- und Raumfotografie"
+    }
+  };
+} else if (page === 'portraitfotografie') {
+  pageSpecificSchema = {
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://silberblick.berlin/portraitfotografie", 
+      "name": "Portraitfotografie Berlin",
+      "description": "Authentische Portraits und Personenfotografie"
+    }
+  };
+}
+
+// Merge Base + Page-specific Schema
+const finalSchema = { ...basePersonSchema, ...pageSpecificSchema };
+---
+
+<!-- Person Schema Markup für Daniel Kause / SILBERBLICK -->
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema, null, 2)} />
