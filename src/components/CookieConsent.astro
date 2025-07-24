@@ -1,0 +1,21 @@
+---
+// CookieConsent.astro - Cookie-Consent Management mit Cookiebot
+// Separate Component für bessere Modularität und zukünftige Erweiterungen
+
+// Nur in Production laden (Development braucht kein Cookie-Consent)
+const isProduction = import.meta.env.PROD;
+---
+
+{isProduction && (
+  <!-- Cookiebot Cookie Consent Management Platform -->
+  <!-- Automatisches Blocking: data-blockingmode="auto" -->
+  <!-- Scripts mit data-cookieconsent werden automatisch blockiert -->
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" 
+          data-cbid="8c73c5da-138c-40cc-ae08-91243330399a" 
+          data-blockingmode="auto" type="text/javascript"></script>
+)}
+
+<!-- Development Mode: Kein Cookie-Banner nötig -->
+{!isProduction && (
+  <!-- Cookie-Consent nur in Production erforderlich -->
+)}

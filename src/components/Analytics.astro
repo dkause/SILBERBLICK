@@ -11,9 +11,9 @@ const siteUrl = 'https://silberblick.berlin';
 
 {isProduction && (
   <>
-    <!-- Google Analytics GA4 - MESS-ID: G-WJK34XRR7F -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WJK34XRR7F"></script>
-    <script>
+    <!-- Google Analytics GA4 - wartet auf Cookie-Consent -->
+    <script type="text/plain" data-cookieconsent="statistics" async src="https://www.googletagmanager.com/gtag/js?id=G-WJK34XRR7F"></script>
+    <script type="text/plain" data-cookieconsent="statistics">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -23,8 +23,8 @@ const siteUrl = 'https://silberblick.berlin';
       });
     </script>
 
-    <!-- Hotjar Tracking Code für silberblick.berlin -->
-    <script>
+    <!-- Hotjar Tracking Code - wartet auf Cookie-Consent -->
+    <script type="text/plain" data-cookieconsent="statistics">
       (function(h,o,t,j,a,r){
           h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
           h._hjSettings={hjid:3519944,hjsv:6};
@@ -37,10 +37,3 @@ const siteUrl = 'https://silberblick.berlin';
   </>
 )}
 
-<!-- Development Mode: Console Logging -->
-{!isProduction && (
-  <script>
-    console.log('🔧 DEV MODE: Analytics disabled');
-    console.log('📊 Hotjar + GA4 würden hier laden');
-  </script>
-)}
