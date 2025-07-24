@@ -32,10 +32,18 @@ const imageSchema = {
   "contentUrl": contentUrl,          // Direkter Link zum optimierten Bild
   "url": currentUrl,                 // Link zur Foto-Detail-Seite
   
-  // Urheberrechts-Daten (fest)
+  // Erweiterte Urheberrechts-Daten mit Occupation
   "author": {
     "@type": "Person",
-    "name": "Daniel Kause"
+    "name": "Daniel Kause",
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Fotograf",
+      "occupationLocation": {
+        "@type": "AdministrativeArea",
+        "name": "Hauptstadtregion Berlin-Brandenburg"
+      }
+    }
   },
   "copyrightHolder": "Daniel Kause",
   "license": "All Rights Reserved",
