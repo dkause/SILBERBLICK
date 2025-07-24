@@ -1,0 +1,36 @@
+{
+  // --- Bestehende Formatierungs-Einstellungen ---
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+
+  // --- NEU: Einstellungen für Vorschläge & Autovervollständigung ---
+
+  // 1. Weniger "hyperaktive" Vorschläge:
+  // Vorschläge nur noch anzeigen, wenn du sie aktiv anforderst (STRG+Space)
+  // oder bestimmte Zeichen tippst (z.B. "<", ".", "/").
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.suggestOnTriggerCharacters": true,
+
+  // 2. Hyperaktiven Copilot deaktivieren (er schlägt nur noch bei STRG+Space vor):
+  "github.copilot.inlineSuggest.enabled": false,
+
+  // 3. "Hakeliges" Ersetzen verhindern:
+  // Vorschläge nicht mehr automatisch mit der Enter-Taste annehmen.
+  // Nur noch mit Tab oder Klick. Das verhindert das Überschreiben von Tags.
+  "editor.acceptSuggestionOnEnter": "off",
+
+  // 4. Emmet-Vorschläge in der Liste nach unten verschieben:
+  // Sorgt dafür, dass IntelliSense-Vorschläge (z.B. CSS-Klassen) Priorität haben.
+  "emmet.showSuggestionsAsSnippets": true,
+  "editor.snippetSuggestions": "bottom",
+
+  // Astro-spezifische Einstellungen
+  "astro.enable-extension": true
+}

@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  fotos: any[]; // Replace 'any' with a more specific type if available
+  allTags: Set<string>;
+  isotopeOptions?: {
+    layoutMode?: string;
+    columnWidth?: string | number;
+    gutter?: string | number;
+  };
+  showFilterButtons?: boolean; // New prop to control visibility of filter buttons
+}
+
+// Destructure props, providing a default value for showFilterButtons
+const { fotos, allTags, isotopeOptions, showFilterButtons = true } = Astro.props;
+
+const defaultIsotopeOptions = {
+  layoutMode: 'masonry',
+  masonry: {
+    columnWidth: '.masonry-sizer',
+    gutter: 0, // Keeping as 0 as per user request for now
+  },
+  itemSelector: '.masonry-item',
+  percentPosition: true,
+  transitionDuration: '0.3s',
+};
+
+// Merge default options with props
+const finalIsotopeOptions = { ...defaultIsotopeOptions, ...isotopeOptions };
+
+
+
+const totalFotos = fotos.length;
+---
+
+<!--
+  Conditional rendering for the filter buttons.
+  The buttons will only be rendered if `showFilterButtons` is true.
+  By default, `showFilterButtons` is true (see frontmatter).
+  To hide the buttons, set `showFilterButtons={false}` when using <IsotopeGallery />.
+-->
+{showFilterButtons && (
+  <div class="filter-button-group" role="group" aria-label="Image filters">
+    <button class="is-checked" data-filter="*" aria-pressed="true" aria-controls="gallery-grid">show all</button>
+    {
+      Array.from(allTags).map((tag) => (
+        <button data-filter={`.${tag}`} aria-pressed="false" aria-controls="gallery-grid">{tag}</button>
+      ))
+    }
+  </div>
+)}
+
+<div class="gallery-container">
+  <div
+    id="gallery-grid"
+    class="grid"
+    itemscope
+    itemtype="http://schema.org/ItemList"
+    itemprop="mainEntityOfPage"
+    data-isotope-options={JSON.stringify(finalIsotopeOptions)}
+  >
+    <meta itemprop="numberOfItems" content={totalFotos.toString()} />
+    <div class="masonry-sizer"></div>
+    {fotos.map(foto => {
+      const filename = foto.id.split('/').pop()?.replace('.md', '') || foto.id;
+      return (
+        <div class={`masonry-item ${foto.data.category} ${foto.data.tags.join(' ')}`} itemscope itemtype="http://schema.org/ImageObject">
+          <a href={`/${foto.data.category}/${filename}`} itemprop="contentUrl">
+          <Image
+            src={foto.data.image.src}
+            alt={foto.data.image.alt}
+            loading="lazy"
+            decoding="async"
+            itemprop="image name description"
+          />
+        </a>
+        </div>
+      );
+    })}
+  </div>
+  <div class="no-results-message hidden" role="status" aria-live="polite" aria-hidden="true">
+    <p>No images found for this filter.</p>
+  </div>
+</div>
+<script src="/src/scripts/isotope-init.js"></script>
+<!-- Masonry styles moved to global.css for proper bundling -->
+<style>
+  .no-results-message {
+    text-align: center;
+    padding: 2rem;
+    font-size: var(--step-1);
+    color: #555;
+  }
+  .masonry-item:first-child:not(.masonry-item-double-width) {
+  order: -1;
+}
+</style>
