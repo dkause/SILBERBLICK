@@ -8,6 +8,5 @@ image:
 ---
 
 # Potsdamer Platz Berlin
-![Potsdamer Platz Berlin](./architektur-potsdamer-platz-modern.jpg)
 
 Zeitgenössische Architektur am Potsdamer Platz Berlin. Dynamische Komposition aus Glas und Stahl zeigt die moderne Stadtentwicklung Berlins.

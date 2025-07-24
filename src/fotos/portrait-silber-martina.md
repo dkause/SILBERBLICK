@@ -1,12 +1,12 @@
 ---
-name: "Authentisches Jugendportrait"
+name: "Silverstar"
 category: "portraits"
 tags: ["portrait", "authentic", "creative", "youth", "natural"]
 image:
-  src: "./portrait-authentisch-jugendlich-17.jpg"
-  alt: "Authentisches Portrait eines jungen Menschen in natürlicher Pose, fotografiert von Daniel Kause"
+  src: "./portrait-silber-martina.jpg"
+  alt: "künstlerisches Portait einer Frau mit silbernen Haar und Makeup"
 seriesName: "martina"
 isHero: true
 ---
 
-Ein authentisches Portrait, das die natürliche Persönlichkeit und Ausstrahlung junger Menschen einfängt. Ohne Pose, dafür mit echter Emotionalität und charakterstarkem Ausdruck.
+Kreative Variation des Thema Silber: künstlerisches Portrait mit silbernen Make-Up und Haar. Vielen Dank an Martina.

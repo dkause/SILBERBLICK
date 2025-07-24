@@ -11,6 +11,5 @@ isHero: true
 ---
 
 # Agrarlandschaft Brandenburg
-![Agrarlandschaft Brandenburg](./architektur-agricultural-landscape.jpg)
 
 Landschaftsfotogarfie der Agrarräume Brandenburg. Frühlingshafte Komposition aus Rapsfeld und Himmel zeigt die Weite der Kulturlandschaft.

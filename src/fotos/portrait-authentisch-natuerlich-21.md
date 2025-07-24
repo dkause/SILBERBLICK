@@ -5,8 +5,6 @@ tags: ["portrait", "authentic", "natural", "genuine", "character"]
 image:
   src: "./portrait-authentisch-natuerlich-21.jpg"
   alt: "Natürliches Portrait mit authentischem Ausdruck und ungezwungener Ausstrahlung von Daniel Kause"
-client: "Freie Arbeit"
-year: 2023
 ---
 
 Natürlichkeit und Authentizität stehen im Mittelpunkt dieses Portraits. Ungezwungene Ausstrahlung und echte Emotionen ohne künstliche Inszenierung.

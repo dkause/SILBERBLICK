@@ -10,6 +10,5 @@ isHero: true
 ---
 
 # Urbane Fassadendetail
-![Urbane Fassadendetail](./architektur-commercial-interior-detail.jpg)
 
 Fotos der Innnearchitektur eines Wohnraum mit Fokus auf Farbe und Geometrie. Komposition zeigt die Ästhetik moderner Innenräume.

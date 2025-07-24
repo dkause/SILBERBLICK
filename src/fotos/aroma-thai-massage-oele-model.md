@@ -9,6 +9,5 @@ seriesName: "aroma"
 ---
 
 # Aroma Thai Massage mit Model
-![Wellness-Szene mit Model und Massage-Ölen in entspannter Atmosphäre](./aroma-thai-massage-oele-model.jpg)
 
 Authentische Wellness-Fotografie die Entspannung und Wohlbefinden vermittelt.

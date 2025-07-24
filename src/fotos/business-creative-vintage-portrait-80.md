@@ -10,6 +10,5 @@ seriesName: "martina"
 ---
 
 # Creative Vintage Portrait
-![Creative Vintage Portrait](./business-creative-vintage-portrait-80.jpg)
 
 Stilvolle Werbefotografie mit Vintage-Elementen. High-Key-Ästhetik und atmosphärische Bildsprache für Marketing-Kampagnen mit Charakter.

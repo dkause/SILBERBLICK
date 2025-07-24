@@ -9,6 +9,5 @@ seriesName: "kastanienallee"
 ---
 
 # Moderne Wohnarchitektur
-![Moderne Wohnarchitektur](./architektur-residential-building.jpg)
 
 Zeitgenössische Wohnbebauung mit durchdachter Architektur. Funktionale Gestaltung trifft auf ästhetische Qualität im urbanen Kontext.

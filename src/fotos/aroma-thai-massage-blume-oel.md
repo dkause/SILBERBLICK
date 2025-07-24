@@ -9,6 +9,5 @@ seriesName: "aroma"
 ---
 
 # Aroma Thai Massage Blumen und Öle
-![Harmonische Kombination aus Blumen und Massage-Ölen](./aroma-thai-massage-blume-oel.jpg)
 
 Harmonische Wellness-Komposition mit natürlichen Elementen.

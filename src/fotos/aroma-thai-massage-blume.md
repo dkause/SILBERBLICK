@@ -9,6 +9,5 @@ seriesName: "aroma"
 ---
 
 # Aroma Thai Massage Blumendekoration
-![Dekorative Blumenarrangements für Aroma Thai Massage Studio](./aroma-thai-massage-blume.jpg)
 
 Stilvolle Dekoration und Atmosphäre mit natürlichen Elementen.

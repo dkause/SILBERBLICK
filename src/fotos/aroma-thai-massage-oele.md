@@ -9,6 +9,5 @@ seriesName: "aroma"
 ---
 
 # Aroma Thai Massage Öle
-![Hochwertige Massage-Öle für Aroma Thai Massage in warmer Beleuchtung](./aroma-thai-massage-oele.jpg)
 
 Professionelle Produktfotografie für Aroma Thai Massage mit warmer Beleuchtung.

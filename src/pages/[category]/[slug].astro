@@ -29,7 +29,6 @@ const { entry } = Astro.props
 const  { Content } = await render(entry);
 
 // Nur den Text-Content extrahieren (ohne Markdown-Bilder)
-const textContent = entry.body?.replace(/!\[.*?\]\(.*?\)/g, '').replace(/^#.*$/gm, '').trim();
 
 // Layout-Erkennung: Einzelbild vs. Serie
 const isPhotoSeries = entry.data.seriesName !== undefined;
@@ -103,9 +102,7 @@ const currentUrl = Astro.url.href;
                     </a>
                 </div>
                 <div class="right-column">
-                            <h2>{entry.data.name}</h2>
-
-                    <p>{textContent}</p>
+<Content/>
                 </div>
             </div>
         )}
@@ -128,9 +125,8 @@ const currentUrl = Astro.url.href;
                         </a>
                     </div>
                     <div class="hero-text">
-                                                    <h2>{entry.data.name}</h2>
 
-                        <p>{textContent}</p>
+<Content/>
                     </div>
                 </div>
                 <div class="right-column">

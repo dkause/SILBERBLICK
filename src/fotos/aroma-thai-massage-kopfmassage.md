@@ -10,7 +10,6 @@ isHero: true
 ---
 
 # Aroma Thai Massage Kopfmassage
-![Professionelle Kopfmassage-Technik bei Aroma Thai Massage](./aroma-thai-massage-kopfmassage.jpg)
 
 Professionelle Kopf Massage-Techniken in entspannter Wellness-Atmosphäre. Alle Modelle sind Mitarbeiter und Freunde. Das erzeugt ein authentisches Bild und emotionale Bindung.
 [Besuche unsere Partnerseite](https://aromathaimassage-berlin.de/)

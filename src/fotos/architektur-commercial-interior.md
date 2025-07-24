@@ -9,6 +9,5 @@ seriesName: "kastanienallee"
 ---
 
 # Kommerzielle Architektur
-![Kommerzielle Architektur](./architektur-commercial-interior.jpg)
 
 Professionelle Architekturfotografie für Gewerbeimmobilien. Repräsentative Darstellung kommerzieller Gebäude mit architektonischem Anspruch.
