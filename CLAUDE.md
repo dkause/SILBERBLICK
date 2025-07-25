@@ -210,6 +210,85 @@ Bei Homepage-Portfolio-Bildern mit unterschiedlichen Seitenverhältnissen führt
 - Sketch.app Integration mit automatisiertem CSS-Export
 - Responsive Editorial Grids für komplexe Multi-Serie Layouts
 
+## ✅ SEO & Cookie-Consent Setup (24.7.2025)
+
+### Abgeschlossen:
+- **Analytics Integration**: GA4 (G-WJK34XRR7F) + Hotjar (3519944)
+- **Schema.org Markup**: PersonSchema + ImageObjectSchema komplett implementiert
+- **Cookie-Consent**: Cookiebot DSGVO-konform (ID: 8c73c5da-138c-40cc-ae08-91243330399a)
+- **Duplicate Content Fix**: trailingSlash: "never" in astro.config.mjs
+- **Component Architecture**: Analytics.astro, PersonSchema.astro, ImageObjectSchema.astro, CookieConsent.astro
+
+### Technical Implementation:
+- **Person Schema**: Fotograf Daniel Kause, Smart Genossenschaft, Hauptstadtregion Berlin-Brandenburg
+- **ImageObject Schema**: Für Portfolio-Detail-Seiten mit Fallback-Description (Markdown Body → Alt-Text)
+- **Cookie-Consent Flow**: CookieConsent → Analytics → PersonSchema (korrekte Load-Order)
+- **Analytics Blocking**: Scripts mit data-cookieconsent="statistics" warten auf User-Consent
+
+### Erfolgskriterien erreicht:
+- ✅ Hotjar läuft (nach Cookie-Consent)
+- ✅ GoogleAnalytics läuft (nach Cookie-Consent)  
+- ✅ Kein Duplicate Content
+- ✅ Google findet Schema.org (Person + ImageObject)
+- [ ] Lighthouse Score min. 95 (noch zu testen)
+
+### Claude-Workflow Präferenzen:
+- Keine Emojis in Responses
+- Code-Änderungen immer VOR Ausführung zeigen
+- "Weniger ist mehr" - bestehende Daten nutzen statt neue Felder
+
+### Wichtige Content Collection Erkenntnisse:
+- Category-Feld ist nur für interne Astro-Filterung
+- URLs kommen aus Route-Parametern, nicht aus Frontmatter
+- Inkonsistente Categories brechen nichts
+- Schema.org verwendet andere Datenquellen
+
+## ✅ Website Features & UX (Bereits implementiert)
+
+### Navigation & CTAs:
+- ✅ Navigation erweitert: "Preise" + "Termine" zwischen "der Fotograf" und "Kontakt"
+- ✅ Hero CTA-Bereich: "PREISE & TERMIN" Button implementiert
+- ✅ Kontextuelle CTAs nach Galerie-Filter
+- ✅ Mobile Navigation für erweiterte Menüpunkte
+- ✅ Mobile Floating Action Button "Termin buchen" (sticky)
+
+### Content Completion:
+- ✅ Fotografenseite `/der-fotograf` vollständig ausgearbeitet
+- ✅ Alle 45 Portfolio-Seiten mit optimierten Bildern
+- ✅ Typography & Layout optimiert (zweizeilige Headlines, Weißraum)
+- ✅ About-Text Daniel Kause Sektion finalisiert
+
+### Performance & Build Results:
+- **Platform**: Cloudflare Pages
+- **Build Time**: ~15 Sekunden
+- **Pages Generated**: 45 statische Seiten
+- **Image Optimization**: 81 Bilder, ~70% Größenreduktion (WebP)
+- **Domain**: https://silberblick.berlin (live)
+- **CI/CD**: Git Push → GitHub → Cloudflare Build (vollautomatisch)
+- ✅ Lazy Loading für Galerie implementiert
+- ✅ PhotoSwipe Modal-Verzerrung behoben
+
+### Domain-Strategie (Final):
+- **silberblick.berlin**: Fotografie-Portfolio (Hauptprojekt, live)
+- **silberblick.net**: UX Web.dev Projekt (separates Projekt, KEIN Redirect)
+
+## 📋 Aktueller Status (24.7.2025)
+
+### ✅ Vollständig abgeschlossen:
+- Website-Entwicklung (45 Seiten)
+- SEO & Analytics Setup (DSGVO-konform)
+- Schema.org Structured Data
+- Cookie-Consent Management
+- Performance-Optimierung
+- Domain-Setup & Deployment
+- Navigation & UX Features
+- Content-Erstellung komplett
+
+### 🎯 Mögliche Zukunftsprojekte:
+- Bildauswahl-System für Kunden
+- Erweiterte Analytics-Auswertung
+- A/B-Testing für Conversion-Optimierung
+
 ```
 
 ```

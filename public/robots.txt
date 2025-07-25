@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Block legacy .html URLs
+Disallow: /*.html
+Disallow: /*?filter=*
+
+# Claude AI Crawler (Anthropic)
+User-agent: Claude-Web
+Allow: /
+
+# Main sitemap
+Sitemap: https://silberblick.berlin/sitemap.xml
