@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '../components/Analytics.astro';
 import PersonSchema from '../components/PersonSchema.astro';
-import CookieConsent from '../components/CookieConsent.astro';
+import CustomCookieConsent from '../components/CustomCookieConsent.astro';
 
 interface Props {
 	title: string;
@@ -24,7 +24,7 @@ const { title, page = 'homepage' } = Astro.props;
         <meta name="description"
             content="Professionelle Fotografie für Menschen und Unternehmen in Berlin. Businessfotografie, Portraits und Architekturfotografie seit 1995." />
         <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
-        <CookieConsent />
+        <CustomCookieConsent />
         <Analytics />
         <PersonSchema page={page} />
 	</head>

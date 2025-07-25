@@ -1,39 +1,13 @@
 ---
-// Analytics Component für SILBERBLICK
-// Google Analytics + Hotjar Integration
-// Conditional loading: nur in Production
+// Analytics Component für SILBERBLICK - Custom Cookie Consent Version
+// Google Analytics + Hotjar werden über CustomCookieConsent.astro geladen
+// Dieses Component ist jetzt nur noch für Fallback/Debug-Zwecke
 
 const isProduction = import.meta.env.PROD;
-console.log ('Analytics Debug - isProduction', isProduction)
-
-const siteUrl = 'https://silberblick.berlin';
 ---
 
-{isProduction && (
-  <>
-    <!-- Google Analytics GA4 - wartet auf Cookie-Consent -->
-    <script type="text/plain" data-cookieconsent="statistics" async src="https://www.googletagmanager.com/gtag/js?id=G-WJK34XRR7F"></script>
-    <script type="text/plain" data-cookieconsent="statistics">
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-WJK34XRR7F', {
-        page_title: document.title,
-        page_location: window.location.href
-      });
-    </script>
-
-    <!-- Hotjar Tracking Code - wartet auf Cookie-Consent -->
-    <script type="text/plain" data-cookieconsent="statistics">
-      (function(h,o,t,j,a,r){
-          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-          h._hjSettings={hjid:3519944,hjsv:6};
-          a=o.getElementsByTagName('head')[0];
-          r=o.createElement('script');r.async=1;
-          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-          a.appendChild(r);
-      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>
-  </>
-)}
+<!-- 
+Analytics werden jetzt über CustomCookieConsent.astro dynamisch geladen.
+Dieses Component dient nur noch als Placeholder für zukünftige Analytics-Erweiterungen.
+-->
 
