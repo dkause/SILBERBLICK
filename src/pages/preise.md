@@ -21,7 +21,8 @@ title: 'Meine Markdown-Seite'
 - Lieferung: JPG via WeTransfer
 - Technik: Nikon → CaptureOne → Sofortkontrolle
 
-**Preis: 350 € zzgl. MwSt.**
+**Preis: 297,50 € inkl. MwSt.**
+**(Studio Selbstbucher 238,- € inkl. MwSt.)**
 
 ---
 

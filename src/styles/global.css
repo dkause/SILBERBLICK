@@ -157,14 +157,32 @@ nav a:hover {
 /* Filter navigation styling */
 .filter-nav-container {
   display: flex;
-  align-items: center;
-  gap: var(--s1);
+  align-items: left;
   margin-bottom: var(--s1);
 }
+.filter-nav-container ul {
+  gap: var(--s1);
 
+}
+.filter-nav-container ul li {
+   display: flex;
+  justify-content: start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.filter-nav-container ul li a {
+  font-size: var(--step--2);
+  text-decoration: none;
+  color: inherit;
+  font-family: var(--font-sans);
+  transition: opacity 0.2s ease;
+  font-weight: 600;
+  cursor: pointer;
+}
 .filter-label {
   font-family: var(--font-sans);
-  font-size: var(--step--1);
+  font-size: var(--step--2);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -527,6 +545,7 @@ text-transform: capitalize;
     border-radius: 4px;
     float: right;
   }
+ 
   .nav-list {
     position: absolute;
     top: 100%;
@@ -645,6 +664,12 @@ text-transform: capitalize;
   --cssColumnWidth: 50%; /* 2 columns default */
 }
 
+@media (max-width: 768px) {
+ .masonry-item-double-width {
+  width: var(--cssColumnWidth);
+}
+
+}
 @media (min-width: 768px) {
   .grid {
     --cssColumnWidth: 33.333%; /* 3 columns */
