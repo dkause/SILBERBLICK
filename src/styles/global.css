@@ -6,17 +6,19 @@
 /* 6. Media Queries */
 
 /* 1. Imports & Custom Properties */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@400;500&display=swap');
 
 /* 2. Reset & Base Styles */
 * {
   box-sizing: border-box;
-  margin: 0
+  margin: 0;
+  padding: 0;
 }
 img {
   max-width: 100%;
   height: auto;
 }
+
 :root {
   --ratio: 1.5;
   --s00: calc(var(--s0) / var(--ratio));
@@ -43,8 +45,8 @@ img {
   --step-5: clamp(2.7994rem, 2.4462rem + 1.7658vw, 3.8147rem);
 
   /* Fonts */
-  --font-serif: "IBM Plex Serif", "Times New Roman", serif;
-  --font-sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: 'IBM Plex Serif', 'Times New Roman', serif;
+  --font-sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* 3. Typography */
@@ -161,11 +163,10 @@ nav a:hover {
   margin-bottom: var(--s1);
 }
 .filter-nav-container ul {
-  gap: var(--s1);
-
+  gap: var(--s00);
 }
 .filter-nav-container ul li {
-   display: flex;
+  display: flex;
   justify-content: start;
   list-style: none;
   margin: 0;
@@ -225,12 +226,14 @@ nav a:hover {
 
 /* Astro Masonry Grid */
 .astro-masonry-grid {
-  gap: clamp(0.8%,1%,1.2%);
+  gap: clamp(0.8%, 1%, 1.2%);
 }
 
 /* Grundzustand für Animationen */
 .astro-masonry-grid_column {
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Sanfter Übergang für Opazität und Skalierung */
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out; /* Sanfter Übergang für Opazität und Skalierung */
   transform: scale(1); /* Standard-Skalierung */
   opacity: 1; /* Standard-Opazität */
 }
@@ -238,7 +241,9 @@ nav a:hover {
 /* Zustand, wenn das Element ausgeblendet ist */
 .astro-masonry-grid_column.hidden {
   opacity: 0; /* Vollständig transparent */
-  transform: scale(0.95); /* Leicht verkleinert, um einen "Verschwinden"-Effekt zu erzeugen */
+  transform: scale(
+    0.95
+  ); /* Leicht verkleinert, um einen "Verschwinden"-Effekt zu erzeugen */
   pointer-events: none; /* Verhindert Interaktionen, wenn ausgeblendet */
 }
 /* Alle-Spalten Layout */
@@ -280,13 +285,11 @@ nav a:hover {
 /*  Form Elements  */
 fieldset {
   border: solid 1px #000000;
-    border-radius: 4px;
-
-
+  border-radius: 4px;
 }
 .form-label {
   display: block;
-  font-weight: 600
+  font-weight: 600;
 }
 .form-submit-button {
   color: red;
@@ -365,7 +368,6 @@ figcaption {
   gap: var(--grid-gutter);
   display: flex;
   flex-direction: column;
-
 }
 .image-showcase figure {
   flex: 0 1 0;
@@ -378,11 +380,11 @@ figcaption {
   object-fit: contain;
 }
 .capitalize {
-text-transform: capitalize;
+  text-transform: capitalize;
 }
 .display-block {
   display: block;
-} 
+}
 .padding-bottom {
   padding-bottom: 2rem;
 }
@@ -427,11 +429,9 @@ text-transform: capitalize;
   align-items: flex-end;
 }
 .padding-3vw {
-
   padding: 3vw;
 }
 /* Filter Button Styles */
-
 
 .filter-button-group {
   margin-bottom: var(--grid-gutter);
@@ -529,29 +529,49 @@ text-transform: capitalize;
 
   .nav-container {
     position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
   }
   /* Checkbox verstecken */
   #nav-toggle {
     display: none;
   }
   .nav-hamburger {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    gap: 1vh;
     font-size: var(--step--2);
     font-weight: 600;
     cursor: pointer;
-    padding: 8px 12px;
+    text-align: center;
+  }
+  .hamburger-icon {
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #000;
     color: #fff;
     border-radius: 4px;
-    float: right;
+    font-size: var(--step--1);
+    line-height: calc(2 * var(--step--1));
+    min-width: calc(2 * var(--step--1));
   }
- 
+  .hamburger-text {
+    font-size: var(--step--2);
+    line-height: 1;
+    min-width: calc(2 * var(--step--2));
+    text-transform: uppercase;
+  }
   .nav-list {
     position: absolute;
     top: 100%;
     right: 0;
     background: #fff;
     border: 1px solid #000;
+    border-radius: 4px;
+
     min-width: 200px;
     opacity: 0;
     visibility: hidden;
@@ -665,10 +685,9 @@ text-transform: capitalize;
 }
 
 @media (max-width: 768px) {
- .masonry-item-double-width {
-  width: var(--cssColumnWidth);
-}
-
+  .masonry-item-double-width {
+    width: var(--cssColumnWidth);
+  }
 }
 @media (min-width: 768px) {
   .grid {
