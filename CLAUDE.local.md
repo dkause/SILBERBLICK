@@ -1,1 +1,2 @@
 - einzelne Fotoseiten als md files
+- update readme when necessary

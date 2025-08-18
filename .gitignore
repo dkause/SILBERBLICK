@@ -32,3 +32,5 @@ SCRATCH/
 # Cloudflare
 .wrangler/
 
+# Screenhots
+website-screenshots/

@@ -1,78 +1,139 @@
---- 
+---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import { Masonry } from 'astro-masonry';
-import IsotopeGallery from '../components/IsotopeGallery.astro';
-import { getCollection } from "astro:content";
-const allFotos = (await getCollection('fotos'));
-
-// Filtere die Fotos: Nur HeroImages und Einzelbilder anzeigen
-const fotosToShow = allFotos.filter(foto => {
-  // Ein Bild ist ein HeroImage, wenn isHero: true gesetzt ist
-  const isHeroImage = foto.data.isHero === true;
-  // Ein Bild ist ein Einzelbild, wenn es keinen seriesName hat
-  const isSingleImage = !foto.data.seriesName;
-
-  // Zeige das Bild an, wenn es ein HeroImage ist ODER ein Einzelbild
-  return isHeroImage || isSingleImage;
-});
-
-const allTags = new Set(fotosToShow.flatMap(foto => foto.data.tags));
-
-const isotopeOptions = {
-  layoutMode: 'masonry',
-  // columnWidth wird jetzt über CSS-Variablen in IsotopeGallery.astro gesteuert
-  masonry: {
-    gutter: 0 // Isotope will not add gutter; we control it via CSS
-  }
-};
-
-import danielfoto from '../fotograf-daniel-kause.jpg'
+import danielfoto from '../fotograf-daniel-kause.jpg';
+import kopfmassage from '/src/fotos/aroma-thai-massage-kopfmassage.jpg';
+import professorAbri from '/src/fotos/business-corporate-executive-portrait-03.jpg';
+import hauswart from '/src/fotos/business-samakiez-executive-portrait-78.jpg';
+import lolaLipps from '/src/fotos/business-corporate-executive-portrait-06.jpg';
+import janeLL from '/src/fotos/business-jll-executive-portrait-71.jpg';
+import gerdW from '/src/fotos/business-corporate-executive-portrait-02.jpg';
 ---
 
-<Layout title="SILBERBLICK - Fotograf Berlin | Daniel Kause" >
-  <section class="gap" aria-label="Portfolio" >
-
-
-    <div class="all-column-item">
-      <h1 class="u-step-02">Einfach gute Fotos</h1>
-      <h2>
-        Professionelle Fotografie für Menschen und Unternehmen in Berlin
-      </h2>
-    </div>
-    
-  
-    <IsotopeGallery fotos={fotosToShow} allTags={allTags} isotopeOptions={isotopeOptions} showFilterButtons={true} />
-
-
+<Layout title='SILBERBLICK - Fotograf Berlin | Daniel Kause'>
+  <section class='gap figure-container'>
+    <figure>
+      <Image
+        src={kopfmassage}
+        alt='zwei Hände geben einer Frau eine Kopfmassage'
+        class='kopfMassage'
+      />
+      <Image src={professorAbri} alt='Prof. Dr. Abri im Büro' class='drAbri' />
+      <Image
+        src={lolaLipps}
+        alt='Businessportrait im Studio'
+        class='lolaLipps'
+      />
+      <Image
+        src={gerdW}
+        alt='Modesigner Gerd Weißhofer auf einem Stuhl'
+        class='gerdW'
+      />
+      <Image
+        src={janeLL}
+        alt='S/W Foto einer Businessfrau im Studio'
+        class='janeLL'
+      />
+      <Image
+        src={hauswart}
+        alt='Hauswart in einer Sporthalle'
+        class='hauswart'
+      />
+    </figure>
   </section>
-  <section aria-label="Über den Fotografen" class="u-grid">
-    <h3 class="all-column-item">Ich bin Daniel Kause</h3>
-    <div class="eight-column-item gap">
-
-      <p>
-        Seit 1995 fotografiere ich Menschen, Unternehmen und Architektur in
-        Berlin. Meine Schwerpunkte sind
-        <a class="text-link" href="./businessfotos.html">Businessfotografie</a>,
-        <a class="text-link" href="./portraits.html">Portraitfotografie</a>
-        und
-        <a class="text-link" href="./architektur.html/">Architekturfotografie.</a>
-      </p>
-      <p>
-        Ich arbeite mit Unternehmen, Agenturen und Privatpersonen zusammen,
-        um authentische und ansprechende Bilder zu schaffen, die Ihre
-        Botschaft klar kommunizieren.
-      </p>
-      <div class="u-step-01 button-stack">
-        <a href="/kontakt/" class="button-base cta-button">Kontakt aufnehmen</a>
-        <a href="mailto:d.g.kause@gmail.com" class="button-base cta-button-2">E-Mail schreiben</a>
-      </div>
-    </div>
-    <div class="three-column-item">
-
-      <aside>
-        <Image src={danielfoto}  alt="Daniel Kause, Fotograf in Berlin"  />
-      </aside>
-    </div>
+  <section class='gap cta-container' aria-label='landing-page'>
+    <article class='cta'>
+      <figure>
+        <Image src={danielfoto} alt='Daniel Kause' />
+        <p>
+          Portraits sind das Hauptgebiet meiner Arbeit. Werbefotos,
+          Produktfotos, Fotos von Immobilien finden Sie im Portfolio
+        </p>
+      </figure>
+      <button class='button-base cta-button'>Buchen Sie einen Termin! </button>
+    </article>
   </section>
 </Layout>
+<style is:global>
+  .figure-container {
+    container-type: inline-size;
+    container-name: figure-container;
+    > figure {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: calc(var(--grid-gutter) * 0.5);
+    }
+    .kopfMassage {
+      grid-column: 1 / 4;
+    }
+    .drAbri {
+      grid-column: 3 / 5;
+      grid-row: 2 / 4;
+    }
+  }
+
+  @container figure-container (max-width: 750px) {
+    figure {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--grid-gutter);
+    }
+    figure > img {
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+    .kopfMassage {
+      object-position: 65% 50%;
+    }
+    .drAbri {
+      object-position: 50% 39%;
+    }
+    .lolaLipps {
+      object-position: 0%;
+    }
+    .gerdW {
+      object-position: 0% 0%;
+    }
+    .janeLL {
+      object-position: 0% 0%;
+    }
+    .hauswart {
+      object-position: 0% 20%;
+    }
+  }
+  .cta-container {
+    container-type: inline-size;
+    container-name: cta-container;
+  }
+  .cta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--grid-gutter);
+  }
+  .cta > figure {
+    display: flex;
+    flex-direction: row;
+    gap: var(--grid-gutter);
+  }
+  .cta > figure > img {
+    max-width: calc(var(--step-0) * 6);
+    height: auto;
+    object-fit: contain;
+  }
+  .cta > figure > p {
+    font-size: var(--step--1);
+  }
+  .cta > button {
+    max-height: calc(var(--step-0) * 3);
+    max-width: fit-content;
+  }
+  @container cta-container (max-width: 600px) {
+    .cta {
+      grid-template-columns: 1fr;
+    }
+    .cta > button {
+      order: -1;
+    }
+  }
+</style>

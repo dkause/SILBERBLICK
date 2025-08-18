@@ -21,32 +21,12 @@ import Layout from '../layouts/Layout.astro';
                 </section>
 
                 <section>
-                    <h2>Cookie-Einstellungen</h2>
+                    <h2>Verwendung von Cookies</h2>
                     <p>
-                        Unsere Website verwendet Cookies nur für Analyse-Zwecke (Google Analytics, Hotjar). Diese Cookies werden nur mit Ihrer Einwilligung gesetzt.
+                        Diese Website verwendet <strong>keine Cookies oder Tracking-Technologien</strong>. Es werden keine Analyse-Tools wie Google Analytics oder Hotjar eingesetzt.
                     </p>
-                    
-                    <div id="consent-status" class="consent-status">
-                        <h3>Aktueller Status Ihrer Einwilligung:</h3>
-                        <div id="consent-info">
-                            <p>Wird geladen...</p>
-                        </div>
-                        <div class="consent-actions">
-                            <button id="revoke-consent" class="button-base btn-secondary">Einwilligung widerrufen</button>
-                            <button id="accept-consent" class="button-base btn-primary" style="display: none;">Analyse-Cookies akzeptieren</button>
-                        </div>
-                    </div>
-
-                    <h3>Was wir tracken:</h3>
-                    <ul>
-                        <li><strong>Google Analytics:</strong> Seitenaufrufe, Verweildauer, Gerätetyp (anonymisiert)</li>
-                        <li><strong>Hotjar:</strong> Mausbewegungen, Scroll-Verhalten für UX-Optimierung (anonymisiert)</li>
-                    </ul>
-                    
                     <p>
-                        <strong>Ihre Daten:</strong> Werden anonymisiert verarbeitet und nicht an Dritte weitergegeben.<br>
-                        <strong>Zweck:</strong> Verbesserung der Website-Nutzererfahrung.<br>
-                        <strong>Widerruf:</strong> Jederzeit über den Button oben möglich.
+                        Wir verzichten bewusst auf das Tracking von Nutzerdaten, um Ihre Privatsphäre zu schützen.
                     </p>
                 </section>
 
@@ -100,35 +80,7 @@ import Layout from '../layouts/Layout.astro';
                     </p>
                 </section>
 
-                <section>
-                    <h2>Google Analytics</h2>
-                    <p>
-                        Wir verwenden Google Analytics zur Analyse des Nutzerverhaltens unserer Website. Google Analytics verwendet Cookies und ähnliche Technologien.
-                    </p>
-                    <p>
-                        <strong>Verarbeitete Daten:</strong> Seitenaufrufe, Verweildauer, ungefähre Standortdaten, Geräteinformationen<br>
-                        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)<br>
-                        <strong>Anbieter:</strong> Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA<br>
-                        <strong>Aufbewahrungsdauer:</strong> 26 Monate<br>
-                        <strong>Datenschutzerklärung:</strong> <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a>
-                    </p>
-                    <p>
-                        Sie können der Erfassung durch Google Analytics widersprechen, indem Sie auf folgenden Link klicken: <a href="javascript:gaOptout()">Google Analytics deaktivieren</a>
-                    </p>
-                </section>
 
-                <section>
-                    <h2>Hotjar</h2>
-                    <p>
-                        Wir nutzen Hotjar zur Analyse des Nutzerverhaltens und zur Optimierung unserer Website. Hotjar erstellt anonyme Heatmaps und Session-Aufzeichnungen.
-                    </p>
-                    <p>
-                        <strong>Verarbeitete Daten:</strong> Mausbewegungen, Klicks, Scroll-Verhalten (anonymisiert)<br>
-                        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)<br>
-                        <strong>Anbieter:</strong> Hotjar Ltd., Level 2, St Julians Business Centre, 3, Elia Zammit Street, St Julians STJ 1000, Malta<br>
-                        <strong>Datenschutzerklärung:</strong> <a href="https://www.hotjar.com/legal/policies/privacy/" target="_blank">https://www.hotjar.com/legal/policies/privacy/</a>
-                    </p>
-                </section>
 
                 <section>
                     <h2>Kontaktaufnahme</h2>
@@ -170,115 +122,10 @@ import Layout from '../layouts/Layout.astro';
                 <section>
                     <h2>Aktualität der Datenschutzerklärung</h2>
                     <p>
-                        Diese Datenschutzerklärung ist aktuell gültig und hat den Stand Januar 2025. Durch die Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher Bestimmungen kann es notwendig werden, diese Datenschutzerklärung zu ändern.
+                        Diese Datenschutzerklärung ist aktuell gültig und hat den Stand August 2025. Durch die Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher Bestimmungen kann es notwendig werden, diese Datenschutzerklärung zu ändern.
                     </p>
                 </section>
             </article>
         </div>
     </main>
 </Layout>
-
-<script>
-    // Consent-Status auf Datenschutz-Seite anzeigen
-    function updateConsentStatus() {
-        const consentInfo = document.getElementById('consent-info');
-        const revokeBtn = document.getElementById('revoke-consent');
-        const acceptBtn = document.getElementById('accept-consent');
-        
-        if (!consentInfo) return;
-        
-        // Consent-Status aus CustomCookieConsent abrufen
-        const consent = (window as any).CookieConsent?.getConsentStatus();
-        
-        if (consent) {
-            if (consent.analytics) {
-                consentInfo.innerHTML = `
-                    <p style="color: green;">✓ Analyse-Cookies sind <strong>aktiviert</strong></p>
-                    <p><small>Erteilt am: ${new Date(consent.timestamp).toLocaleString('de-DE')}</small></p>
-                `;
-                if (revokeBtn) revokeBtn.style.display = 'inline-block';
-                if (acceptBtn) acceptBtn.style.display = 'none';
-            } else {
-                consentInfo.innerHTML = `
-                    <p style="color: orange;">⊘ Analyse-Cookies sind <strong>deaktiviert</strong></p>
-                    <p><small>Entschieden am: ${new Date(consent.timestamp).toLocaleString('de-DE')}</small></p>
-                `;
-                if (revokeBtn) revokeBtn.style.display = 'none';
-                if (acceptBtn) acceptBtn.style.display = 'inline-block';
-            }
-        } else {
-            consentInfo.innerHTML = `
-                <p style="color: gray;">⏳ Noch keine Entscheidung getroffen</p>
-                <p><small>Beim nächsten Seitenbesuch erscheint der Cookie-Banner.</small></p>
-            `;
-            if (revokeBtn) revokeBtn.style.display = 'none';
-            if (acceptBtn) acceptBtn.style.display = 'none';
-        }
-    }
-    
-    // Event Listeners
-    document.getElementById('revoke-consent')?.addEventListener('click', () => {
-        if (confirm('Möchten Sie wirklich alle Analyse-Cookies widerrufen? Die Seite wird neu geladen.')) {
-            (window as any).CookieConsent?.revokeConsent();
-        }
-    });
-    
-    document.getElementById('accept-consent')?.addEventListener('click', () => {
-        // Consent setzen und Analytics laden
-        localStorage.setItem('silberblick-consent', JSON.stringify({
-            analytics: true,
-            timestamp: new Date().toISOString()
-        }));
-        location.reload();
-    });
-    
-    // Initial load + retry wenn CookieConsent noch nicht verfügbar
-    function initConsentStatus() {
-        if ((window as any).CookieConsent) {
-            updateConsentStatus();
-        } else {
-            // Retry nach 100ms falls CustomCookieConsent noch lädt
-            setTimeout(initConsentStatus, 100);
-        }
-    }
-    
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initConsentStatus);
-    } else {
-        initConsentStatus();
-    }
-</script>
-
-<style>
-    .consent-status {
-        background: #f8f9fa;
-        border: 1px solid #e9ecef;
-        border-radius: 4px;
-        padding: var(--s1);
-        margin: var(--s1) 0;
-    }
-    
-    .consent-actions {
-        margin-top: var(--s1);
-    }
-    
-    .btn-primary {
-        background: #007bff;
-        color: white;
-        margin-right: var(--s0);
-    }
-    
-    .btn-primary:hover {
-        background: #0056b3;
-    }
-    
-    .btn-secondary {
-        background: #6c757d;
-        color: white;
-        margin-right: var(--s0);
-    }
-    
-    .btn-secondary:hover {
-        background: #545b62;
-    }
-</style>
