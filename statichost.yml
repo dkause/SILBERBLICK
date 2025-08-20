@@ -1,0 +1,8 @@
+# statichost.eu build configuration for Astro
+image: node:22-alpine
+command: npm install && npm run build
+public: dist
+
+# Domain configuration 
+domains:
+  - silberblick.berlin

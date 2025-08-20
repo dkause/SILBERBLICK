@@ -2,32 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import danielfoto from '../fotograf-daniel-kause.jpg';
-import kopfmassage from '/src/fotos/aroma-thai-massage-kopfmassage.jpg';
 import professorAbri from '/src/fotos/business-corporate-executive-portrait-03.jpg';
 import hauswart from '/src/fotos/business-samakiez-executive-portrait-78.jpg';
 import lolaLipps from '/src/fotos/business-corporate-executive-portrait-06.jpg';
 import janeLL from '/src/fotos/business-jll-executive-portrait-71.jpg';
-import gerdW from '/src/fotos/business-corporate-executive-portrait-02.jpg';
+import portraitSilberMartina from '/src/fotos/portrait-silber-martina.jpg';
 ---
 
 <Layout title='SILBERBLICK - Fotograf Berlin | Daniel Kause'>
+  <h1>Einfach gute Fotos</h1>
   <section class='gap figure-container'>
-    <figure>
-      <Image
-        src={kopfmassage}
-        alt='zwei Hände geben einer Frau eine Kopfmassage'
-        class='kopfMassage'
-      />
-      <Image src={professorAbri} alt='Prof. Dr. Abri im Büro' class='drAbri' />
+    <figure class='mobmob'>
       <Image
         src={lolaLipps}
         alt='Businessportrait im Studio'
         class='lolaLipps'
       />
       <Image
-        src={gerdW}
-        alt='Modesigner Gerd Weißhofer auf einem Stuhl'
-        class='gerdW'
+        src={professorAbri}
+        alt='Prof. Dr. Abri im Büro'
+        class='professorAbri'
       />
       <Image
         src={janeLL}
@@ -39,19 +33,20 @@ import gerdW from '/src/fotos/business-corporate-executive-portrait-02.jpg';
         alt='Hauswart in einer Sporthalle'
         class='hauswart'
       />
-    </figure>
-  </section>
-  <section class='gap cta-container' aria-label='landing-page'>
-    <article class='cta'>
-      <figure>
+      <Image
+        src={portraitSilberMartina}
+        alt='Portrait einer Frau mit silbernem Haar'
+        class='portraitSilberMartina'
+      />
+      <div class='cta-vertical'>
         <Image src={danielfoto} alt='Daniel Kause' />
         <p>
-          Portraits sind das Hauptgebiet meiner Arbeit. Werbefotos,
-          Produktfotos, Fotos von Immobilien finden Sie im Portfolio
+          Businessportraits sind das Hauptgebiet meiner Arbeit. Ich fotografiere
+          Ihre Immobilien, Services und Produkte für Websites und Werbung.
         </p>
-      </figure>
-      <button class='button-base cta-button'>Buchen Sie einen Termin! </button>
-    </article>
+      </div>
+      <button class='cta-button'>Buchen Sie einen Termin! </button>
+    </figure>
   </section>
 </Layout>
 <style is:global>
@@ -60,46 +55,114 @@ import gerdW from '/src/fotos/business-corporate-executive-portrait-02.jpg';
     container-name: figure-container;
     > figure {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      grid-template-rows: repeat(3, 1fr);
       gap: calc(var(--grid-gutter) * 0.5);
-    }
-    .kopfMassage {
-      grid-column: 1 / 4;
-    }
-    .drAbri {
-      grid-column: 3 / 5;
-      grid-row: 2 / 4;
     }
   }
 
+  /* Desktop Grid - Magazine Layout */
+  @container figure-container (min-width: 751px) {
+    .figure-container > figure {
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(9, 1fr);
+    }
+    .figure-container .lolaLipps {
+      grid-column: 2 / 5;
+      grid-row: 2 / 4;
+    }
+    .figure-container .professorAbri {
+      grid-column: 3 / 5;
+      grid-row: 4 / 7;
+    }
+    .figure-container .janeLL {
+      grid-column: 5 / 7;
+      grid-row: 2 / 5;
+    }
+    .figure-container .hauswart {
+      grid-column: 5 / 7;
+      grid-row: 5 / 8;
+    }
+    .figure-container .portraitSilberMartina {
+      grid-column: 7 / 9;
+      grid-row: 4 / 7;
+    }
+    .figure-container .cta-vertical {
+      grid-column: 10 / 13;
+      grid-row: 2 / 7;
+      > img {
+        width: 50%;
+      }
+      > p {
+        font-size: var(--step--1);
+      }
+    }
+    .figure-container .cta-button {
+      grid-column: 9 / 13;
+      grid-row: 7 / 8;
+    }
+  }
+
+  /* Mobile Grid - Override */
   @container figure-container (max-width: 750px) {
-    figure {
-      display: grid;
+    .figure-container > figure {
       grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, 1fr);
       gap: var(--grid-gutter);
     }
-    figure > img {
-      aspect-ratio: 1;
+
+    .figure-container .lolaLipps {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .figure-container .professorAbri {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .figure-container .janeLL {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .figure-container .hauswart {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    .figure-container .portraitSilberMartina {
+      grid-column: 1;
+      grid-row: 3;
+    }
+    .figure-container .cta-button {
+      grid-column: 1 / -1;
+      grid-row: 4;
+    }
+    .figure-container .cta-vertical {
+      > img {
+        width: 50%;
+      }
+      grid-column: 1;
+      grid-row: 5;
+    }
+
+    /* 1:1 Aspect Ratio + Object Positioning */
+    .figure-container figure > img {
+      aspect-ratio: 1/1;
       object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
-    .kopfMassage {
-      object-position: 65% 50%;
-    }
-    .drAbri {
-      object-position: 50% 39%;
-    }
-    .lolaLipps {
+
+    .figure-container .lolaLipps {
       object-position: 0%;
     }
-    .gerdW {
+    .figure-container .professorAbri {
+      object-position: 50% 39%;
+    }
+    .figure-container .janeLL {
       object-position: 0% 0%;
     }
-    .janeLL {
-      object-position: 0% 0%;
-    }
-    .hauswart {
+    .figure-container .hauswart {
       object-position: 0% 20%;
+    }
+    .figure-container .portraitSilberMartina {
+      object-position: 50% 30%;
     }
   }
   .cta-container {

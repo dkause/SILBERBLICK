@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.hetzner.com)",
+      "WebFetch(domain:github.com)",
+      "WebSearch",
+      "WebSearch",
+      "WebSearch"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
